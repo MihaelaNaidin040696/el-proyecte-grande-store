@@ -27,11 +27,11 @@ class Product {
 - purchasePrice : float
 - purchaseDate : Date
 - totalStock : int
-- discount float
+- discount : float
 }
 
 
-class Reports {
+class Report {
 - id : int
 - adminId : int
 - startDate : Date
@@ -39,7 +39,6 @@ class Reports {
 - totalCost : float
 - profit : float
 - totalEarned : float
-
 }
 
 class Category {
@@ -50,9 +49,7 @@ class Category {
 class Supplier{
 - id : int
 - name : String
-
 }
-
 
 class Client {
 - id : int
@@ -60,18 +57,18 @@ class Client {
 - email : String
 - password : String
 - loggedId : int
-- deliveryDetailsId : int
-- paymentDetailsId : int
+- deliveryDetailId : int
+- paymentDetailId : int
 }
 
-class CartItems {
+class CartItem {
 - id : int
 - productId : int
 - quantity : int
 - totalPrice : int
 }
 
-class DeliveryDetails{
+class DeliveryDetail{
 - id : int
 - firstName : String
 - lastName : String
@@ -84,7 +81,7 @@ class DeliveryDetails{
 
 class Cart {
 - id : int
-- cartItemsId : int[]
+- cartItemId : int[]
 - clientId : int
 }
 
@@ -107,7 +104,7 @@ class Order{
 }
 
 Client o-- LoggedUser
-Client o-- DeliveryDetails
+Client o-- DeliveryDetail
 Client o-- PaymentDetail
 Client o-- Cart
 
@@ -115,12 +112,12 @@ Product o-- Category
 Product o-- Supplier
 Product o-- Brand
 
-CartItems o-- Product
+CartItem o-- Product
 
-Cart o--- CartItems
+Cart o--- CartItem
 
 Order o-- Cart
 
-Admin o-- Reports
+Admin o-- Report
 
 @enduml
