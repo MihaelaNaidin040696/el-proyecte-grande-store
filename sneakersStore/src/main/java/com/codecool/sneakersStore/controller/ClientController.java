@@ -18,7 +18,7 @@ public class ClientController {
 
     @GetMapping(value = "all-clients")
     public List<Client> getClients() {
-        return clientService.getClients();
+        return clientService.getClientDaoMem().getAllClients();
 
     }
 
@@ -32,7 +32,7 @@ public class ClientController {
         System.out.println(validPassword);
 
         Client client1 = new Client(client.getId(), client.getFirstName(), client.getLastName(), client.getEmail(), encodedPassword);
-        clientService.addClient(client1);
+        clientService.getClientDaoMem().addClient(client1);
     }
 
 }

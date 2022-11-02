@@ -12,11 +12,7 @@ public class ClientService {
         this.clientDaoMem = ClientDaoMem.getInstance();
     }
 
-    public List<Client> getClients() {
-        return clientDaoMem.getAllClients();
-    }
-
-    public void addClient(Client client){
-        clientDaoMem.addClient(client);
+    public ClientDaoMem getClientDaoMem() {
+        return clientDaoMem;
     }
 }
