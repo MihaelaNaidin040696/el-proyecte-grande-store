@@ -2,7 +2,7 @@
 
 class LoggedUser{
 - id : int
-- userName : String
+- email : String
 - password : String
 }
 
@@ -53,7 +53,8 @@ class Supplier{
 
 class Client {
 - id : int
-- userName : String
+- firstName : String
+- lastName : String
 - email : String
 - password : String
 - loggedId : int
