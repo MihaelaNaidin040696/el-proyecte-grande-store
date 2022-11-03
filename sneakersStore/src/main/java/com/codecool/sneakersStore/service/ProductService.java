@@ -2,12 +2,16 @@ package com.codecool.sneakersStore.service;
 
 
 import com.codecool.sneakersStore.service.DAO.ProductMemory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductService {
-    private ProductMemory productMemory;
+    private final ProductMemory productMemory;
 
-    public ProductService() {
-        this.productMemory = ProductMemory.getInstance();
+    @Autowired
+    public ProductService(ProductMemory productMemory) {
+        this.productMemory = productMemory;
     }
 
     public ProductMemory getProductMemory() {
