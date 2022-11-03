@@ -2,35 +2,28 @@ package com.codecool.sneakersStore.service.DAO;
 
 import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.service.ProductService;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
+@Repository
 public class ProductMemory {
-    private List<Product> products;
-    private static ProductMemory instance = null;
-
+    private final List<Product> products;
     public ProductMemory() {
 
         this.products = new ArrayList<>();
     }
 
-    public static ProductMemory getInstance(){
-        if(instance == null){
-            instance = new ProductMemory();
-        }
-        return instance;
-    }
     public void addProduct(Product product){
         products.add(product);
     }
 
     public List<Product> getProducts() {
         setProducts();
-
         return products;
     }
 

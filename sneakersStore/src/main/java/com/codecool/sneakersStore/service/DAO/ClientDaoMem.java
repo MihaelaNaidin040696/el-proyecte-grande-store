@@ -1,20 +1,13 @@
 package com.codecool.sneakersStore.service.DAO;
 
 import com.codecool.sneakersStore.model.Client;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class ClientDaoMem implements ClientDao {
-    private static ClientDaoMem instance = null;
     private List<Client> clients;
-
-    public static ClientDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ClientDaoMem();
-        }
-        return instance;
-    }
 
     public ClientDaoMem() {
         this.clients = new ArrayList<>();
