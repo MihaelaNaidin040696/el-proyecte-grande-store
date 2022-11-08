@@ -21,7 +21,6 @@ public class ProductMemory {
 
     public List<Product> getProducts() {
         setProducts();
-
         return products;
     }
 

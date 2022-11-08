@@ -13,6 +13,7 @@ public class ClientService {
         this.clientDaoMem = clientDaoMem;
     }
 
+
     public ClientDaoMem getClientDaoMem() {
         return clientDaoMem;
     }
