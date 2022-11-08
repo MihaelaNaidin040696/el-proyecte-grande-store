@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class ProductMemory {
-    private List<Product> products;
+    private final List<Product> products;
 
     public ProductMemory() {
         this.products = new ArrayList<>();
