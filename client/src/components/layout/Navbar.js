@@ -35,6 +35,15 @@ export default function Navbar() {
         <Link to='/cart' className={classes.link}>
           <button className={classes.button}>Cart</button>
         </Link>
+        <Link to='/login' className={classes.link}>
+          <button className={classes.button}>Login</button>
+        </Link>
+        <Link to='/register' className={classes.link}>
+          <button className={classes.button}>Register</button>
+        </Link>
+        <Link to='/logout' className={classes.link}>
+          <button className={classes.button}>Logout</button>
+        </Link>
       </nav>
     </div>
   );
