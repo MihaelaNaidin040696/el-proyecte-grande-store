@@ -18,7 +18,7 @@ function Login() {
                         placeholder="Password"
                     />
 
-                    <a className={classes.forgotpass} href="#">
+                    <a className={classes.forgotpass} href="/">
                         Forgot Password?
                     </a>
 

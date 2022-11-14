@@ -15,16 +15,16 @@ function Footer() {
                         <h4>Company</h4>
                         <ul>
                             <li>
-                                <a href="#">About us</a>
+                                <a href="/">About us</a>
                             </li>
                             <li>
-                                <a href="#">our services</a>
+                                <a href="/">our services</a>
                             </li>
                             <li>
-                                <a href="#">privacy polcy</a>
+                                <a href="/">privacy polcy</a>
                             </li>
                             <li>
-                                <a href="#">affiliate program</a>
+                                <a href="/">affiliate program</a>
                             </li>
                         </ul>
                     </div>
@@ -32,20 +32,20 @@ function Footer() {
                         <h4>get help</h4>
                         <ul>
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="/">FAQ</a>
                             </li>
                             <li>
-                                <a href="#">shipping</a>
+                                <a href="/">shipping</a>
                             </li>
                             <li>
-                                <a href="#">returns</a>
+                                <a href="/">returns</a>
                             </li>
 
                             <li>
-                                <a href="#">order status</a>
+                                <a href="/">order status</a>
                             </li>
                             <li>
-                                <a href="#">payment</a>
+                                <a href="/">payment</a>
                             </li>
                         </ul>
                     </div>
@@ -53,16 +53,16 @@ function Footer() {
                         <h4>online shop</h4>
                         <ul>
                             <li>
-                                <a href="#">Sneakers men</a>
+                                <a href="/">Sneakers men</a>
                             </li>
                             <li>
-                                <a href="#">Sneakers women</a>
+                                <a href="/">Sneakers women</a>
                             </li>
                             <li>
-                                <a href="#">Clothing</a>
+                                <a href="/">Clothing</a>
                             </li>
                             <li>
-                                <a href="#">Accesories</a>
+                                <a href="/">Accesories</a>
                             </li>
                         </ul>
                     </div>
@@ -70,16 +70,16 @@ function Footer() {
                         <h4>follow us</h4>
                         <ul>
                             <div className={classes.sociallinks}>
-                                <a href="#">
+                                <a href="/">
                                     <i className="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#">
+                                <a href="/">
                                     <i className="fab fa-instagram"></i>
                                 </a>
-                                <a href="#">
+                                <a href="/">
                                     <i className="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="#">
+                                <a href="/">
                                     <i className="fab fa-twitter"></i>
                                 </a>
                             </div>
