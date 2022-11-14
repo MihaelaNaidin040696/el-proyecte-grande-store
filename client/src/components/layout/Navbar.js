@@ -1,50 +1,22 @@
-import { Link } from 'react-router-dom';
-
 import classes from './Navbar.module.css';
 
 export default function Navbar() {
-  const pages = [
-      { text: 'Sneakers', href: '/sneakers' },
-      { text: 'Clothes', href: '/clothes' }
-    ];
-
-  function toggleMenu() {
-    document.container.classList.toggle('open');
-  }
-
-  return (
-    <div className={classes.container}>
-      <nav className={classes.navbar}>
-        <button onClick={toggleMenu} className={classes.burger}></button>
-        <Link to={'/'} className={classes.link}>
-          <button className={classes.button}>Home</button>
-        </Link>
-        <div className={classes.dropdowns}>
-          {pages.map((page) => (
-            <div className={classes.dropdown} key={page.text}>
-              <Link to={page.href} className={classes.link}>
-                <button className={classes.button}key={page.text}>{page.text}</button>
-              </Link>
-              <div className={classes.dropdownmenu}>
-                <button>Men</button>
-                <button>Women</button>
-              </div>
-            </div>
-          ))}
+    return (
+        <div className={classes.container}>
+            <nav>
+                <label className={classes.logo}>RIGHT Sneakers Store</label>
+                <ul className={classes.left}>
+                    <li><a className={classes.active} href='/'>Home</a></li>
+                    <li><a href='/sneakers'>Sneakers</a></li>
+                    <li><a href='/clothes'>Clothes</a></li>
+                </ul>
+                <ul className={classes.right}>
+                    <li><a href='/cart'>Cart</a></li>
+                    <li><a href='/login'>Login</a></li>
+                    <li><a href='/register'>Register</a></li>
+                    <li><a href='/logout'>Logout</a></li>
+                </ul>
+            </nav>
         </div>
-        <Link to='/cart' className={classes.link}>
-          <button className={classes.button}>Cart</button>
-        </Link>
-        <Link to='/login' className={classes.link}>
-          <button className={classes.button}>Login</button>
-        </Link>
-        <Link to='/register' className={classes.link}>
-          <button className={classes.button}>Register</button>
-        </Link>
-        <Link to='/logout' className={classes.link}>
-          <button className={classes.button}>Logout</button>
-        </Link>
-      </nav>
-    </div>
-  );
+    );
 }
