@@ -1,171 +1,113 @@
-.container {
-    background: #2c2c32;
-}
-
-button {
-    border: 0;
+*{
     padding: 0;
-    background: transparent;
-    cursor: pointer;
-    line-height: 1;
-    color: inherit;
-    font-family: 'Euclid Circular A';
-    font-size: 20px;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    
 }
 
-@media (width >= 500px) {
-    button { font-size: 16px;}
+body{
+    font-family: montserrat, serif;
 }
 
-:is(.navbar, .burger, .dropdown) {
-    position: fixed;
-    top: 0;
+nav{
+    background: red;
+    height: 80px;
     width: 100%;
 }
 
-.button {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 0 24px;
-    height: 100%;
-    opacity: 0.6;
-}
-
-@media (width >= 500px) {
-    .button { padding: 0 10px 0 24px;}
-}
-
-@media (width >= 500px) {
-    .dropdown:hover .button {
-        opacity: 1;
-    }
-}
-
-.dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.navbar {
-    z-index: 1;
-    left: 0;
-    display: flex;
-    align-items: stretch;
-    height: 72px;
-    background: #19191c;
-    color: #f9f9f9;
-}
-
-.burger {
-    z-index: 3;
-    right: 0;
-    display: grid;
-    place-items: center;
-    width: 72px;
-    height: 72px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-@media (width >= 508px) {
-    .burger { display: none;}
-}
-
-.dropdowns {
-    left: -9999px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #0d0d0e;
-    opacity: 0;
-    visibility: hidden;
-    transition-property: opacity, visibility;
-    transition-duration: 0.3s;
-}
-
-@media (width < 500px) {
-    .container.open .dropdowns {
-        opacity: 1; visibility: visible; left: 0;
-    }
-}
-
-@media (width >= 500px) {
-    .dropdowns {
-        position: static;
-        flex-direction: row;
-        justify-content: flex-start;
-        background: transparent;
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-@media (width >= 500px) {
-    .dropdown {
-        height: 100%;
-        flex-direction: row;
-    }
-}
-
-.dropdownmenu {
-    position: absolute;
-    top: 72px;
-    left: 0;
-    width: 180px;
-    padding: 6px 24px 10px;
-    margin-bottom: 0;
-    place-items: start;
-    background: #19191c;
-    opacity: 0;
-    visibility: hidden;
-    translate: 0 24px;
-    transition: 0.3s;
-}
-
-.dropdown:hover .dropdownmenu {
-    opacity: 1;
-    visibility: visible;
-    translate: 0 0;
-}
-
-.dropdownmenu {
-    display: grid;
-    margin-bottom: 28px;
-}
-
-.dropdownmenu > button {
-    color: #f9f9f9;
-    opacity: 1;
-    height: 40px;
-}
-
-@media (width >= 500px) {
-    .dropdownmenu > button {
-        opacity: 0.6;
-    }
-    .dropdown:hover .button {
-        opacity: 1;
-    }
-}
-
-.dropdownmenu > button:hover {
-    opacity: 1;
-}
-
-.link, .link:visited {
-    background-color: #19191c;
+label.logo{
     color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
 }
 
-.link:hover, .link:active {
-    background-color: #19191c;
+nav ul {
+    float:right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin:0 5px;
+}
+
+nav ul li a{
+    color:white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+
+    text-transform: uppercase;
+}
+
+a.active,a:hover{
+    background: black;
+    transition: .5s;
+}
+
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+.check{
+    display: none;
+}
+
+@media(max-width: 952px){
+    label.logo{
+        font-size: 30px;
+        padding-left: 50px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top:80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    a:hover,a.active{
+        background: none;
+        color: #0082e6;
+    }
+    #check:checked ~ ul{
+        left:0;
+    }
+}
+
+section{
+    background: url(best-air-jordans.jpg) no-repeat;
+    background-size: cover;
+    height: calc(100vh - 80px);
+
 }

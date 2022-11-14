@@ -1,41 +1,31 @@
-import { Link } from 'react-router-dom';
 
 import classes from './Navbar.module.css';
+import {useState} from "react";
 
 export default function Navbar() {
-  const pages = [
-      { text: 'Sneakers', href: '/sneakers' },
-      { text: 'Clothes', href: '/clothes' }
-    ];
-
-  function toggleMenu() {
-    document.container.classList.toggle('open');
-  }
-
   return (
-    <div className={classes.container}>
-      <nav className={classes.navbar}>
-        <button onClick={toggleMenu} className={classes.burger}></button>
-        <Link to={'/'} className={classes.link}>
-          <button className={classes.button}>Home</button>
-        </Link>
-        <div className={classes.dropdowns}>
-          {pages.map((page) => (
-            <div className={classes.dropdown} key={page.text}>
-              <Link to={page.href} className={classes.link}>
-                <button className={classes.button}key={page.text}>{page.text}</button>
-              </Link>
-              <div className={classes.dropdownmenu}>
-                <button>Men</button>
-                <button>Women</button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Link to='/cart' className={classes.link}>
-          <button className={classes.button}>Cart</button>
-        </Link>
+      <div>
+
+      <nav>
+          <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+          <input type="checkbox" className={classes.check}/>
+              <label for="check" className={classes.checkbtn}>
+                  <i className="fas fa-bars"></i>
+              </label>
+        <label className={classes.logo}>Design</label>
+        <ul>
+          <li><a className={classes.active} href="#">Home</a></li>
+          <li><a href="#">Sneakers</a></li>
+          <li><a href="#">Clothing</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Register</a></li>
+        </ul>
       </nav>
-    </div>
+
+
+          <section>
+          </section>
+      </div>
+
   );
 }
