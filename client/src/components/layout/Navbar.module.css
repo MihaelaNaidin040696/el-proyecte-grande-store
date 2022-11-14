@@ -20,7 +20,7 @@ label.logo {
     color: #ffffff;
     font-size: 35px;
     line-height: 80px;
-    padding: 0 100px;
+    /*padding: 0 100px;*/
     font-weight: bold;
     float: left;
 }
@@ -30,7 +30,7 @@ nav ul {
     margin-right: 20px;
 }
 
-nav ul li {
+ul li {
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
@@ -53,6 +53,59 @@ nav ul li a {
 }
 
 a.active, a:hover {
+    /*background: #e91e63;*/
+    transition: .5s;
+}
+
+.aNav:hover{
     background: #e91e63;
     transition: .5s;
+
+}
+
+@media only screen and (max-width: 1320px){
+    .right{
+        display: none;
+    }
+
+}
+@media only screen and (max-width: 920px){
+    .left {
+        display: none;
+    }
+    .hamburger{
+        display: block !important;
+        float: right;
+        margin: 25px;
+        font-size: 25px;
+    }
+
+}
+@media only screen and (max-width: 468px){
+    label.logo{
+        font-size: 20px;
+    }
+}
+
+
+.hamburger{
+    color: white !important;
+    display: none;
+}
+
+.mobileContainer{
+    position: fixed;
+    background: black;
+    height: 100%;
+    z-index: 3;
+    width: 100%;
+}
+
+.mobileNav{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: none !important;
+
 }

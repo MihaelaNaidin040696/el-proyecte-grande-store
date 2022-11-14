@@ -1,12 +1,16 @@
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Footer from "./Footer";
+import Header from "./Header";
+import Navbar from "./Navbar";
 
-export default function Layout(props) {
+function Layout(props) {
     return (
         <div>
-            <Navbar />
+            <Navbar/>
+
             {props.children}
             <Footer />
         </div>
     );
 }
+
+export default Layout;

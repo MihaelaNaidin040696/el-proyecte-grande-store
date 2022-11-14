@@ -42,7 +42,6 @@ export default function Home() {
         }
     ];
 
-
     return (
         <div>
             <ProductsCarousel/>
@@ -60,6 +59,3 @@ export default function Home() {
         </div>
     );
 }
-
-
-
