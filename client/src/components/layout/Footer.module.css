@@ -3,7 +3,6 @@
 body {
     line-height: 1.5;
     font-family: 'Poppins', sans-serif;
-
 }
 
 * {
@@ -15,7 +14,6 @@ body {
 .container {
     max-width: 1170px;
     margin: auto;
-
 }
 
 .row {
@@ -59,7 +57,6 @@ ul {
 
 .footercol ul li:not(:last-child) {
     margin-bottom: 10px;
-
 }
 
 .footercol ul li a {
@@ -68,13 +65,8 @@ ul {
     color: #ffffff;
     text-decoration: none;
     font-weight: 300;
-    /*display: block;*/
+    display: block;
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-
-
 }
 
 .footercol ul li a:hover {
@@ -93,13 +85,11 @@ ul {
     border-radius: 50%;
     color: #ffffff;
     transition: all 0.3s ease;
-
 }
 
 .footercol .sociallinks a:hover {
     color: #24242b;
     background-color: #ffffff;
-
 }
 
 @media (max-width: 767px) {
@@ -107,12 +97,10 @@ ul {
         width: 50%;
         margin-bottom: 30px;
     }
-
 }
 
 @media (max-width: 574px) {
     .footercol {
         width: 100%;
     }
-
 }

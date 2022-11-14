@@ -1,0 +1,21 @@
+.carousel {
+    font-family: 'Poppins', sans-serif;
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+    background-color: #24262b;
+    color: #fff;
+    margin: 0 15px;
+    font-size: 4em;
+}
