@@ -1,5 +1,6 @@
 import ProductsCarousel from "../components/layout/Carousel";
 import ProductCard from "../components/layout/ProductCard";
+import classes from '../components/layout/Products.module.css';
 
 export default function Home() {
     const productData = [
@@ -29,22 +30,33 @@ export default function Home() {
             productType: "openBackHeadphones",
             price: 170,
             totalSales: 6347
+        },
+        {
+            id: 4,
+            name: "MASSDROP X SENNHEISER HD 58X JUBILEE HEADPHONES",
+            image:
+                "https://massdrop-s3.imgix.net/product-images/massdrop-x-sennheiser-hd-58x-jubilee-headphones/FP/jbCgVcPdRXZC1YRI2oZ3_3qKeFvWGRbQ3wreRhIVc_58x_clear.png?auto=format&fm=jpg&fit=fill&w=300&h=300&bg=f0f0f0&fill=solid&fill-color=f0f0f0&dpr=1&q=70",
+            productType: "openBackHeadphones",
+            price: 170,
+            totalSales: 6347
         }
     ];
 
 
     return (
         <div>
-            <ProductsCarousel />
-            {productData.map(product => (
-                <ProductCard
-                    key={product.id}
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    totalSales={product.totalSales}
-                />
-            ))}
+            <ProductsCarousel/>
+            <div className={classes.productList}>
+                {productData.map(product => (
+                    <ProductCard
+                        key={product.id}
+                        image={product.image}
+                        name={product.name}
+                        price={product.price}
+                        totalSales={product.totalSales}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

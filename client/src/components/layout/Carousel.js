@@ -10,20 +10,18 @@ export default function ProductsCarousel() {
     ]
 
     return (
-        <>
-            <div className={classes.carousel}>
-                <Carousel breakPoints={breakPoints}>
-                    <div className={classes.item}>One</div>
-                    <div className={classes.item}>Two</div>
-                    <div className={classes.item}>Three</div>
-                    <div className={classes.item}>Four</div>
-                    <div className={classes.item}>Five</div>
-                    <div className={classes.item}>Six</div>
-                    <div className={classes.item}>Seven</div>
-                    <div className={classes.item}>Eight</div>
-                </Carousel>
-            </div>
-        </>
+        <div className={classes.carousel}>
+            <Carousel breakPoints={breakPoints}>
+                <div className={classes.item}>One</div>
+                <div className={classes.item}>Two</div>
+                <div className={classes.item}>Three</div>
+                <div className={classes.item}>Four</div>
+                <div className={classes.item}>Five</div>
+                <div className={classes.item}>Six</div>
+                <div className={classes.item}>Seven</div>
+                <div className={classes.item}>Eight</div>
+            </Carousel>
+        </div>
     );
 }
 

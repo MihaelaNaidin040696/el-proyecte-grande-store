@@ -1,55 +1,44 @@
-
 .productList {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
     justify-content: space-evenly;
-    margin-top: 5rem;
 }
 
 .productCard {
     position: relative;
-    background-color: #24262b;
+    background-color: rgb(255, 255, 255, 0.2);
     margin: 1rem;
     flex: 1 0 25rem;
     max-width: 30rem;
     max-height: 50rem;
     transition: 0.2s;
+    border: 2px solid #e7e7e7;
+    border-radius: 4px;
+    padding: .5rem;
 }
 
 .productCard:hover {
     transform: translateY(-0.5rem);
-    box-shadow: 0.5rem 0.75rem 1.5rem #bbbbbb;
+    box-shadow: 0.5rem 0.75rem 1.5rem #24242b;
 }
 
 .productImage {
-    margin-top: 2rem;
-    max-width: 100%;
     height: auto;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .productCard__cart {
-    position: absolute;
+    float: right;
     right: 0;
     margin: 1rem;
     font-size: 2rem;
     transition: 0.2s;
     cursor: pointer;
-}
-
-.productCard__wishlist {
-    position: absolute;
-    right: 3rem;
-    margin: 1rem;
-    font-size: 2rem;
-    transition: 0.2s;
-    cursor: pointer;
-}
-
-.productCard__fastSelling {
-    position: absolute;
-    font-size: 2rem;
-    left: 0;
-    margin: 1rem;
-    fill: rgb(255, 255, 255, 0.2);
 }
 
 .productCard__content {
@@ -72,7 +61,6 @@
     font-weight: bold;
 }
 
-.productSales,
-.productTime {
+.productSales {
     font-size: 1.1rem;
 }
