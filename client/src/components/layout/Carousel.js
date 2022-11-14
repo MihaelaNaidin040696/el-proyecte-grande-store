@@ -11,7 +11,7 @@ export default function ProductsCarousel() {
 
     return (
         <div className={classes.carousel}>
-            <Carousel breakPoints={breakPoints}>
+            <Carousel breakPoints={breakPoints} isRTL>
                 <div className={classes.item}>One</div>
                 <div className={classes.item}>Two</div>
                 <div className={classes.item}>Three</div>
