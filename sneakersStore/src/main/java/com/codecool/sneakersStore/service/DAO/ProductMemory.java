@@ -1,9 +1,6 @@
 package com.codecool.sneakersStore.service.DAO;
 
 import com.codecool.sneakersStore.model.Product;
-import com.codecool.sneakersStore.service.ProductService;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -13,8 +10,8 @@ import java.util.List;
 @Repository
 public class ProductMemory {
     private final List<Product> products;
-    public ProductMemory() {
 
+    public ProductMemory() {
         this.products = new ArrayList<>();
     }
 
