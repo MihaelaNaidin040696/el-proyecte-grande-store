@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 function Layout(props) {
     return (
         <div>
-            <Header/>
             <Navbar/>
 
             {props.children}
