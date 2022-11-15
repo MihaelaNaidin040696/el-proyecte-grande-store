@@ -10,8 +10,9 @@ public class ProductService {
     private final ProductMemory productMemory;
 
     @Autowired
-    public ProductService(ProductMemory productMemory) {
-        this.productMemory = productMemory;
+    public ProductService() {
+        this.productMemory = ProductMemory.getInstance();
+        productMemory.setProducts();
     }
 
     public ProductMemory getProductMemory() {
