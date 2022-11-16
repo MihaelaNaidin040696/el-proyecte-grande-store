@@ -7,12 +7,14 @@ import Cart from './pages/Cart';
 import Clothes from './pages/Clothes';
 import Sneakers from './pages/Sneakers';
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
     return (
         <Layout>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path='/admin' element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/logout" element={<Logout />} />
