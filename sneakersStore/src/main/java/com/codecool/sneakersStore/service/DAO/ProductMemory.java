@@ -12,14 +12,13 @@ public class ProductMemory {
     private final List<Product> products;
     private static  ProductMemory instance = null;
 
-
     public static ProductMemory getInstance(){
         if(instance == null){
             instance = new ProductMemory();
-
         }
         return instance;
     }
+
     public ProductMemory() {
         this.products = new ArrayList<>();
     }
@@ -85,8 +84,6 @@ public class ProductMemory {
                 ,"Textiles"
                 ,"Durable vulcanized rubber"
                 ,"https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",300,200,new Date(),100,10);
-
-
         products.add(p1);
         products.add(p2);
         products.add(p3);

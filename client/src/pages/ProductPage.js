@@ -28,7 +28,7 @@ function ProductPage(props) {
                         <h1>{data.brand}</h1>
                     </div>
                     <div className={classes.productName}>
-                        <p>Model {data.name}</p>
+                        <p>{data.productName}</p>
                     </div>
                     <div className={classes.productPrice}>
                         <p>{data.sellingPrice}$</p>
