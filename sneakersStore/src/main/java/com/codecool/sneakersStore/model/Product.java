@@ -17,7 +17,10 @@ public class Product {
     private int categoryId;
     private int supplierId;
     private int brandId;
-    private String description;
+    private String descriptionColor;
+    private String descriptionMaterial;
+    private String descriptionInterior;
+    private String descriptionSole;
     private String image;
     private String size;
     private float sellingPrice;
