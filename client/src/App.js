@@ -3,12 +3,13 @@ import Layout from "./components/layout/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout";
-import Cart from './pages/Cart';
 import Clothes from './pages/Clothes';
 import Sneakers from './pages/Sneakers';
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Dashboard from "./pages/Dashboard";
+import Modal from "./components/Modal";
+import Cart from "./pages/Cart";
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
                 <Route path="/sneakers" element={<Sneakers />} />
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/clothes" element={<Clothes />} />
-                <Route path="/cart" element={<Cart />} />
+                {/* <Route path="/cart" element={<Cart />} /> */}
             </Routes>
         </Layout>
     );

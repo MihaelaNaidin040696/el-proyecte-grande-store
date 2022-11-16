@@ -11,7 +11,7 @@ function ProductCardList(props){
                             key={index}
                             id={product.id}
                             image={product.image}
-                            name={product.name}
+                            name={product.productName}
                             sellingPrice={product.sellingPrice}
                             size = {product.size}
                             // description={product.description}

@@ -43,10 +43,10 @@ input:focus {
     display: flex;
 }
 .productBrandAndName{
-    margin-top: -90px;
+    margin-top: -70px;
 }
 .productName{
-    margin-top: -70px;
+    margin-top: -40px;
 }
 
 select{
@@ -65,7 +65,12 @@ option{
 
 .productPrice{
     font-size: 30px;
-    margin-top: -50px;
+    margin-top: -10px;
 
 }
 
+.productDescription{
+
+    margin-bottom: -65px;
+
+}

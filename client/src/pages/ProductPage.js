@@ -28,7 +28,7 @@ function ProductPage(props) {
                         <h1>{data.brand}</h1>
                     </div>
                     <div className={classes.productName}>
-                        <p>Model {data.name}</p>
+                        <p>{data.productName}</p>
                     </div>
                     <div className={classes.productPrice}>
                         <p>{data.sellingPrice}$</p>
@@ -55,11 +55,23 @@ function ProductPage(props) {
                         type="submit"
                         value="Add to cart"
                     />
-                    {/* <div className={classes.productDescription}>
-
-                        <p>{data.description}</p>
-
-                    </div> */}
+                    <div className={classes.productDescription}>
+                        <p>
+                            <b>Color:</b> {data.descriptionColor}
+                        </p>
+                        <p>
+                            <b>Material:</b> {data.descriptionMaterial}
+                        </p>
+                        <p>
+                            <b>Interior:</b> {data.descriptionInterior}
+                        </p>
+                        <p>
+                            <b>Sole:</b> {data.descriptionSole}
+                        </p>
+                        <p>
+                            <b>Reference Code:</b> {data.referenceCode}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

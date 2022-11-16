@@ -62,7 +62,7 @@ ul {
 }
 
 .footercol ul li:not(:last-child) {
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 .footercol ul li a {

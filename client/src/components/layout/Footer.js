@@ -30,7 +30,7 @@ function Footer() {
                     </div>
                     <div className={classes.footercol}>
                         <h4>get help</h4>
-                        <ul>
+                        <ul className={classes.footerCols}>
                             <li>
                                 <a href="/">FAQ</a>
                             </li>
@@ -51,7 +51,7 @@ function Footer() {
                     </div>
                     <div className={classes.footercol}>
                         <h4>online shop</h4>
-                        <ul>
+                        <ul className={classes.footerCols}>
                             <li>
                                 <a href="/">Sneakers men</a>
                             </li>
@@ -68,7 +68,7 @@ function Footer() {
                     </div>
                     <div className={classes.footercol}>
                         <h4>follow us</h4>
-                        <ul>
+                        <ul className={classes.footerCols}>
                             <div className={classes.sociallinks}>
                                 <a href="/">
                                     <i className="fab fa-facebook-f"></i>
