@@ -43,14 +43,14 @@ public class ProductMemory {
         return productToFind;
     }
     public void setProducts(){
-        Product p1 = new Product(1,"JORDAN","H67366",1,1,1,"Culori: Alb / Negru\n" +
+        Product p1 = new Product(1,"JORDAN","JORDAN 1 LOW","H67366",1,1,1,"Culori: Alb / Negru\n" +
                 "\n" +
                 "Materiale: Piele / Materiale sintetice\n" +
                 "\n" +
                 "Interior: Textile\n" +
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","41", (float) 455.4, (float) 250.3,new Date(),50, 10.0F);
-        Product p2 = new Product(2,"JORDAN","CT8013-015\n" +
+        Product p2 = new Product(2,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
@@ -59,7 +59,7 @@ public class ProductMemory {
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",
                 1200,700,new Date(),20,10);
-        Product p3 = new Product(3,"JORDAN","CT8013-015\n" +
+        Product p3 = new Product(3,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
@@ -68,7 +68,7 @@ public class ProductMemory {
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",
                 1200,700,new Date(),20,10);
-        Product p4 = new Product(4,"JORDAN","CT8013-015\n" +
+        Product p4 = new Product(4,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
@@ -77,7 +77,7 @@ public class ProductMemory {
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",
                 1200,700,new Date(),20,10);
-        Product p5 = new Product(4,"JORDAN","CT8013-015\n" +
+        Product p5 = new Product(4,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
@@ -86,7 +86,7 @@ public class ProductMemory {
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",
                 1200,700,new Date(),20,10);
-        Product p6 = new Product(4,"JORDAN","CT8013-015\n" +
+        Product p6 = new Product(4,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
@@ -95,7 +95,7 @@ public class ProductMemory {
                 "\n" +
                 "Talpa: Cauciuc vulcanizat durabil","https://sneakerindustry.ro/95359-category_products/1-low.jpg","44",
                 1200,700,new Date(),20,10);
-        Product p7 = new Product(4,"JORDAN","CT8013-015\n" +
+        Product p7 = new Product(4,"JORDAN","JORDAN 1 LOW","CT8013-015\n" +
                 "\n",1,3,3,"Culori:  Alb / Gri\n" +
                 "\n" +
                 "Materiale: Piele / Piele sintetica\n" +
