@@ -8,23 +8,23 @@
 .productCard {
     position: relative;
     background-color: rgb(255, 255, 255, 0.2);
-    margin: 1rem;
+    margin-top: 55px;
     flex: 1 0 25rem;
     max-width: 30rem;
     max-height: 50rem;
     transition: 0.2s;
-    border: 2px solid #e7e7e7;
+    border: 2px solid white;
     border-radius: 4px;
     padding: .5rem;
 }
 
 .productCard:hover {
     transform: translateY(-0.5rem);
-    box-shadow: 0.5rem 0.75rem 1.5rem #24242b;
+    box-shadow: 0.5rem 0.75rem 1.5rem #e91e63;
 }
 
 .productImage {
-    height: auto;
+    height: 150px;
     margin-left: 0;
     margin-right: 0;
     display: flex;

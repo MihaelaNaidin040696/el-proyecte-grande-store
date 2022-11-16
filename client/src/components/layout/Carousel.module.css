@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 35vh;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .item {
@@ -15,7 +15,7 @@
     height: 250px;
     width: 100%;
     background-color: #24262b;
-    color: #fff;
+    color: #e91e63;
     margin: 0 15px;
     font-size: 4em;
 }

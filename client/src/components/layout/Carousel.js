@@ -4,14 +4,14 @@ import classes from './Carousel.module.css';
 export default function ProductsCarousel() {
     const breakPoints = [
         {width: 1, itemsToShow: 1},
-        {width: 550, itemsToShow: 2},
-        {width: 768, itemsToShow: 3},
-        {width: 1200, itemsToShow: 4},
+        // {width: 550, itemsToShow: 2},
+        // {width: 768, itemsToShow: 3},
+        // {width: 1200, itemsToShow: 4},
     ]
 
     return (
         <div className={classes.carousel}>
-            <Carousel breakPoints={breakPoints}>
+            <Carousel breakPoints={breakPoints} isRTL>
                 <div className={classes.item}>One</div>
                 <div className={classes.item}>Two</div>
                 <div className={classes.item}>Three</div>
