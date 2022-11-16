@@ -1,9 +1,6 @@
 import ProductsCarousel from "../components/layout/Carousel";
-import ProductCard from "../components/layout/ProductCard";
-import classes from '../components/layout/Products.module.css';
 import {useEffect, useState} from "react";
 import ProductCardList from "../components/layout/ProductCardList";
-import { ExposureTwoTone } from "@mui/icons-material";
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);

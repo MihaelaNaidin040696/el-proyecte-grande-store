@@ -23,6 +23,12 @@ body {
 
 ul {
     list-style: none;
+    
+}
+.footerCols{
+    display: flex;
+    flex-direction: column;
+
 }
 
 .footer {

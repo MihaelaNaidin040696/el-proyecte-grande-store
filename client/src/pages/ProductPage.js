@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import classes from "./ProductPage.module.css";
+
 
 function ProductPage(props) {
     const [data, setData] = useState([]);
@@ -16,9 +18,50 @@ function ProductPage(props) {
     },[props.id])
    
     return (
-        <div>
-            <div>{data.name}</div>
-            <div>{data.sellingPrice}</div>
+        <div className={classes.productContainer}>
+            <div className={classes.productDiv}>
+                <div className={classes.productImage}>
+                    <img src={data.image}></img>
+                </div>
+                <div className={classes.productInfo}>
+                    <div className={classes.productBrandAndName}>
+                        <h1>{data.brand}</h1>
+                    </div>
+                    <div className={classes.productName}>
+                        <p>Model {data.name}</p>
+                    </div>
+                    <div className={classes.productPrice}>
+                        <p>{data.sellingPrice}$</p>
+                    </div>
+                    <div className={classes.productSizeInput}>
+                        <form>
+                            <label for="size"></label>
+                            <select name="size" className={classes.inputstyle}>
+                                <option value={data.size}>
+                                    {data.size - 3}
+                                </option>
+                                <option value={data.size}>
+                                    {data.size - 2}
+                                </option>
+                                <option value={data.size}>
+                                    {data.size - 1}
+                                </option>
+                                <option value={data.size}>{data.size}</option>
+                            </select>
+                        </form>
+                    </div>
+                    <input
+                        className={classes.inputstyle}
+                        type="submit"
+                        value="Add to cart"
+                    />
+                    {/* <div className={classes.productDescription}>
+
+                        <p>{data.description}</p>
+
+                    </div> */}
+                </div>
+            </div>
         </div>
     );
  }

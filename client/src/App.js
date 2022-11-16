@@ -7,8 +7,8 @@ import Cart from './pages/Cart';
 import Clothes from './pages/Clothes';
 import Sneakers from './pages/Sneakers';
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import ProductPage from "./pages/ProductPage";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
     return (

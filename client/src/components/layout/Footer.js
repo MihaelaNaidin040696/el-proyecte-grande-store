@@ -13,7 +13,7 @@ function Footer() {
                 <div className={classes.row}>
                     <div className={classes.footercol}>
                         <h4>Company</h4>
-                        <ul>
+                        <ul className={classes.footerCols}>
                             <li>
                                 <a href="/">About us</a>
                             </li>
