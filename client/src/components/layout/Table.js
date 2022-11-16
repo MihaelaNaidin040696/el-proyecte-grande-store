@@ -63,7 +63,7 @@ export default function BasicTable() {
                                 key={row.name}
                                 sx={{"&:last-child td, &:last-child th": {border: 0}}}
                             >
-                                <TableCell component="th" scope="row">{row.name}</TableCell>
+                                <TableCell scope="row">{row.name}</TableCell>
                                 <TableCell align="left">{row.trackingId}</TableCell>
                                 <TableCell align="left">{row.date}</TableCell>
                                 <TableCell align="left">
