@@ -11,109 +11,127 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 
 export default function ProductsTable() {
-    const [loadedProducts, setLoadedProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const [editProductId, setEditProductId] = useState(null);
-    const [addNewProduct, setAddNewProduct] = useState({
+    const [addFormData, setAddFormData] = useState({
         productName: "",
+        brand: "",
         referenceCode: "",
-        description: "",
+        descriptionColor: "",
+        descriptionMaterial: "",
+        descriptionInterior: "",
+        descriptionSole: "",
         image: "",
         size: "",
         sellingPrice: "",
         purchasePrice: "",
+        purchaseDate: "",
         totalStock: "",
         discount: "",
     });
 
-    const [editProduct, setEditProduct] = useState({
+    const [editFormData, setEditFormData] = useState({
         productName: "",
+        brand: "",
         referenceCode: "",
-        description: "",
+        descriptionColor: "",
+        descriptionMaterial: "",
+        descriptionInterior: "",
+        descriptionSole: "",
         image: "",
         size: "",
         sellingPrice: "",
         purchasePrice: "",
+        purchaseDate: "",
         totalStock: "",
         discount: "",
     });
 
-    const handleAddNewProduct = (event) => {
+    const handleAddFormChange = (event) => {
         event.preventDefault();
         const fieldName = event.target.getAttribute('name');
         const fieldValue = event.target.value;
-        const newProduct = {...addNewProduct};
-        newProduct[fieldName] = fieldValue;
-        setAddNewProduct(newProduct);
+        const newFormData = {...addFormData};
+        newFormData[fieldName] = fieldValue;
+        setAddFormData(newFormData);
     };
 
-    const handleEditFormProduct = (event) => {
+    const handleEditFormChange = (event) => {
         event.preventDefault();
         const fieldName = event.target.getAttribute('name');
         const fieldValue = event.target.value;
-        const newFormData = {...editProduct};
+        const newFormData = {...editFormData};
         newFormData[fieldName] = fieldValue;
-        setEditProduct(newFormData);
+        setEditFormData(newFormData);
     }
 
     const handleAddFormSubmit = (event) => {
         event.preventDefault();
         const newProduct = {
-            productName: addNewProduct.productName,
-            referenceCode: addNewProduct.referenceCode,
-            description: addNewProduct.description,
-            image: addNewProduct.image,
-            size: addNewProduct.size,
-            sellingPrice: addNewProduct.sellingPrice,
-            purchasePrice: addNewProduct.purchasePrice,
-            totalStock: addNewProduct.totalStock,
-            discount: addNewProduct.discount,
+            productName: addFormData.productName,
+            brand: addFormData.brand,
+            referenceCode: addFormData.referenceCode,
+            descriptionColor: addFormData.descriptionColor,
+            descriptionMaterial: addFormData.descriptionMaterial,
+            descriptionInterior: addFormData.descriptionInterior,
+            descriptionSole: addFormData.descriptionSole,
+            image: addFormData.image,
+            size: addFormData.size,
+            sellingPrice: addFormData.sellingPrice,
+            purchasePrice: addFormData.purchasePrice,
+            purchaseDate: addFormData.purchaseDate,
+            totalStock: addFormData.totalStock,
+            discount: addFormData.discount,
         }
-        const newProducts = [...loadedProducts, newProduct];
-        setLoadedProducts(newProducts);
+        const newProducts = [...products, newProduct];
+        setProducts(newProducts);
+    };
+
+    const handleEditFormSubmit = (event) => {
+        event.preventDefault();
+        const editedProduct = {
+            brand: editFormData.brand,
+            productName: editFormData.productName,
+            referenceCode: editFormData.referenceCode,
+            descriptionColor: editFormData.descriptionColor,
+            descriptionMaterial: editFormData.descriptionMaterial,
+            descriptionInterior: editFormData.descriptionInterior,
+            descriptionSole: editFormData.descriptionSole,
+            image: editFormData.image,
+            size: editFormData.size,
+            sellingPrice: editFormData.sellingPrice,
+            purchasePrice: editFormData.purchasePrice,
+            purchaseDate: editFormData.purchaseDate,
+            totalStock: editFormData.totalStock,
+            discount: editFormData.discount,
+        };
+        const newProducts = [...products];
+        const index = products.findIndex((product) => product.id === editProductId);
+        newProducts[index] = editedProduct;
+        setProducts(newProducts);
+        setEditProductId(null);
     };
 
     const handleEditClick = (event, product) => {
         event.preventDefault();
         setEditProductId(product.id);
-
         const formValues = {
-            productName: addNewProduct.productName,
-            referenceCode: addNewProduct.referenceCode,
-            description: addNewProduct.description,
-            image: addNewProduct.image,
-            size: addNewProduct.size,
-            sellingPrice: addNewProduct.sellingPrice,
-            purchasePrice: addNewProduct.purchasePrice,
-            totalStock: addNewProduct.totalStock,
-            discount: addNewProduct.discount,
+            brand: product.brand,
+            productName: product.productName,
+            referenceCode: product.referenceCode,
+            descriptionColor: product.descriptionColor,
+            descriptionMaterial: product.descriptionMaterial,
+            descriptionInterior: product.descriptionInterior,
+            descriptionSole: product.descriptionSole,
+            image: product.image,
+            size: product.size,
+            sellingPrice: product.sellingPrice,
+            purchasePrice: product.purchasePrice,
+            purchaseDate: product.purchaseDate,
+            totalStock: product.totalStock,
+            discount: product.discount,
         }
-
-        setEditProduct(formValues);
-    };
-
-    const handleEditFormSubmit = (event) => {
-        event.preventDefault();
-
-        const editedProduct = {
-            productName: addNewProduct.productName,
-            referenceCode: addNewProduct.referenceCode,
-            description: addNewProduct.description,
-            image: addNewProduct.image,
-            size: addNewProduct.size,
-            sellingPrice: addNewProduct.sellingPrice,
-            purchasePrice: addNewProduct.purchasePrice,
-            totalStock: addNewProduct.totalStock,
-            discount: addNewProduct.discount,
-        };
-
-        const newProduct = [...loadedProducts];
-
-        const index = loadedProducts.findIndex((product) => product.id === editProductId);
-
-        newProduct[index] = editedProduct;
-
-        setLoadedProducts(newProduct);
-        setEditProductId(null);
+        setEditFormData(formValues);
     };
 
     const handleCancelClick = () => {
@@ -121,13 +139,10 @@ export default function ProductsTable() {
     };
 
     const handleDeleteClick = (editProductId) => {
-        const newProduct = [...loadedProducts];
-
-        const index = loadedProducts.findIndex((product) => product.id === editProductId);
-
-        newProduct.splice(index, 1);
-
-        setLoadedProducts(newProduct);
+        const newProducts = [...products];
+        const index = products.findIndex((product) => product.id === editProductId);
+        newProducts.splice(index, 1);
+        setProducts(newProducts);
     };
 
     useEffect(() => {
@@ -143,7 +158,7 @@ export default function ProductsTable() {
                     };
                     products.push(product);
                 }
-                setLoadedProducts(products);
+                setProducts(products);
             })
     }, []);
 
@@ -155,63 +170,98 @@ export default function ProductsTable() {
                 name="productName"
                 required="required"
                 placeholder="Enter a product name"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
+            />
+            <input
+                type="text"
+                name="brand"
+                required="required"
+                placeholder="Enter a product brand"
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="referenceCode"
                 required="required"
                 placeholder="Enter a reference code"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
-                name="description"
+                name="descriptionColor"
                 required="required"
-                placeholder="Enter a product description"
-                onChange={handleAddNewProduct}
+                placeholder="Enter a product color"
+                onChange={handleAddFormChange}
+            />
+            <input
+                type="text"
+                name="descriptionMaterial"
+                required="required"
+                placeholder="Enter a product material"
+                onChange={handleAddFormChange}
+            />
+            <input
+                type="text"
+                name="descriptionInterior"
+                required="required"
+                placeholder="Enter a product interior"
+                onChange={handleAddFormChange}
+            />
+            <input
+                type="text"
+                name="descriptionSole"
+                required="required"
+                placeholder="Enter a product description sole"
+                onChange={handleAddFormChange}
             />
             <input
                 type="file"
                 name="image"
                 required="required"
                 alt="image"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="size"
                 required="required"
                 placeholder="Enter a product size"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="sellingPrice"
                 required="required"
                 placeholder="Enter a selling price"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="purchasePrice"
                 required="required"
                 placeholder="Enter a purchase price"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
+            />
+            <input
+                type="date"
+                name="purchaseDate"
+                required="required"
+                placeholder="Enter a purchase date"
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="totalStock"
                 required="required"
                 placeholder="Enter a product total stock"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <input
                 type="text"
                 name="discount"
                 required="required"
                 placeholder="Enter a product discount"
-                onChange={handleAddNewProduct}
+                onChange={handleAddFormChange}
             />
             <button type="submit">Add Product</button>
         </form>
@@ -226,24 +276,29 @@ export default function ProductsTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Product Name</TableCell>
+                            <TableCell align="left">Brand</TableCell>
                             <TableCell align="left">Reference Code</TableCell>
-                            <TableCell align="left">Description</TableCell>
+                            <TableCell align="left">Color</TableCell>
+                            <TableCell align="left">Material</TableCell>
+                            <TableCell align="left">Interior</TableCell>
+                            <TableCell align="left">Sole</TableCell>
                             <TableCell align="left">Image</TableCell>
                             <TableCell align="left">Size</TableCell>
                             <TableCell align="left">Selling Price</TableCell>
                             <TableCell align="left">Purchase Price</TableCell>
+                            <TableCell align="left">Purchase Date</TableCell>
                             <TableCell align="left">Total Stock</TableCell>
                             <TableCell align="left">Discount</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody style={{color: "white"}}>
-                        {loadedProducts.map((product, index) => (
+                        {products.map((product, index) => (
                             <Fragment>
                                 {editProductId === product.id ?
                                     (<EditableRow
                                         index={index}
                                         editProduct={product}
-                                        handleEditFormProduct={handleEditFormProduct}
+                                        handleEditFormChange={handleEditFormChange}
                                         handleCancelClick={handleCancelClick}
                                     />)
                                     :
