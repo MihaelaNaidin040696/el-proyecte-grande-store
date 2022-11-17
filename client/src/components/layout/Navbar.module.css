@@ -58,7 +58,7 @@ a.active, a:hover {
 }
 
 .aNav:hover{
-    background: #d31b1b;
+    background: #dd0026;
     transition: .5s;
 
 }
@@ -125,4 +125,11 @@ a.active, a:hover {
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
+    
+}
+
+.cartNav:hover{
+    background: #dd0026;
+    transition: .5s;
+
 }

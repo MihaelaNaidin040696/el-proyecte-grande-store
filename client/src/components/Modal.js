@@ -10,7 +10,7 @@ export default function Modal({ setModal }) {
     return (
 
         <div onClick={()=>{closeModal(); }} className={classes.container}>
-            <div className={classes.modalContainer}>am 3 lei</div>
+            <div className={classes.modalContainer}>REGELEEEEEEEE</div>
         </div>
     );
 }
