@@ -6,16 +6,23 @@
     justify-content: center;
     height: 35vh;
     margin-top: 30px;
+    margin-bottom: 70px;
 }
 
 .item {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
+    height: 400px;
     width: 100%;
     background-color: #24262b;
     color: #dd0026;
     margin: 0 15px;
     font-size: 4em;
 }
+
+/*.rec.rec-arrow { border-radius: 0; background-color: rgb(208, 212, 216); }*/
+
+/*.rec.rec-arrow:hover { border-radius: 50%; background-color: olive; }*/
+
+/*.rec.rec-arrow:disabled { visibility: hidden; }*/
