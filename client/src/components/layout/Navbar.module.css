@@ -78,6 +78,7 @@ a.active, a:hover {
     }
 
 }
+
 @media only screen and (max-width: 920px){
     .left {
         display: none;
@@ -90,6 +91,7 @@ a.active, a:hover {
     }
 
 }
+
 @media only screen and (max-width: 468px){
     label.logo{
         font-size: 20px;
@@ -125,6 +127,7 @@ a.active, a:hover {
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
+    line-height: 25px;
     
 }
 
