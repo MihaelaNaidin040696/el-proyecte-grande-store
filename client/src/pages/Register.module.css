@@ -40,7 +40,7 @@
 }
 
 .inputstyle:hover {
-    background-color: #e91e63;
+    background-color: #dd0026;
 }
 
 input {
@@ -71,7 +71,7 @@ input:focus {
 }
 
 .forgotpass:hover {
-    color: #e91e63;
+    color: #dd0026;
 }
 
 .signuplink {

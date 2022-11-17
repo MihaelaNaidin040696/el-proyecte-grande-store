@@ -20,7 +20,7 @@
 
 .productCard:hover {
     transform: translateY(-0.5rem);
-    box-shadow: 0.5rem 0.75rem 1.5rem #d31b1b;
+    box-shadow: 0.5rem 0.75rem 1.5rem #dd0026;
 }
 
 .productImage {
@@ -39,7 +39,7 @@
     font-size: 2rem;
     transition: 0.2s;
     cursor: pointer;
-    color: #d31b1b;
+    color: #dd0026;
 }
 
 .productCard__content {
