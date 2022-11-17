@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import classes from './Table.module.css';
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
 
 export default function ProductsTable() {
     const [products, setProducts] = useState([]);
@@ -165,109 +167,122 @@ export default function ProductsTable() {
     return (<div className={classes.Table}>
         <h3>Add New Product</h3>
         <form onSubmit={handleAddFormSubmit}>
-            <input
-                type="text"
-                name="productName"
-                required="required"
-                placeholder="Enter a product name"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="brand"
-                required="required"
-                placeholder="Enter a product brand"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="referenceCode"
-                required="required"
-                placeholder="Enter a reference code"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="descriptionColor"
-                required="required"
-                placeholder="Enter a product color"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="descriptionMaterial"
-                required="required"
-                placeholder="Enter a product material"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="descriptionInterior"
-                required="required"
-                placeholder="Enter a product interior"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="descriptionSole"
-                required="required"
-                placeholder="Enter a product description sole"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="file"
-                name="image"
-                required="required"
-                alt="image"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="size"
-                required="required"
-                placeholder="Enter a product size"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="sellingPrice"
-                required="required"
-                placeholder="Enter a selling price"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="purchasePrice"
-                required="required"
-                placeholder="Enter a purchase price"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="date"
-                name="purchaseDate"
-                required="required"
-                placeholder="Enter a purchase date"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="totalStock"
-                required="required"
-                placeholder="Enter a product total stock"
-                onChange={handleAddFormChange}
-            />
-            <input
-                type="text"
-                name="discount"
-                required="required"
-                placeholder="Enter a product discount"
-                onChange={handleAddFormChange}
-            />
-            <button type="submit">Add Product</button>
+            <Box
+                component={Paper}
+                sx={{
+                    '& > :not(style)': {m: 1},
+                }}
+                noValidate
+                autoComplete="off"
+
+            >
+                <Input
+                    type="text"
+                    name="productName"
+                    required="required"
+                    placeholder="Enter a product name"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="brand"
+                    required="required"
+                    placeholder="Enter a product brand"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="referenceCode"
+                    required="required"
+                    placeholder="Enter a reference code"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="descriptionColor"
+                    required="required"
+                    placeholder="Enter a product color"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="descriptionMaterial"
+                    required="required"
+                    placeholder="Enter a product material"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="descriptionInterior"
+                    required="required"
+                    placeholder="Enter a product interior"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="descriptionSole"
+                    required="required"
+                    placeholder="Enter a product description sole"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="file"
+                    name="image"
+                    required="required"
+                    alt="image"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="size"
+                    required="required"
+                    placeholder="Enter a product size"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="sellingPrice"
+                    required="required"
+                    placeholder="Enter a selling price"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="purchasePrice"
+                    required="required"
+                    placeholder="Enter a purchase price"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="date"
+                    name="purchaseDate"
+                    required="required"
+                    placeholder="Enter a purchase date"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="totalStock"
+                    required="required"
+                    placeholder="Enter a product total stock"
+                    onChange={handleAddFormChange}
+                />
+                <Input
+                    type="text"
+                    name="discount"
+                    required="required"
+                    placeholder="Enter a product discount"
+                    onChange={handleAddFormChange}
+                />
+                <button type="submit" className={classes.status}
+                        style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}>Add Product
+                </button>
+            </Box>
         </form>
+        <br/>
 
         <h3>All Products</h3>
-        <form onSubmit={handleEditFormSubmit}>
+        <form onSubmit={handleEditFormSubmit} className={classes.Table}>
             <TableContainer
                 component={Paper}
                 style={{boxShadow: "0px 13px 20px 0px #80808029"}}
