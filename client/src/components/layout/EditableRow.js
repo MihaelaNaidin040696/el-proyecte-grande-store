@@ -1,10 +1,13 @@
 import classes from "./Table.module.css";
+import Input from '@mui/material/Input';
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
 
 export default function EditableRow({editProduct, index, handleEditFormChange, handleCancelClick}) {
     return (
-        <tr key={index}>
-            <td>
-                <input
+        <TableRow key={index}>
+            <TableCell>
+                <Input
                     type="text"
                     name="productName"
                     required="required"
@@ -12,9 +15,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.productName}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="brand"
                     required="required"
@@ -22,9 +25,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.brand}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="referenceCode"
                     required="required"
@@ -32,9 +35,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.referenceCode}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="descriptionColor"
                     required="required"
@@ -42,9 +45,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.descriptionColor}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="descriptionMaterial"
                     required="required"
@@ -52,9 +55,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.descriptionMaterial}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="descriptionInterior"
                     required="required"
@@ -62,9 +65,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.descriptionInterior}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="descriptionSole"
                     required="required"
@@ -72,18 +75,18 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.descriptionSole}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="file"
                     name="image"
                     required="required"
                     alt="image"
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="size"
                     required="required"
@@ -91,9 +94,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.size}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="sellingPrice"
                     required="required"
@@ -101,9 +104,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.sellingPrice}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="purchasePrice"
                     required="required"
@@ -111,18 +114,18 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.purchasePrice}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="date"
                     name="purchaseDate"
                     required="required"
                     placeholder="Enter a purchase date"
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="totalStock"
                     required="required"
@@ -130,9 +133,9 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.totalStock}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type="text"
                     name="discount"
                     required="required"
@@ -140,18 +143,18 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.discount}
                     onChange={handleEditFormChange}
                 />
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <button type='submit' className={classes.status}
                         style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}>Save
                 </button>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <button type='button' className={classes.status}
                         style={{background: '#ffadad8f', color: 'red', border: 'none'}}
                         onClick={handleCancelClick}>Cancel
                 </button>
-            </td>
-        </tr>
+            </TableCell>
+        </TableRow>
     );
 }
