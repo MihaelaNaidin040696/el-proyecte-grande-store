@@ -43,8 +43,9 @@ export default function Navbar() {
                             onClick={() => openModal()}
                             className={classes.cartNav}
                         >
-                            Cart
+                            <div>Cart</div>
                         </li>
+
                         <li>
                             <a className={classes.aNav} href="/login">
                                 Login
@@ -92,9 +93,9 @@ export default function Navbar() {
                                 </li>
                                 <li
                                     onClick={() => openModal()}
-                                    className={classes.aNav}
+                                    className={classes.cartNav}
                                 >
-                                    Cart
+                                    <div>Cart</div>
                                 </li>
                                 <li>
                                     <a className={classes.aNav} href="/login">

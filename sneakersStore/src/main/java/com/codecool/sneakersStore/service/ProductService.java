@@ -18,9 +18,11 @@ public class ProductService {
         productMemory.setProducts();
     }
     public Product findProductById(String roomId){
+
         return productMemory.findProductById(parseInt(roomId));
     }
-    public ProductMemory getProductMemory() {
+    public ProductMemory getProductMemory()
+    {
         return productMemory;
     }
 }

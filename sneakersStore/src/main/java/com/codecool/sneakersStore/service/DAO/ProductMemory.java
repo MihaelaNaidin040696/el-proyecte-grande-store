@@ -24,6 +24,7 @@ public class ProductMemory {
     }
 
     public void addProduct(Product product){
+
         products.add(product);
     }
 
