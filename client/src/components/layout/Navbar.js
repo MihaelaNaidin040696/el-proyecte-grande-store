@@ -1,14 +1,14 @@
-import classes from './Navbar.module.css';
-import {useState} from "react";
-import Modal from '../Modal';
+import classes from "./Navbar.module.css";
+import { useState } from "react";
+import Modal from "../Modal";
 
 export default function Navbar() {
     const [mobileNavbar, setMobileNavbar] = useState(false);
     const [modal, setModal] = useState(false);
-        function openModal() {
-            setModal(true);
-            document.body.style.overflow = "hidden";
-        }
+    function openModal() {
+        setModal(true);
+        document.body.style.overflow = "hidden";
+    }
 
     return (
         <>

@@ -1,6 +1,7 @@
-import ProductsCarousel from "../components/layout/Carousel";
+// import ProductsCarousel from "../components/layout/Carousel";
 import {useEffect, useState} from "react";
 import ProductCardList from "../components/layout/ProductCardList";
+import Slider from "../components/slider/Slider";
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,7 @@ function Home() {
                 for (const key in data) {
                     console.log("keeeeeeeey"+key)
                     const product = {
-                        id: key+1,
+                        id: key,
                         ...data[key]
                     };
                     products.push(product);
@@ -42,13 +43,10 @@ function Home() {
 
     return (
         <section>
-            <ProductsCarousel/>
+            <Slider />
             <ProductCardList products={loadedProducts} />
         </section>
     );
-    
-
-  
 }
 
 export default Home;
