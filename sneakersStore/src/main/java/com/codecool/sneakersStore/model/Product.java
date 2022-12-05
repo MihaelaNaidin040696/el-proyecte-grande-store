@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,18 +28,21 @@ public class Product {
     @Id
     @GeneratedValue
     private int id;
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name="brand_id",referencedColumnName = "id")
     private Brand brand;
     private String productName;
     private String referenceCode;
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+
     @JoinColumn(name="category_id",referencedColumnName = "id")
     private Category category;
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+
     @JoinColumn(name="suplier_id",referencedColumnName = "id")
     private Supplier supplier;
     private String descriptionColor;
