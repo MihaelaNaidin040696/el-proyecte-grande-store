@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
     private Set<Product> products;
 }
