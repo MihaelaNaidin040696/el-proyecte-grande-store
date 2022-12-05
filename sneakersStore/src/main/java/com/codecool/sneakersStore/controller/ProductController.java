@@ -14,16 +14,20 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/prod")
 public class ProductController {
-    @Autowired
     private ProductService productService;
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/products")
     public List<Product> products() {
-        return productService.getProductMemory().getProducts();
+        return productService.getAllProducts();
     }
 
     @GetMapping("/product/{productId}")
     public Product getProductById(@PathVariable String productId){
-        return productService.getProductMemory().findProductById(Integer.parseInt(productId));
+        return productService.getProductById(Long.parseLong(productId));
     }
 }
