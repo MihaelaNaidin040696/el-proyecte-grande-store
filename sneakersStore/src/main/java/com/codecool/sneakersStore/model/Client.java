@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
