@@ -1,4 +1,4 @@
-package com.codecool.sneakersStore.service.DAO;
-
-public interface ProductDao {
-}
+//package com.codecool.sneakersStore.service.DAO;
+//
+//public interface ProductDao {
+//}
