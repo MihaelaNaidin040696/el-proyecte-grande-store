@@ -35,18 +35,11 @@ function ProductPage(props) {
                     </div>
                     <div className={classes.productSizeInput}>
                         <form>
-                            <label for="size"></label>
+                            <label htmlFor="size"></label>
                             <select name="size" className={classes.inputstyle}>
                                 <option value={data.size}>
-                                    {data.size - 3}
+                                    {data.size}
                                 </option>
-                                <option value={data.size}>
-                                    {data.size - 2}
-                                </option>
-                                <option value={data.size}>
-                                    {data.size - 1}
-                                </option>
-                                <option value={data.size}>{data.size}</option>
                             </select>
                         </form>
                     </div>

@@ -7,26 +7,17 @@ function Home() {
     const [loadedProducts, setLoadedProducts] = useState([]);
 
     useEffect(() => {
-        console.log(loadedProducts);
+
         setIsLoading(true);
         fetch("http://localhost:8080/prod/products")
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                const products = [];
-
-                for (const key in data) {
-                    const product = {
-                        id: key,
-                        ...data[key],
-                    };
-                    products.push(product);
-                }
+                setLoadedProducts(data);
                 setIsLoading(false);
-                setLoadedProducts(products);
             });
-    }, []);
+    },[]);
 
     if (isLoading) {
         return (

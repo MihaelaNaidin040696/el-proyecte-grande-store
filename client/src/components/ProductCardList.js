@@ -6,7 +6,7 @@ function ProductCardList(props) {
         <div className={classes.container}>
             <ul className={classes.myUL}>
                 {props.products.map((product, index) => (
-                    <li key={index}>
+                    <li key={product.id}>
                         <ProductCard
                             id={product.id}
                             image={product.image}

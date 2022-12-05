@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
-
 @Getter
 @Setter
 @Table(name = "products")
@@ -24,16 +23,22 @@ import java.util.Date;
 public class Product {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name="brand_id",referencedColumnName = "id")
     private Brand brand;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name="category_id",referencedColumnName = "id")
+    private Category category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name="supplier_id",referencedColumnName = "id")
+    private Supplier supplier;
     private String productName;
     private String referenceCode;
-    private int categoryId;
-    private int supplierId;
-    private int brandId;
     private String descriptionColor;
     private String descriptionMaterial;
     private String descriptionInterior;
