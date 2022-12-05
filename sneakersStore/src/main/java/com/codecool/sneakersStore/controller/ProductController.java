@@ -28,4 +28,5 @@ public class ProductController {
     public Product getProductById(@PathVariable String productId){
         return productService.getProductById(Long.parseLong(productId));
     }
+
 }
