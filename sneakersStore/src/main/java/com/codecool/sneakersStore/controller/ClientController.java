@@ -5,6 +5,7 @@ import com.codecool.sneakersStore.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/client")
 public class ClientController {
+    private final ClientService clientService;
+
     @Autowired
-    private ClientService clientService;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @GetMapping(value = "all-clients")
     public List<Client> getClients() {
-        return clientService.getClientDaoMem().getAllClients();
-
+        return clientService.getAllClients();
     }
 
     @PostMapping(value = "add-client")
@@ -33,8 +37,17 @@ public class ClientController {
         Boolean validPassword = encoder.matches(textPassword, encodedPassword);
         System.out.println(validPassword);
 
-        Client client1 = new Client(client.getId(), client.getFirstName(), client.getLastName(), client.getEmail(), encodedPassword);
-        clientService.getClientDaoMem().addClient(client1);
+        Client client1 = new Client(
+                client.getId(),
+                client.getFirstName(),
+                client.getLastName(),
+                client.getEmail(),
+                encodedPassword);
+        clientService.addClient(client1);
     }
 
+    @GetMapping("/get-client/{id}")
+    public Client getClientById(@PathVariable("id") Long id) {
+        return clientService.getClientById(id);
+    }
 }
