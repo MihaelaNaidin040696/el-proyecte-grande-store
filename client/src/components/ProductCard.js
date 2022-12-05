@@ -1,4 +1,4 @@
-import {FaShoppingCart} from 'react-icons/fa';
+import { FaShoppingCart } from "react-icons/fa";
 import classes from './Products.module.css';
 import { useNavigate } from "react-router-dom";
 

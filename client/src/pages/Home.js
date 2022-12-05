@@ -1,13 +1,14 @@
-import ProductsCarousel from "../components/layout/Carousel";
-import {useEffect, useState} from "react";
-import ProductCardList from "../components/layout/ProductCardList";
+// import ProductsCarousel from "../components/layout/Carousel";
+import { useEffect, useState } from "react";
+import ProductCardList from "../components/ProductCardList";
+import Slider from "../components/slider/Slider";
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadedProducts, setLoadedProducts] = useState([]);
 
     useEffect(() => {
-        console.log(loadedProducts)
+        console.log(loadedProducts);
         setIsLoading(true);
         fetch("http://localhost:8080/prod/products")
             .then((response) => {
@@ -17,14 +18,14 @@ function Home() {
                 const products = [];
 
                 for (const key in data) {
-                    console.log("keeeeeeeey"+key)
+                    console.log("keeeeeeeey" + key);
                     const product = {
-                        id: key+1,
-                        ...data[key]
+                        id: key,
+                        ...data[key],
                     };
                     products.push(product);
                 }
-                console.log(products)
+                console.log(products);
                 setIsLoading(false);
                 setLoadedProducts(products);
             });
@@ -33,22 +34,17 @@ function Home() {
     if (isLoading) {
         return (
             <section>
-                <p>
-                    Loading...
-                </p>
+                <p>Loading...</p>
             </section>
-        )
+        );
     }
 
     return (
         <section>
-            <ProductsCarousel/>
+            <Slider />
             <ProductCardList products={loadedProducts} />
         </section>
     );
-    
-
-  
 }
 
 export default Home;

@@ -1,4 +1,4 @@
-import MainDash from "../components/layout/MainDash";
+import MainDash from "../components/MainDash";
 import classes from './Dashboard.module.css';
 
 export default function Dashboard() {
@@ -10,3 +10,4 @@ export default function Dashboard() {
         </div>
     );
 }
+
