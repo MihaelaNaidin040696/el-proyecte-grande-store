@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.controller;
 
+import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,14 @@ public class CartItemController {
         cartItemService.addCartItem(cartItem);
 
         return  cartItemService.getCartItem(id);
+    }
+
+    @GetMapping("/decrease-cart-value/{id}")
+    public CartItem decreaseCartItemQuantity(@PathVariable Long id){
+        CartItem cartItem = cartItemService.getCartItem(id);
+        cartItemService.decreaseCartItemQuantity(cartItem);
+        cartItemService.addCartItem(cartItem);
+
+        return cartItemService.getCartItem(id);
     }
 }
