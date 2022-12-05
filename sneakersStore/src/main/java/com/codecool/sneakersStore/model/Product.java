@@ -10,10 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+
 
 @Getter
 @Setter
@@ -25,20 +25,15 @@ public class Product {
     @Id
     @GeneratedValue
     private int id;
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name="brand_id",referencedColumnName = "id")
     private Brand brand;
     private String productName;
     private String referenceCode;
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id",referencedColumnName = "id")
-    private Category category;
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="suplier_id",referencedColumnName = "id")
-    private Supplier supplier;
+    private int categoryId;
+    private int supplierId;
+    private int brandId;
     private String descriptionColor;
     private String descriptionMaterial;
     private String descriptionInterior;
