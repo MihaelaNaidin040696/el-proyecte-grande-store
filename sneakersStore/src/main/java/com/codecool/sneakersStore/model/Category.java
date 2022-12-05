@@ -21,4 +21,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
+    private Set<Product> products;
 }
