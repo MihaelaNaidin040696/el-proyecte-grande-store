@@ -13,7 +13,6 @@ function ProductCardList(props) {
                             name={product.productName}
                             sellingPrice={product.sellingPrice}
                             size={product.size}
-                            // description={product.description}
                         />
                     </li>
                 ))}

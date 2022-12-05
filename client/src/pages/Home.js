@@ -1,4 +1,3 @@
-// import ProductsCarousel from "../components/layout/Carousel";
 import { useEffect, useState } from "react";
 import ProductCardList from "../components/ProductCardList";
 import Slider from "../components/slider/Slider";
@@ -18,14 +17,12 @@ function Home() {
                 const products = [];
 
                 for (const key in data) {
-                    console.log("keeeeeeeey" + key);
                     const product = {
                         id: key,
                         ...data[key],
                     };
                     products.push(product);
                 }
-                console.log(products);
                 setIsLoading(false);
                 setLoadedProducts(products);
             });

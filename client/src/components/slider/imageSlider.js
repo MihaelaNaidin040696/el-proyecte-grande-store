@@ -1,5 +1,3 @@
-// import amg from "/home/george/CodeCool/Advanced/El Grande Project/el-proyecte-grande-sprint-1-java-MihaelaNaidin040696/client/src/assets/amg.png";
-
 
 export default [
     {
