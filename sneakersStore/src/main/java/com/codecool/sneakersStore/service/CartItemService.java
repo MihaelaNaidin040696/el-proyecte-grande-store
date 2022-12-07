@@ -22,10 +22,10 @@ public class CartItemService {
     public CartItem getCartItem(Long id) {
         Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
         return optionalCartItem.orElse(null);
-
     }
 
     public void deleteCartItem(Long id){
+
         cartItemRepository.deleteById(id);
     }
 
