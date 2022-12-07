@@ -1,9 +1,7 @@
 package com.codecool.sneakersStore.controller;
 
-import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.service.CartItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +45,5 @@ public class CartItemController {
         }
 
         return cartItemService.getCartItem(id);
-
     }
 }

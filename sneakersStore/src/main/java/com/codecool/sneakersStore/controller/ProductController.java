@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/prod")
 @CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;

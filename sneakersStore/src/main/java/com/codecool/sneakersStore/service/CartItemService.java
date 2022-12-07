@@ -13,7 +13,6 @@ public class CartItemService {
 
     @Autowired
     public CartItemService(CartItemRepository cartItemRepository) {
-
         this.cartItemRepository = cartItemRepository;
     }
     public void addCartItem(CartItem cartItem) {
@@ -22,7 +21,6 @@ public class CartItemService {
     public CartItem getCartItem(Long id) {
         Optional<CartItem> optionalCartItem = cartItemRepository.findById(id);
         return optionalCartItem.orElse(null);
-
     }
 
     public void deleteCartItem(Long id){
@@ -38,8 +36,6 @@ public class CartItemService {
     }
 
     public Set<CartItem> getAllCartItemsByCardId(Long id){
-        Set<CartItem> cartItems = cartItemRepository.findAllById(id);
-        System.out.println(cartItems);
-        return cartItems;
+        return cartItemRepository.findAllById(id);
     }
 }
