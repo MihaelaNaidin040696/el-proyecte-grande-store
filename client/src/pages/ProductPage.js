@@ -1,28 +1,26 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import classes from "./ProductPage.module.css";
 
 
 function ProductPage(props) {
     const [data, setData] = useState([]);
-    let { id } = useParams();
+    let {id} = useParams();
     useEffect(() => {
         const fetchData = async () => {
             const request = await fetch(
-                "http://localhost:8080/prod/product/"+id
+                "http://localhost:8080/prod/product/" + id
             )
             const response = await request.json();
             setData(response);
         };
         fetchData();
-    },[props.id])
-   
+    }, [props.id])
+
     return (
         <div className={classes.productContainer}>
             <div className={classes.productDiv}>
-                <div className={classes.productImage}>
-                    <img src={data.image}></img>
-                </div>
+                <img className={classes.productImage} src={data.image}></img>
                 <div className={classes.productInfo}>
                     <div className={classes.productBrandAndName}>
                         <h1>{data.brand}</h1>
@@ -69,6 +67,6 @@ function ProductPage(props) {
             </div>
         </div>
     );
- }
+}
 
 export default ProductPage;
