@@ -6,6 +6,12 @@ import classes from "./ProductPage.module.css";
 function ProductPage(props) {
     const [data, setData] = useState([]);
     let {id} = useParams();
+    const [selects,setSelects] = useState();
+
+    const handleSubmit = (e) =>{
+        setSelects(e.target.value)
+        console.log(selects)
+    }
     useEffect(() => {
         const fetchData = async () => {
             const request = await fetch(
