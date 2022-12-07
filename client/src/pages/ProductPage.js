@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent,FormEvent } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./ProductPage.module.css";
 
 
 function ProductPage(props) {
     const [data, setData] = useState([]);
+    const [selects,setSelects] = useState();
+
+    const handleSubmit = (e) =>{
+        setSelects(e.target.value)
+        console.log(selects)
+    }
+
     let { id } = useParams();
     useEffect(() => {
         const fetchData = async () => {
@@ -16,6 +23,7 @@ function ProductPage(props) {
         };
         fetchData();
     },[props.id])
+
    
     return (
         <div className={classes.productContainer}>
@@ -34,20 +42,20 @@ function ProductPage(props) {
                         <p>{data.sellingPrice}$</p>
                     </div>
                     <div className={classes.productSizeInput}>
-                        <form>
+                        <form onSubmit={handleSubmit} >
                             <label htmlFor="size"></label>
-                            <select name="size" className={classes.inputstyle}>
-                                <option value={data.size}>
-                                    {data.size}
-                                </option>
+                            <select value={selects}  onChange={handleSubmit} className={classes.inputstyle}>
+                                    <option value="">Choose your size</option>
+                                    <option  value={data.size}>{data.size}</option>
                             </select>
+                            <input 
+                                className={classes.inputstyle}
+                                type="submit"
+                                value="Add to cart"
+                                />
                         </form>
                     </div>
-                    <input
-                        className={classes.inputstyle}
-                        type="submit"
-                        value="Add to cart"
-                    />
+               
                     <div className={classes.productDescription}>
                         <p>
                             <b>Color:</b> {data.descriptionColor}
