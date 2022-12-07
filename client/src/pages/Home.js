@@ -6,6 +6,8 @@ function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadedProducts, setLoadedProducts] = useState([]);
 
+    // useAtom - READ ABOUT IT !!!
+
     useEffect(() => {
 
         setIsLoading(true);
