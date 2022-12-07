@@ -9,7 +9,7 @@ function ProductPage(props) {
     useEffect(() => {
         const fetchData = async () => {
             const request = await fetch(
-                "http://localhost:8080/prod/product/" + id
+                "http://localhost:8080/prod/product/"+id
             )
             const response = await request.json();
             setData(response);
@@ -32,20 +32,19 @@ function ProductPage(props) {
                         <p>{data.sellingPrice}$</p>
                     </div>
                     <div className={classes.productSizeInput}>
-                        <form>
+                        <form onSubmit={handleSubmit} >
                             <label htmlFor="size"></label>
-                            <select name="size" className={classes.inputstyle}>
-                                <option value={data.size}>
-                                    {data.size}
-                                </option>
+                            <select value={selects}  onChange={handleSubmit} className={classes.inputstyle}>
+                                    <option value="">Choose your size</option>
+                                    <option  value={data.size}>{data.size}</option>
                             </select>
+                            <input
+                                className={classes.inputstyle}
+                                type="submit"
+                                value="Add to cart"
+                                />
                         </form>
                     </div>
-                    <input
-                        className={classes.inputstyle}
-                        type="submit"
-                        value="Add to cart"
-                    />
                     <div className={classes.productDescription}>
                         <p>
                             <b>Color:</b> {data.descriptionColor}
