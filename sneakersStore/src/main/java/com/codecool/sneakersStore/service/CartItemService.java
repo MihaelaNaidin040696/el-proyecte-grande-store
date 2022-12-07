@@ -1,11 +1,11 @@
 package com.codecool.sneakersStore.service;
 
 import com.codecool.sneakersStore.model.CartItem;
-import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CartItemService {
@@ -35,5 +35,11 @@ public class CartItemService {
 
     public void increaseCartItemQuantity(CartItem cartItem){
         cartItem.setQuantity(cartItem.getQuantity() + 1);
+    }
+
+    public Set<CartItem> getAllCartItemsByCardId(Long id){
+        Set<CartItem> cartItems = cartItemRepository.findAllById(id);
+        System.out.println(cartItems);
+        return cartItems;
     }
 }

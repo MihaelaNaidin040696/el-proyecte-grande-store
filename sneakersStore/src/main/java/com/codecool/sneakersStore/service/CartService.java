@@ -7,16 +7,19 @@ import com.codecool.sneakersStore.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final CartItemService cartItemService;
 
     @Autowired
-    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
+    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository, CartItemService cartItemService) {
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
+        this.cartItemService = cartItemService;
     }
 
     public void addCart(Cart cart) {
@@ -28,7 +31,11 @@ public class CartService {
         return optionalCart.orElse(null);
     }
 
-    public void addCartItemToCart(CartItem cartItem){
-
-    }
+//    public Cart addCartItemToCart(Long cartId){
+//        Set<CartItem> cartItems = cartItemRepository.findAllById(cartId);
+//
+//
+//
+//
+//    }
 }
