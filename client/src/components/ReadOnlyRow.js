@@ -10,7 +10,7 @@ export default function ReadOnlyRow({ product, index, handleEditClick, handleDel
             sx={{"&:last-child td, &:last-child th": {border: 0}}}
         >
             <TableCell scope="row">{product.productName}</TableCell>
-            <TableCell scope="row">{product.brand}</TableCell>
+            {/*<TableCell scope="row">{product.brand}</TableCell>*/}
             <TableCell align="left">{product.referenceCode}</TableCell>
             <TableCell align="left">{product.descriptionColor}</TableCell>
             <TableCell align="left">{product.descriptionMaterial}</TableCell>

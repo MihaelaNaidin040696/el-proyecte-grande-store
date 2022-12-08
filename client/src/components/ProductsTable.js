@@ -141,14 +141,18 @@ export default function ProductsTable() {
     };
 
     const handleDeleteClick = (editProductId) => {
-        const newProducts = [...products];
         const index = products.findIndex((product) => product.id === editProductId);
-        newProducts.splice(index, 1);
-        setProducts(newProducts);
+        fetch(`http://localhost:8080/admin/delete-product/${index + 1}`, {method: 'DELETE'})
+            .then(() => {
+                const newProducts = [...products];
+                const index = products.findIndex((product) => product.id === editProductId);
+                newProducts.splice(index, 1);
+                setProducts(newProducts);
+            })
     };
 
     useEffect(() => {
-        fetch("http://localhost:8080/prod/products")
+        fetch("http://localhost:8080/admin")
             .then((response) => {
                 return response.json();
             })
@@ -291,7 +295,7 @@ export default function ProductsTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Product Name</TableCell>
-                            <TableCell align="left">Brand</TableCell>
+                            {/*<TableCell align="left">Brand</TableCell>*/}
                             <TableCell align="left">Reference Code</TableCell>
                             <TableCell align="left">Color</TableCell>
                             <TableCell align="left">Material</TableCell>
