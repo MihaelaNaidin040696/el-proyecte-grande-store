@@ -42,7 +42,9 @@ public class ClientController {
                 client.getFirstName(),
                 client.getLastName(),
                 client.getEmail(),
-                encodedPassword);
+                encodedPassword,
+                client.getCart(),
+                client.getOrders());
         clientService.addClient(client1);
     }
 

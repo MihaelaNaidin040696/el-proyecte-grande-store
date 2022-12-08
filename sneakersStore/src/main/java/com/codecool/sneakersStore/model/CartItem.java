@@ -1,11 +1,14 @@
 package com.codecool.sneakersStore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,29 +21,27 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cart_items")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Long id;
-
-    @OneToOne
-    private Product product;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "quantity")
+    private int quantity;
+    @Column(name = "total")
+    private double totalPrice;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
-
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "total")
-    private Float total;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_id", referencedColumnName = "id")
+    private Product product;
 
 }

@@ -46,4 +46,9 @@ public class CartItemController {
 
         return cartItemService.getCartItem(id);
     }
+
+    @GetMapping("/get-cart-item/{id}")
+    public CartItem getCartItemById(@PathVariable Long id){
+        return cartItemService.getCartItem(id);
+    }
 }
