@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -50,4 +51,32 @@ public class Product {
     private Date purchaseDate;
     private int totalStock;
     private float discount;
+
+    public Product(String productName,
+                   String referenceCode,
+                   String descriptionColor,
+                   String descriptionMaterial,
+                   String descriptionInterior,
+                   String descriptionSole,
+//                   String image,
+                   String size,
+                   Float sellingPrice,
+                   Float purchasePrice,
+                   Date purchaseDate,
+                   Integer totalStock,
+                   Float discount) {
+        this.setProductName(productName);
+        this.setReferenceCode(referenceCode);
+        this.setDescriptionColor(descriptionColor);
+        this.setDescriptionMaterial(descriptionMaterial);
+        this.setDescriptionInterior(descriptionInterior);
+        this.setDescriptionSole(descriptionSole);
+//        this.setImage(image);
+        this.setSize(size);
+        this.setSellingPrice(sellingPrice);
+        this.setPurchasePrice(purchasePrice);
+        this.setPurchaseDate(purchaseDate);
+        this.setTotalStock(totalStock);
+        this.setDiscount(discount);
+    }
 }

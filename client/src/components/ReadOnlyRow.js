@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import moment from 'moment';
 import classes from './Table.module.css';
 
-export default function ReadOnlyRow({ product, index, handleEditClick, handleDeleteClick }) {
+export default function ReadOnlyRow({ product, index, handleEditClick, handleDeleteClick}) {
     return (
         <TableRow
             key={index}
@@ -16,13 +16,13 @@ export default function ReadOnlyRow({ product, index, handleEditClick, handleDel
             <TableCell align="left">{product.descriptionMaterial}</TableCell>
             <TableCell align="left">{product.descriptionInterior}</TableCell>
             <TableCell align="left">{product.descriptionSole}</TableCell>
-            <TableCell align="left">
-                <img
-                    style={{height: 'auto', maxWidth: '50%'}}
-                    src={product.image}
-                    alt={product.productName}
-                />
-            </TableCell>
+            {/*<TableCell align="left">*/}
+            {/*    <img*/}
+            {/*        style={{height: 'auto', maxWidth: '50%'}}*/}
+            {/*        src={product.image}*/}
+            {/*        alt={product.productName}*/}
+            {/*    />*/}
+            {/*</TableCell>*/}
             <TableCell align="left">{product.size}</TableCell>
             <TableCell align="left">{product.sellingPrice}</TableCell>
             <TableCell align="left">{product.purchasePrice}</TableCell>

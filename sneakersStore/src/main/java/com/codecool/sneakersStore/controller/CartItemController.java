@@ -3,6 +3,7 @@ package com.codecool.sneakersStore.controller;
 import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.service.CartItemService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class CartItemController {
         return cartItemService.getCartItem(id);
     }
 
-    @GetMapping("/delete-cart-item/{id}")
+    @DeleteMapping("/delete-cart-item/{id}")
     public CartItem deleteCartItem(@PathVariable Long id){
         CartItem cartItem = cartItemService.getCartItem(id);
         if(cartItem.getQuantity()==0){

@@ -1,4 +1,4 @@
-import {useEffect, useState, Fragment} from "react";
+import {useEffect, useState, Fragment, useRef} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,41 +13,48 @@ import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 
 export default function ProductsTable() {
+    const baseURL = "http://localhost:8080/admin";
     const [products, setProducts] = useState([]);
     const [editProductId, setEditProductId] = useState(null);
+    const [productImage, setProductImage] = useState("");
     const [addFormData, setAddFormData] = useState({
         productName: "",
-        brand: "",
+        // brand: "",
         referenceCode: "",
         descriptionColor: "",
         descriptionMaterial: "",
         descriptionInterior: "",
         descriptionSole: "",
-        image: "",
+        // image: "",
         size: "",
-        sellingPrice: "",
-        purchasePrice: "",
-        purchaseDate: "",
-        totalStock: "",
-        discount: "",
+        sellingPrice: 0,
+        purchasePrice: 0,
+        purchaseDate: null,
+        totalStock: 0,
+        discount: 0,
     });
 
     const [editFormData, setEditFormData] = useState({
         productName: "",
-        brand: "",
+        // brand: "",
         referenceCode: "",
         descriptionColor: "",
         descriptionMaterial: "",
         descriptionInterior: "",
         descriptionSole: "",
-        image: "",
+        // image: "",
         size: "",
-        sellingPrice: "",
-        purchasePrice: "",
-        purchaseDate: "",
-        totalStock: "",
-        discount: "",
+        sellingPrice: 0,
+        purchasePrice: 0,
+        purchaseDate: null,
+        totalStock: 0,
+        discount: 0,
     });
+
+    const handleImageChange = (event) => {
+        console.log(event.target.files);
+        setProductImage(URL.createObjectURL(event.target.files[0]));
+    }
 
     const handleAddFormChange = (event) => {
         event.preventDefault();
@@ -71,13 +78,13 @@ export default function ProductsTable() {
         event.preventDefault();
         const newProduct = {
             productName: addFormData.productName,
-            brand: addFormData.brand,
+            // brand: addFormData.brand,
             referenceCode: addFormData.referenceCode,
             descriptionColor: addFormData.descriptionColor,
             descriptionMaterial: addFormData.descriptionMaterial,
             descriptionInterior: addFormData.descriptionInterior,
             descriptionSole: addFormData.descriptionSole,
-            image: addFormData.image,
+            // image: addFormData.image,
             size: addFormData.size,
             sellingPrice: addFormData.sellingPrice,
             purchasePrice: addFormData.purchasePrice,
@@ -85,21 +92,33 @@ export default function ProductsTable() {
             totalStock: addFormData.totalStock,
             discount: addFormData.discount,
         }
-        const newProducts = [...products, newProduct];
-        setProducts(newProducts);
+        fetch(`${baseURL}/add-new-product`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newProduct)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then(() => {
+                const newProducts = [...products, newProduct];
+                setProducts(newProducts);
+            })
+        window.location.replace("/admin");
+        alert("Product added successfully!");
     };
 
     const handleEditFormSubmit = (event) => {
         event.preventDefault();
         const editedProduct = {
-            brand: editFormData.brand,
+            // brand: editFormData.brand,
             productName: editFormData.productName,
             referenceCode: editFormData.referenceCode,
             descriptionColor: editFormData.descriptionColor,
             descriptionMaterial: editFormData.descriptionMaterial,
             descriptionInterior: editFormData.descriptionInterior,
             descriptionSole: editFormData.descriptionSole,
-            image: editFormData.image,
+            // image: editFormData.image,
             size: editFormData.size,
             sellingPrice: editFormData.sellingPrice,
             purchasePrice: editFormData.purchasePrice,
@@ -107,25 +126,36 @@ export default function ProductsTable() {
             totalStock: editFormData.totalStock,
             discount: editFormData.discount,
         };
-        const newProducts = [...products];
-        const index = products.findIndex((product) => product.id === editProductId);
-        newProducts[index] = editedProduct;
-        setProducts(newProducts);
-        setEditProductId(null);
+        fetch(`${baseURL}/edit-product/${editProductId}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(editedProduct)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then(() => {
+                const newProducts = [...products];
+                newProducts[editProductId] = editedProduct;
+                setProducts(newProducts);
+                setEditProductId(null);
+            })
+        window.location.replace("/admin");
+        alert("Product edited successfully!");
     };
 
     const handleEditClick = (event, product) => {
         event.preventDefault();
         setEditProductId(product.id);
         const formValues = {
-            brand: product.brand,
+            // brand: product.brand,
             productName: product.productName,
             referenceCode: product.referenceCode,
             descriptionColor: product.descriptionColor,
             descriptionMaterial: product.descriptionMaterial,
             descriptionInterior: product.descriptionInterior,
             descriptionSole: product.descriptionSole,
-            image: product.image,
+            // image: product.image,
             size: product.size,
             sellingPrice: product.sellingPrice,
             purchasePrice: product.purchasePrice,
@@ -141,8 +171,7 @@ export default function ProductsTable() {
     };
 
     const handleDeleteClick = (editProductId) => {
-        const index = products.findIndex((product) => product.id === editProductId);
-        fetch(`http://localhost:8080/admin/delete-product/${index + 1}`, {method: 'DELETE'})
+        fetch(`${baseURL}/delete-product/${editProductId}`, {method: 'DELETE'})
             .then(() => {
                 const newProducts = [...products];
                 const index = products.findIndex((product) => product.id === editProductId);
@@ -152,19 +181,12 @@ export default function ProductsTable() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:8080/admin")
+        fetch(`${baseURL}`)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                const products = [];
-                for (const key in data) {
-                    const product = {
-                        id: key + 1, ...data[key]
-                    };
-                    products.push(product);
-                }
-                setProducts(products);
+                setProducts(data);
             })
     }, []);
 
@@ -187,13 +209,13 @@ export default function ProductsTable() {
                     placeholder="Enter a product name"
                     onChange={handleAddFormChange}
                 />
-                <Input
-                    type="text"
-                    name="brand"
-                    required="required"
-                    placeholder="Enter a product brand"
-                    onChange={handleAddFormChange}
-                />
+                {/*<Input*/}
+                {/*    type="text"*/}
+                {/*    name="brand"*/}
+                {/*    required="required"*/}
+                {/*    placeholder="Enter a product brand"*/}
+                {/*    onChange={handleAddFormChange}*/}
+                {/*/>*/}
                 <Input
                     type="text"
                     name="referenceCode"
@@ -229,13 +251,16 @@ export default function ProductsTable() {
                     placeholder="Enter a product description sole"
                     onChange={handleAddFormChange}
                 />
-                <Input
-                    type="file"
-                    name="image"
-                    required="required"
-                    alt="image"
-                    onChange={handleAddFormChange}
-                />
+                {/*<Input*/}
+                {/*    type="file"*/}
+                {/*    name="image"*/}
+                {/*    required="required"*/}
+                {/*    alt="image"*/}
+                {/*    onChange={(e) => {*/}
+                {/*        handleAddFormChange(e);*/}
+                {/*        handleImageChange(e);*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Input
                     type="text"
                     name="size"
@@ -311,18 +336,18 @@ export default function ProductsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody style={{color: "white"}}>
-                        {products.map((product, index) => (
+                        {products.map((product) => (
                             <Fragment>
                                 {editProductId === product.id ?
                                     (<EditableRow
-                                        index={index}
+                                        index={product.id}
                                         editProduct={product}
                                         handleEditFormChange={handleEditFormChange}
                                         handleCancelClick={handleCancelClick}
                                     />)
                                     :
                                     (<ReadOnlyRow
-                                        index={index}
+                                        index={product.id}
                                         product={product}
                                         handleEditClick={handleEditClick}
                                         handleDeleteClick={handleDeleteClick}

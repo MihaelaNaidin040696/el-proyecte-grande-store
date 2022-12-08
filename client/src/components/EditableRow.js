@@ -16,16 +16,16 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     onChange={handleEditFormChange}
                 />
             </TableCell>
-            <TableCell>
-                <Input
-                    type="text"
-                    name="brand"
-                    required="required"
-                    placeholder="Enter a product brand"
-                    defaultValue={editProduct.brand}
-                    onChange={handleEditFormChange}
-                />
-            </TableCell>
+            {/*<TableCell>*/}
+            {/*    <Input*/}
+            {/*        type="text"*/}
+            {/*        name="brand"*/}
+            {/*        required="required"*/}
+            {/*        placeholder="Enter a product brand"*/}
+            {/*        defaultValue={editProduct.brand}*/}
+            {/*        onChange={handleEditFormChange}*/}
+            {/*    />*/}
+            {/*</TableCell>*/}
             <TableCell>
                 <Input
                     type="text"
@@ -76,15 +76,15 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     onChange={handleEditFormChange}
                 />
             </TableCell>
-            <TableCell>
-                <Input
-                    type="file"
-                    name="image"
-                    required="required"
-                    alt="image"
-                    onChange={handleEditFormChange}
-                />
-            </TableCell>
+            {/*<TableCell>*/}
+            {/*    <Input*/}
+            {/*        type="file"*/}
+            {/*        name="image"*/}
+            {/*        required="required"*/}
+            {/*        alt="image"*/}
+            {/*        onChange={handleEditFormChange}*/}
+            {/*    />*/}
+            {/*</TableCell>*/}
             <TableCell>
                 <Input
                     type="text"
