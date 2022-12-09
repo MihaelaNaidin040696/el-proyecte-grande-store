@@ -37,14 +37,16 @@ public class ClientController {
         Boolean validPassword = encoder.matches(textPassword, encodedPassword);
         System.out.println(validPassword);
 
-        Client client1 = new Client(
-                client.getId(),
-                client.getFirstName(),
-                client.getLastName(),
-                client.getEmail(),
-                encodedPassword,
-                client.getCart(),
-                client.getOrders());
+        Client client1 = null;
+//                new Client(
+//                client.getId(),
+//                client.getFirstName(),
+//                client.getLastName(),
+//                client.getEmail(),
+//                encodedPassword
+//                client.getCart(),
+//                client.getOrders()
+//        );
         clientService.addClient(client1);
     }
 

@@ -1,6 +1,7 @@
 package com.codecool.sneakersStore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,11 +28,10 @@ import java.util.List;
 @Table(name = "clients")
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @JsonBackReference
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonManagedReference
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -41,8 +41,10 @@ public class Client {
     @Column(name = "password")
     private String password;
     @OneToOne(mappedBy = "client")
+    @JsonBackReference
     private Cart cart;
-    @OneToMany(mappedBy = "client")
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "client")
+//    private List<Order> orders;
+
 
 }

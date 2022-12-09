@@ -43,7 +43,6 @@ public class CartItemController {
         if(cartItem.getQuantity()==0){
             cartItemService.deleteCartItem(id);
         }
-
         return cartItemService.getCartItem(id);
     }
 

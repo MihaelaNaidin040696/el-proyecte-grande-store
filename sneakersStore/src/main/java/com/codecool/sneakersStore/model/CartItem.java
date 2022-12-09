@@ -29,19 +29,19 @@ import javax.persistence.Table;
 @Table(name = "cart_items")
 public class CartItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "quantity")
+    //    @Column(name = "quantity")
     private int quantity;
     @Column(name = "total")
     private double totalPrice;
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @JsonBackReference
     private Cart cart;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
 }

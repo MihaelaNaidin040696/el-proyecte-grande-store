@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.service;
 
+import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,9 @@ public class ClientService {
         Optional<Client> optionalClient = clientRepository.findById(id);
         return optionalClient.orElse(null);
     }
+
+    public Client findByUsername(String email){
+        return clientRepository.findClientByEmail(email);
+    }
+
 }

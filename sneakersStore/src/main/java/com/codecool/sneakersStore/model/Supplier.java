@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -26,7 +28,7 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "supplier")
-    private Set<Product> products;
+    private List<Product> products;
 }
