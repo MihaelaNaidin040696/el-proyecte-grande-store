@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -36,11 +37,6 @@ public class CartService {
         return optionalCart.orElse(null);
     }
 
-    //    public void addItemToCart(CartItem cartItem,Long cartId){
-//        Cart cart = getCartById(cartId);
-//        cart.addCartItem(cartItem);
-//        addCart(cart);
-//    }
     public Cart addItemToCartTest(Cart cart) {
         return cartRepository.save(cart);
 
