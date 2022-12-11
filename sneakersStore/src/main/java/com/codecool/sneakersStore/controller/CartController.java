@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@CrossOrigin(value = {"*"} )
+@CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -39,28 +40,16 @@ public class CartController {
         return cartService.getCartById(cartId);
     }
 
-//    @PostMapping("/add-items/{id}")
-//    public void addItemsToCart(@PathVariable Long id, @RequestBody CartItem cartItem){
-//        cartService.addItemToCart(cartItem,id);
-//    }
-//    @GetMapping("/client-cart")
-//    public Cart cart(){
-//        String email = "test";
-//        Client client = clientService.findByUsername(email);
-////        Cart cart = client.getCart();
-//        if(cart == null){
-//            System.out.println("Cart is empttyyyyyyyyyyyyyyy");
-//        }
-//        return cart;
-//    }
-    @PostMapping("/add-to-cart")
-    public Cart addItemToCart(@RequestBody CartItemRequest cartItemRequest) {
+    @PostMapping("/add-to-cart/{id}")
+    public Cart addItemToCart(@PathVariable Long id,@RequestBody String size) {
 //        System.out.println(cartItemRequest.getId());
-        Product product = productService.getProductById(Long.parseLong(String.valueOf(cartItemRequest.getProductId())));
-        int quantity = cartItemRequest.getQuantity();
+        System.out.println("sizzzzzzzzzzzzzzzzz"+size);
+//        Product product = productService.getProductById(Long.parseLong(String.valueOf(cartItemRequest.getProductId())));
+        Product product = productService.getProductById(id);
+//        int quantity = cartItemRequest.getQuantity();
         Client client = clientService.findByUsername("test");
 
-        Cart cart = cartService.addItemToCartTest(product, quantity, client);
+        Cart cart = cartService.addItemToCartTest(product, 1, client);
         System.out.println(cart);
         return cart;
     }
