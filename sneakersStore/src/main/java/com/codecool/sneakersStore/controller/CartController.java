@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-    private  CartService cartService;
-    private  ClientService clientService;
-    private  ProductService productService;
+    private CartService cartService;
+    private ClientService clientService;
+    private ProductService productService;
 
     public CartController(CartService cartService, ClientService clientService, ProductService productService) {
         this.cartService = cartService;
@@ -31,17 +31,29 @@ public class CartController {
         this.productService = productService;
     }
 
-    @GetMapping("/get-cart/{cartId}")
-    public Cart getCart(@PathVariable Long cartId){
-        return cartService.getCartById(cartId);
+    @GetMapping("/get-cart")
+    public Cart getClientCart() {
+        Client client = clientService.findByUsername("test");
+        Cart cart = client.getCart();
+
+        return cart;
     }
 
     @PostMapping("/add-to-cart/{id}")
-    public Cart addItemToCart(@PathVariable Long id,@RequestBody String size) {
-        System.out.println("sizzzzzzzzzzzzzzzzz"+size);
+    public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
+        System.out.println("sizzzzzzzzzzzzzzzzz" + size);
         Product product = productService.getProductById(id);
         Client client = clientService.findByUsername("test");
         Cart cart = cartService.addItemToCartTest(product, 1, client);
+        return cart;
+    }
+
+    @PostMapping("/decrease-quantity-of-cart-item/{id}")
+    public Cart decreaseQuantityOfCartItem(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        Client clinet = clientService.findByUsername("test");
+        Cart cart = cartService.drecreaseCartItemQuantity(product, 1, clinet);
+
         return cart;
     }
 

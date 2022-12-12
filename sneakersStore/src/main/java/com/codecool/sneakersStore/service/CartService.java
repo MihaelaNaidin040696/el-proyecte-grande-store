@@ -16,10 +16,12 @@ import java.util.Optional;
 @Service
 public class CartService {
     private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     public void addCart(Cart cart) {
@@ -81,7 +83,7 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public Cart removeItemFromCart(Product product, int quantity, Client client){
+    public Cart drecreaseCartItemQuantity(Product product, int quantity, Client client){
         Cart cart = client.getCart();
         List<CartItem> cartItems = cart.getCartItems();
         CartItem item = findCartItem(cartItems, product.getId());
@@ -93,6 +95,25 @@ public class CartService {
         double totalPrice = totalPrice(cartItems);
         int totalItems = totalItems(cartItems);
 
+        cart.setTotalPrices(totalPrice);
+        cart.setTotalItems(totalItems);
+
+        return cartRepository.save(cart);
+    }
+
+    public Cart deleteItemFromCart(Product product,Client client){
+        Cart cart = client.getCart();
+        List<CartItem> cartItems = cart.getCartItems();
+        CartItem cartItem = findCartItem(cartItems,product.getId());
+
+        cartItems.remove(cartItem);
+
+        cartItemRepository.delete(cartItem);
+
+        double totalPrice = totalPrice(cartItems);
+        int totalItems = totalItems(cartItems);
+
+        cart.setCartItems(cartItems);
         cart.setTotalPrices(totalPrice);
         cart.setTotalItems(totalItems);
 
