@@ -1,10 +1,8 @@
 package com.codecool.sneakersStore.controller;
 
 import com.codecool.sneakersStore.model.Cart;
-import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Product;
-import com.codecool.sneakersStore.payload.CartItemRequest;
 import com.codecool.sneakersStore.service.CartService;
 import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.ProductService;
@@ -16,10 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 
 @CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 @RestController

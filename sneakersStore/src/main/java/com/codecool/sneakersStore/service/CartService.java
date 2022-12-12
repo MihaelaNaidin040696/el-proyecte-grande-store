@@ -8,24 +8,18 @@ import com.codecool.sneakersStore.repository.CartItemRepository;
 import com.codecool.sneakersStore.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CartService {
     private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
+    public CartService(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
-        this.cartItemRepository = cartItemRepository;
     }
 
     public void addCart(Cart cart) {
@@ -60,7 +54,6 @@ public class CartService {
             product.setTotalStock(product.getTotalStock()-1);
             cartItem.setTotalPrice(quantity*product.getSellingPrice());
             cartItems.add(cartItem);
-//                cartItemRepository.save(cartItem);
         }else{
             if(cartItem == null){
                 cartItem = new CartItem();
@@ -84,6 +77,24 @@ public class CartService {
         cart.setTotalPrices(totalPrice);
         cart.setTotalItems(totalItems);
         cart.setClient(client);
+
+        return cartRepository.save(cart);
+    }
+
+    public Cart removeItemFromCart(Product product, int quantity, Client client){
+        Cart cart = client.getCart();
+        List<CartItem> cartItems = cart.getCartItems();
+        CartItem item = findCartItem(cartItems, product.getId());
+
+        item.setQuantity(item.getQuantity()-1);
+        product.setTotalStock(product.getTotalStock()+1);
+        item.setTotalPrice(quantity*product.getSellingPrice());
+
+        double totalPrice = totalPrice(cartItems);
+        int totalItems = totalItems(cartItems);
+
+        cart.setTotalPrices(totalPrice);
+        cart.setTotalItems(totalItems);
 
         return cartRepository.save(cart);
     }
