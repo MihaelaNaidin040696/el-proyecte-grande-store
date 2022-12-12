@@ -42,15 +42,10 @@ public class CartController {
 
     @PostMapping("/add-to-cart/{id}")
     public Cart addItemToCart(@PathVariable Long id,@RequestBody String size) {
-//        System.out.println(cartItemRequest.getId());
         System.out.println("sizzzzzzzzzzzzzzzzz"+size);
-//        Product product = productService.getProductById(Long.parseLong(String.valueOf(cartItemRequest.getProductId())));
         Product product = productService.getProductById(id);
-//        int quantity = cartItemRequest.getQuantity();
         Client client = clientService.findByUsername("test");
-
         Cart cart = cartService.addItemToCartTest(product, 1, client);
-        System.out.println(cart);
         return cart;
     }
 

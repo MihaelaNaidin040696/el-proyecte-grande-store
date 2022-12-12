@@ -57,6 +57,7 @@ public class CartService {
             cartItem.setCart(cart);
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
+            product.setTotalStock(product.getTotalStock()-1);
             cartItem.setTotalPrice(quantity*product.getSellingPrice());
             cartItems.add(cartItem);
 //                cartItemRepository.save(cartItem);
@@ -66,10 +67,12 @@ public class CartService {
                 cartItem.setCart(cart);
                 cartItem.setProduct(product);
                 cartItem.setQuantity(quantity);
+                product.setTotalStock(product.getTotalStock()-1);
                 cartItem.setTotalPrice(quantity*product.getSellingPrice());
                 cartItems.add(cartItem);
             }else{
                 cartItem.setQuantity(cartItem.getQuantity()+quantity);
+                product.setTotalStock(product.getTotalStock()-1);
                 cartItem.setTotalPrice(product.getSellingPrice()*quantity);
 
             }
