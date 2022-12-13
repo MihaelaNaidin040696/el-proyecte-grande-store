@@ -44,7 +44,11 @@ public class CartItemController {
         if(cartItem.getQuantity()==0){
             cartItemService.deleteCartItem(id);
         }
+        return cartItemService.getCartItem(id);
+    }
 
+    @GetMapping("/get-cart-item/{id}")
+    public CartItem getCartItemById(@PathVariable Long id){
         return cartItemService.getCartItem(id);
     }
 }

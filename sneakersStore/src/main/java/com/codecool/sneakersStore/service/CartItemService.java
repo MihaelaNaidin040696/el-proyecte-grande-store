@@ -2,10 +2,10 @@ package com.codecool.sneakersStore.service;
 
 import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.repository.CartItemRepository;
+import com.codecool.sneakersStore.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CartItemService {
@@ -23,8 +23,8 @@ public class CartItemService {
         return optionalCartItem.orElse(null);
     }
 
-    public void deleteCartItem(Long id){
 
+    public void deleteCartItem(Long id){
         cartItemRepository.deleteById(id);
     }
 
@@ -36,7 +36,5 @@ public class CartItemService {
         cartItem.setQuantity(cartItem.getQuantity() + 1);
     }
 
-    public Set<CartItem> getAllCartItemsByCardId(Long id){
-        return cartItemRepository.findAllById(id);
-    }
+
 }

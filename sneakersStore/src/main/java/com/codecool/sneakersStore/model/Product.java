@@ -2,9 +2,12 @@ package com.codecool.sneakersStore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,26 +20,26 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Table(name = "products")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name="brand_id",referencedColumnName = "id")
+    @JsonBackReference
     private Brand brand;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name="category_id",referencedColumnName = "id")
-    private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
-    @JoinColumn(name="supplier_id",referencedColumnName = "id")
+    private Category category;
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name="supplier_id", referencedColumnName = "id")
+    @JsonBackReference
     private Supplier supplier;
     private String productName;
     private String referenceCode;

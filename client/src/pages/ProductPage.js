@@ -8,20 +8,37 @@ function ProductPage(props) {
     let {id} = useParams();
     const [selects,setSelects] = useState();
 
-    const handleSubmit = (e) =>{
-        setSelects(e.target.value)
-        console.log(selects)
+
+    const addToCart = async()=>{
+        const requestOptions={
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode:'no-cors',
+            body: JSON.stringify({
+                "selects":selects
+                })}
+                
+            console.log(requestOptions)
+        
+            const request = await fetch(`http://localhost:8080/cart/add-to-cart/${id}`,requestOptions)
+            const response = await request.json();
+            console.log(response)
+
     }
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchProductById = async () => {
             const request = await fetch(
                 "http://localhost:8080/prod/product/"+id
             )
             const response = await request.json();
             setData(response);
         };
-        fetchData();
+        fetchProductById();
     }, [props.id])
+
 
     return (
         <div className={classes.productContainer}>
@@ -38,13 +55,13 @@ function ProductPage(props) {
                         <p>{data.sellingPrice}$</p>
                     </div>
                     <div className={classes.productSizeInput}>
-                        <form onSubmit={handleSubmit} >
+                        <form>
                             <label htmlFor="size"></label>
-                            <select value={selects}  onChange={handleSubmit} className={classes.inputstyle}>
+                            <select value={selects}  className={classes.inputstyle} onChange={e=>setSelects(e.target.value)}>
                                     <option value="">Choose your size</option>
                                     <option  value={data.size}>{data.size}</option>
                             </select>
-                            <input
+                            <input onClick={addToCart}
                                 className={classes.inputstyle}
                                 type="submit"
                                 value="Add to cart"
