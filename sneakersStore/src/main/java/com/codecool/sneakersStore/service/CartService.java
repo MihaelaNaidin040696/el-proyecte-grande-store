@@ -68,7 +68,7 @@ public class CartService {
             }else{
                 cartItem.setQuantity(cartItem.getQuantity()+quantity);
                 product.setTotalStock(product.getTotalStock()-1);
-                cartItem.setTotalPrice(product.getSellingPrice()*quantity);
+                cartItem.setTotalPrice(cartItem.getTotalPrice()+(quantity*product.getSellingPrice()));
 
             }
         }
@@ -90,7 +90,7 @@ public class CartService {
 
         item.setQuantity(item.getQuantity()-1);
         product.setTotalStock(product.getTotalStock()+1);
-        item.setTotalPrice(quantity*product.getSellingPrice());
+        item.setTotalPrice(item.getTotalPrice()+(quantity*product.getSellingPrice()));
 
         double totalPrice = totalPrice(cartItems);
         int totalItems = totalItems(cartItems);

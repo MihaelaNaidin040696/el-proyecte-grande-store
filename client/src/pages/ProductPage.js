@@ -39,26 +39,6 @@ function ProductPage(props) {
         fetchProductById();
     }, [props.id])
 
-    // useEffect(()=>{
-    //     const requestOptions={
-    //         method:'POST',
-    //         headers:{
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         mode:'no-cors',
-    //         body: JSON.stringify({
-    //             "selects":selects
-    //             })}
-    //             console.log(id);
-    //             console.log(requestOptions)
-
-    //     const test = async()=>{
-    //         const request = await fetch(`http://localhost:8080/cart/add-to-cart/${id}`,requestOptions)
-    //         const response = await request.json();
-    //         console.log(response)
-    //     }
-    // },[])
 
     return (
         <div className={classes.productContainer}>
