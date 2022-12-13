@@ -83,7 +83,7 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public Cart drecreaseCartItemQuantity(Product product, int quantity, Client client){
+    public Cart decreaseCartItemQuantity(Product product, int quantity, Client client){
         Cart cart = client.getCart();
         List<CartItem> cartItems = cart.getCartItems();
         CartItem item = findCartItem(cartItems, product.getId());

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-    private CartService cartService;
-    private ClientService clientService;
-    private ProductService productService;
+    private final CartService cartService;
+    private final ClientService clientService;
+    private final ProductService productService;
 
     public CartController(CartService cartService, ClientService clientService, ProductService productService) {
         this.cartService = cartService;
@@ -34,9 +33,7 @@ public class CartController {
     @GetMapping("/get-cart")
     public Cart getClientCart() {
         Client client = clientService.findByUsername("test");
-        Cart cart = client.getCart();
-
-        return cart;
+        return client.getCart();
     }
 
     @PostMapping("/add-to-cart/{id}")
@@ -51,8 +48,8 @@ public class CartController {
     @PostMapping("/decrease-quantity-of-cart-item/{id}")
     public Cart decreaseQuantityOfCartItem(@PathVariable Long id) {
         Product product = productService.getProductById(id);
-        Client clinet = clientService.findByUsername("test");
-        Cart cart = cartService.drecreaseCartItemQuantity(product, 1, clinet);
+        Client client = clientService.findByUsername("test");
+        Cart cart = cartService.decreaseCartItemQuantity(product, 1, client);
 
         return cart;
     }
