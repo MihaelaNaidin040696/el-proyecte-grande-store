@@ -7,7 +7,7 @@ export default function Navbar() {
     const [modal, setModal] = useState(false);
     function openModal() {
         setModal(true);
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow = "visible";
     }
 
     return (
