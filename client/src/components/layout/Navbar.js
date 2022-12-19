@@ -8,6 +8,7 @@ export default function Navbar() {
     function openModal() {
         setModal(true);
         document.body.style.overflow = "visible";
+        setMobileNavbar(false);
     }
 
     return (
