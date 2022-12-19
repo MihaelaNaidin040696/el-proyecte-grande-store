@@ -24,10 +24,21 @@ export default function Modal({ setModal }) {
     // console.log(cart.cartItems)
     return (
 
-        <div className={classes.container} onClick={closeModal}>
+        <div className={classes.container}>
             <div className={classes.modalContainer}>
                 <> 
-                    <h1 className={classes.wrapper}>Shopping Cart</h1>
+                <div className={classes.close_container}>
+                <h1 className={classes.wrapper}>Shopping Cart</h1>
+                <span className={classes.close_btn}>
+                <i
+                                    className="fas fa-close"
+                                    onClick={closeModal
+                                    }
+                                ></i>
+                </span>
+                    
+                </div>
+             
                         <div className={classes.project}>
                             <div className={classes.shop}>
                             {cartItems && cartItems.map(item=>(  
@@ -37,7 +48,7 @@ export default function Modal({ setModal }) {
                                         <h3>{item.product.productName}</h3> 
                                         <h4>{item.product.sellingPrice * item.quantity} $</h4>
                                         <p className={classes.unit}>Quantity: <input value={item.quantity }/></p>
-                                        <p className={classes.btnarea}>
+                                        <p className={classes.btnArea}>
                                             <i className="fa fa-trash"></i>
                                             <spn className={classes.btn2}>Remove</spn>
                                         </p>
@@ -45,7 +56,7 @@ export default function Modal({ setModal }) {
                                  </div>
                                   ))}
                             </div>
-                        <div className={classes.rightbar}>
+                        <div className={classes.rightBar}>
                             <p><span>Subtotal</span> <span>{cart.totalPrices}</span></p>
                             <hr>
                             </hr>
@@ -57,7 +68,7 @@ export default function Modal({ setModal }) {
                             </hr>
                             <p><span>Total</span> <span>{cart.totalPrices}</span></p>
 
-                            <a href="#"><i className="fa fa-shopping-cart"></i>Checkout</a>
+                            <a href="/order"><i className="fa fa-shopping-cart"></i>Checkout</a>
 
 
                         </div>
