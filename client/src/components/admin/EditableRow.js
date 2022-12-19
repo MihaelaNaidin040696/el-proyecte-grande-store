@@ -10,27 +10,17 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="productName"
-                    required="required"
+                    required
                     placeholder="Enter a product name"
                     defaultValue={editProduct.productName}
                     onChange={handleEditFormChange}
                 />
             </TableCell>
-            {/*<TableCell>*/}
-            {/*    <Input*/}
-            {/*        type="text"*/}
-            {/*        name="brand"*/}
-            {/*        required="required"*/}
-            {/*        placeholder="Enter a product brand"*/}
-            {/*        defaultValue={editProduct.brand}*/}
-            {/*        onChange={handleEditFormChange}*/}
-            {/*    />*/}
-            {/*</TableCell>*/}
             <TableCell>
                 <Input
                     type="text"
                     name="referenceCode"
-                    required="required"
+                    required
                     placeholder="Enter a reference code"
                     defaultValue={editProduct.referenceCode}
                     onChange={handleEditFormChange}
@@ -40,7 +30,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="descriptionColor"
-                    required="required"
+                    required
                     placeholder="Enter a product color"
                     defaultValue={editProduct.descriptionColor}
                     onChange={handleEditFormChange}
@@ -50,7 +40,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="descriptionMaterial"
-                    required="required"
+                    required
                     placeholder="Enter a product material"
                     defaultValue={editProduct.descriptionMaterial}
                     onChange={handleEditFormChange}
@@ -60,7 +50,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="descriptionInterior"
-                    required="required"
+                    required
                     placeholder="Enter a product interior"
                     defaultValue={editProduct.descriptionInterior}
                     onChange={handleEditFormChange}
@@ -70,26 +60,17 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="descriptionSole"
-                    required="required"
+                    required
                     placeholder="Enter a product description sole"
                     defaultValue={editProduct.descriptionSole}
                     onChange={handleEditFormChange}
                 />
             </TableCell>
-            {/*<TableCell>*/}
-            {/*    <Input*/}
-            {/*        type="file"*/}
-            {/*        name="image"*/}
-            {/*        required="required"*/}
-            {/*        alt="image"*/}
-            {/*        onChange={handleEditFormChange}*/}
-            {/*    />*/}
-            {/*</TableCell>*/}
             <TableCell>
                 <Input
                     type="text"
                     name="size"
-                    required="required"
+                    required
                     placeholder="Enter a product size"
                     defaultValue={editProduct.size}
                     onChange={handleEditFormChange}
@@ -99,7 +80,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="sellingPrice"
-                    required="required"
+                    required
                     placeholder="Enter a selling price"
                     defaultValue={editProduct.sellingPrice}
                     onChange={handleEditFormChange}
@@ -109,7 +90,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="purchasePrice"
-                    required="required"
+                    required
                     placeholder="Enter a purchase price"
                     defaultValue={editProduct.purchasePrice}
                     onChange={handleEditFormChange}
@@ -119,7 +100,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="date"
                     name="purchaseDate"
-                    required="required"
+                    required
                     placeholder="Enter a purchase date"
                     onChange={handleEditFormChange}
                 />
@@ -128,7 +109,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="totalStock"
-                    required="required"
+                    required
                     placeholder="Enter a product total stock"
                     defaultValue={editProduct.totalStock}
                     onChange={handleEditFormChange}
@@ -138,7 +119,7 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                 <Input
                     type="text"
                     name="discount"
-                    required="required"
+                    required
                     placeholder="Enter a product discount"
                     defaultValue={editProduct.discount}
                     onChange={handleEditFormChange}

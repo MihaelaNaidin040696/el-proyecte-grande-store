@@ -4,18 +4,18 @@ import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.payload.ProductRequest;
 import com.codecool.sneakersStore.service.ProductService;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(value = {"*"})
+@CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -28,11 +28,6 @@ public class AdminController {
     @GetMapping
     public List<Product> getProducts() {
         return productService.getAllProducts();
-    }
-
-    @DeleteMapping("/delete-product/{id}")
-    public void deleteProductById(@PathVariable Long id) {
-        productService.deleteProduct(id);
     }
 
     @PutMapping("/edit-product/{prodId}")
@@ -68,7 +63,8 @@ public class AdminController {
                 productRequest.getPurchasePrice(),
                 productRequest.getPurchaseDate(),
                 productRequest.getTotalStock(),
-                productRequest.getDiscount()
+                productRequest.getDiscount(),
+                true
         );
         return productService.saveNewProduct(product);
     }

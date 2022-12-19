@@ -57,7 +57,7 @@ export default function Modal({ setModal }) {
                             </hr>
                             <p><span>Total</span> <span>{cart.totalPrices}</span></p>
 
-                            <a href="#"><i className="fa fa-shopping-cart"></i>Checkout</a>
+                            <a href="src/components/user/Modal#"><i className="fa fa-shopping-cart"></i>Checkout</a>
 
 
                         </div>

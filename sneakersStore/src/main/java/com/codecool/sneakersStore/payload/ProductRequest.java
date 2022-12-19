@@ -21,4 +21,5 @@ public class ProductRequest {
     private Date purchaseDate;
     private Integer totalStock;
     private Float discount;
+    private Boolean isAvailable;
 }

@@ -2,27 +2,31 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import moment from 'moment';
 import classes from './Table.module.css';
+import {Checkbox} from "@mui/material";
+import {pink} from "@mui/material/colors";
 
-export default function ReadOnlyRow({ product, index, handleEditClick, handleDeleteClick}) {
+export default function ReadOnlyRow({ product, index, handleEditClick}) {
     return (
         <TableRow
             key={index}
             sx={{"&:last-child td, &:last-child th": {border: 0}}}
         >
+            <TableCell>
+                <Checkbox
+                defaultChecked
+                sx={{
+                    color: pink[800],
+                    '&.Mui-checked': {
+                        color: pink[600],
+                    },
+                }}
+            /></TableCell>
             <TableCell scope="row">{product.productName}</TableCell>
-            {/*<TableCell scope="row">{product.brand}</TableCell>*/}
             <TableCell align="left">{product.referenceCode}</TableCell>
             <TableCell align="left">{product.descriptionColor}</TableCell>
             <TableCell align="left">{product.descriptionMaterial}</TableCell>
             <TableCell align="left">{product.descriptionInterior}</TableCell>
             <TableCell align="left">{product.descriptionSole}</TableCell>
-            {/*<TableCell align="left">*/}
-            {/*    <img*/}
-            {/*        style={{height: 'auto', maxWidth: '50%'}}*/}
-            {/*        src={product.image}*/}
-            {/*        alt={product.productName}*/}
-            {/*    />*/}
-            {/*</TableCell>*/}
             <TableCell align="left">{product.size}</TableCell>
             <TableCell align="left">{product.sellingPrice}</TableCell>
             <TableCell align="left">{product.purchasePrice}</TableCell>
@@ -32,9 +36,6 @@ export default function ReadOnlyRow({ product, index, handleEditClick, handleDel
 
             <TableCell align="left">
                 <button type='button' className={classes.status} style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}} onClick={(event) => handleEditClick(event, product)}>Edit</button>
-            </TableCell>
-            <TableCell align="left">
-                <button type='button' className={classes.status} style={{background: '#ffadad8f', color: 'red', border: 'none'}} onClick={() => handleDeleteClick(product.id)}>Delete</button>
             </TableCell>
         </TableRow>
     )

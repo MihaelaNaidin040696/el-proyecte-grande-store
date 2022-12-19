@@ -1,6 +1,6 @@
 import classes from "./Navbar.module.css";
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../user/Modal";
 
 export default function Navbar() {
     const [mobileNavbar, setMobileNavbar] = useState(false);

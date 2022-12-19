@@ -5,7 +5,7 @@ function ProductCardList(props) {
     return (
         <div className={classes.container}>
             <ul className={classes.myUL}>
-                {props.products.map((product, index) => (
+                {props.products.map((product) => (
                     <li key={product.id}>
                         <ProductCard
                             id={product.id}

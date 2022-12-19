@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from './Card.module.css';
+import classes from './ReportCard.module.css';
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
@@ -8,7 +8,7 @@ import Chart from "react-apexcharts";
 
 // parent Card
 
-export default function Card(props) {
+export default function ReportCard(props) {
     const [expanded, setExpanded] = useState(false);
     return (
         <AnimateSharedLayout>
