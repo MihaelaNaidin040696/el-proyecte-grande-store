@@ -107,6 +107,7 @@ public class CartService {
         CartItem cartItem = findCartItem(cartItems,product.getId());
 
         cartItems.remove(cartItem);
+        System.out.println(cartItems);
 
         cartItemRepository.delete(cartItem);
 

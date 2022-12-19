@@ -35,7 +35,7 @@ public class CartItem {
     private int quantity;
     @Column(name = "total")
     private double totalPrice;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     @JsonBackReference
     private Cart cart;
