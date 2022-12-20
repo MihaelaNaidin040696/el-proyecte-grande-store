@@ -1,8 +1,14 @@
 package com.codecool.sneakersStore.controller;
 
+import com.codecool.sneakersStore.model.Brand;
+import com.codecool.sneakersStore.model.Category;
 import com.codecool.sneakersStore.model.Product;
+import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.payload.ProductRequest;
+import com.codecool.sneakersStore.service.BrandService;
+import com.codecool.sneakersStore.service.CategoryService;
 import com.codecool.sneakersStore.service.ProductService;
+import com.codecool.sneakersStore.service.SupplierService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +26,15 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
     private final ProductService productService;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
+    private final SupplierService supplierService;
 
-    public AdminController(ProductService productService) {
+    public AdminController(ProductService productService, CategoryService categoryService, BrandService brandService, SupplierService supplierService) {
         this.productService = productService;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
+        this.supplierService = supplierService;
     }
 
     @GetMapping
@@ -50,7 +62,14 @@ public class AdminController {
 
     @PostMapping("/add-new-product")
     public Product saveNewProduct(@RequestBody ProductRequest productRequest) {
+        Category category = categoryService.getCategoryById(productRequest.getCategoryId());
+        Brand brand = brandService.getBrandById(productRequest.getBrandId());
+        Supplier supplier = supplierService.getSupplierById(productRequest.getSupplierId());
+
         Product product = new Product(
+                category,
+                brand,
+                supplier,
                 productRequest.getProductName(),
                 productRequest.getReferenceCode(),
                 productRequest.getDescriptionColor(),

@@ -56,6 +56,9 @@ public class Product {
     private Boolean isAvailable;
 
     public Product(
+            Category category,
+            Brand brand,
+            Supplier supplier,
             String productName,
             String referenceCode,
             String descriptionColor,
@@ -71,6 +74,9 @@ public class Product {
             Float discount,
             Boolean isAvailable
     ) {
+        this.setCategory(category);
+        this.setBrand(brand);
+        this.setSupplier(supplier);
         this.setProductName(productName);
         this.setReferenceCode(referenceCode);
         this.setDescriptionColor(descriptionColor);
