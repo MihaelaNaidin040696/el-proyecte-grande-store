@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,12 +26,16 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private Long id;
+
     private Date orderDate;
+
     private Date deliveryDate;
-    private double totalPrice;
+
+    private Double totalPrice;
+
     private String notes;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;

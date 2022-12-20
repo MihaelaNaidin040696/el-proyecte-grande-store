@@ -39,6 +39,7 @@ public class Product {
     @JoinColumn(name="supplier_id", referencedColumnName = "id")
     @JsonBackReference
     private Supplier supplier;
+
     private String productName;
     private String referenceCode;
     private String descriptionColor;
@@ -85,4 +86,5 @@ public class Product {
         this.setDiscount(discount);
         this.setIsAvailable(isAvailable);
     }
+
 }

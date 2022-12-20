@@ -39,28 +39,22 @@ public class CartController {
 
     @PostMapping("/add-to-cart/{id}")
     public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
-        System.out.println("sizzzzzzzzzzzzzzzzz" + size);
         Product product = productService.getProductById(id);
         Client client = clientService.findByUsername("test");
-        Cart cart = cartService.addItemToCartTest(product, 1, client);
-        return cart;
+        return cartService.addItemToCartTest(product, 1, client);
     }
 
     @PostMapping("/decrease-quantity-of-cart-item/{id}")
     public Cart decreaseQuantityOfCartItem(@PathVariable Long id) {
         Product product = productService.getProductById(id);
         Client client = clientService.findByUsername("test");
-        Cart cart = cartService.decreaseCartItemQuantity(product, 1, client);
-
-        return cart;
+        return cartService.decreaseCartItemQuantity(product, 1, client);
     }
 
     @DeleteMapping("/delete-cart-item/{id}")
-    public Cart deleteCartitem(@PathVariable Long id){
+    public Cart deleteCartItem(@PathVariable Long id){
         Product product = productService.getProductById(id);
         Client client = clientService.findByUsername("test");
-        Cart cart = cartService.deleteItemFromCart(product,client);
-
-        return cart;
+        return cartService.deleteItemFromCart(product,client);
     }
 }

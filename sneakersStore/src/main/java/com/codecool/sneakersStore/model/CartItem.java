@@ -1,7 +1,6 @@
 package com.codecool.sneakersStore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,15 +29,18 @@ import javax.persistence.Table;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
+
     private int quantity;
+
     @Column(name = "total")
     private double totalPrice;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     @JsonBackReference
     private Cart cart;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
