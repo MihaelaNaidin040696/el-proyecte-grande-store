@@ -3,6 +3,7 @@ package com.codecool.sneakersStore.controller;
 import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Product;
+import com.codecool.sneakersStore.payload.CartItemRequest;
 import com.codecool.sneakersStore.service.CartService;
 import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.ProductService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,13 +48,16 @@ public class CartController {
         return cart;
     }
 
-    @PostMapping("/decrease-quantity-of-cart-item/{id}")
-    public Cart decreaseQuantityOfCartItem(@PathVariable Long id) {
-        Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("test");
-        Cart cart = cartService.decreaseCartItemQuantity(product, 1, client);
+    @PostMapping ("/update-cart-item-quantity")
+    public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
+        System.out.println(cartItemRequest.getQuantity());
+        System.out.println(cartItemRequest.getProductId());
+        System.out.println("intra");
+        Product product = productService.getProductById(Long.valueOf(cartItemRequest.getProductId()));
 
-        return cart;
+
+        Client client = clientService.findByUsername("test");
+        return cartService.updateItemInCart(product, Integer.parseInt(String.valueOf(cartItemRequest.getQuantity())), client);
     }
 
     @DeleteMapping("/delete-cart-item/{id}")

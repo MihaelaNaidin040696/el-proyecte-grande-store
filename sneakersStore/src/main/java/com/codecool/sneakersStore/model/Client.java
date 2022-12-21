@@ -43,8 +43,9 @@ public class Client {
     @OneToOne(mappedBy = "client")
     @JsonBackReference
     private Cart cart;
-//    @OneToMany(mappedBy = "client")
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "client")
+    @JsonManagedReference
+    private List<Order> orders;
 
 
 }

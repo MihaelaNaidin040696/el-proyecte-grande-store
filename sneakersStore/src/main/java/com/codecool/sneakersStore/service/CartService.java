@@ -83,20 +83,21 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public Cart decreaseCartItemQuantity(Product product, int quantity, Client client){
+    public Cart updateItemInCart(Product product, int quantity, Client client){
         Cart cart = client.getCart();
         List<CartItem> cartItems = cart.getCartItems();
-        CartItem item = findCartItem(cartItems, product.getId());
+        CartItem cartItem = findCartItem(cartItems,product.getId());
 
-        item.setQuantity(item.getQuantity()-1);
-        product.setTotalStock(product.getTotalStock()+1);
-        item.setTotalPrice(item.getTotalPrice()+(quantity*product.getSellingPrice()));
+        cartItem.setQuantity(quantity);
+        cartItem.setTotalPrice(quantity*product.getSellingPrice());
 
-        double totalPrice = totalPrice(cartItems);
+        cartItemRepository.save(cartItem);
+
         int totalItems = totalItems(cartItems);
+        double totalPrice = totalPrice(cartItems);
 
-        cart.setTotalPrices(totalPrice);
         cart.setTotalItems(totalItems);
+        cart.setTotalPrices(totalPrice);
 
         return cartRepository.save(cart);
     }
