@@ -1,4 +1,3 @@
-import { South } from "@mui/icons-material";
 import React,{ useEffect, useState } from "react";
 import classes from "./Modal.module.css";
 
@@ -9,7 +8,7 @@ export default function Modal({ setModal }) {
     const [itemQty, setItemQty] = useState({id:'', quantity:'' })
     const [qty,setQty] = useState();
     console.log(cart)
-    console.log(cartItems);
+    console.log("Cart iteeeeeem",cartItems);
     
     function addItemQty(e){
         let newList = [];
@@ -18,12 +17,13 @@ export default function Modal({ setModal }) {
         for (let index = 0; index < cartItems.length; index++) {
             const element = cartItems[index];
             const p = element.product.id
+            setItemQty({id:p,quantity:element.quantity})
+
             console.log(p, e.currentTarget.id)
         if(p == e.currentTarget.id){
             const sellingPer = element.product.sellingPrice;
             element.quantity += 1;
             element.totalPrice = element.quantity * sellingPer;
-            
         }
         
         newList.push(element);
@@ -31,27 +31,47 @@ export default function Modal({ setModal }) {
         cart.totalPrices = total;
         obj.id = p;
         obj.quantity = element.quantity;
-        setItemQty({id:p,quantity:element.quantity+1})
+        setItemQty({id:p,quantity:element.quantity})
 
-        console.log(itemQty);
+        console.log("Item quantity",itemQty);
         }
         
         setCart(cart);
         setCartItems(newList);
-
+        fetchUpdateCartItemQuantity();
 
     }
-
+    
     function closeModal() {
         setModal(false);
     }
 
     useEffect(() =>{
-        const fetchCart = async ()=>{
-            const request = await fetch()
-        }
-        console.log('Am 3 leeeeeei')
+   
     }, [cartItems])
+
+    const fetchUpdateCartItemQuantity = async ()=>{
+        fetch("http://localhost:8080/cart/update-cart-item-quantity",{ method: 'POST',
+        body: JSON.stringify({
+          id: itemQty.id,quantity: itemQty.quantity+1
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+            console.log(data);
+            // Handle data
+         })
+         .catch((err) => {
+            console.log(err.message);})
+        // const response = await req.json();
+        // // console.log("Responseeee"+response);
+        // setCart(response);
+        // setCartItems(response.cartItems)
+        
+    }
 
     useEffect(()=>{
         const fetchCart = async ()=>{
@@ -96,7 +116,7 @@ export default function Modal({ setModal }) {
                                         <h3>{item.product.productName}</h3> 
                                         <h4>{item.product.sellingPrice * item.quantity} $</h4>
                                         <p className={classes.unit}>Quantity:
-                                         <button>-</button>
+                                         <button onClick={addItemQty}id={item.product.id}>-</button>
                                          <input 
                                          onChange={(e)=> setQty(item.quantity)}
                                          value={item.quantity}/>
