@@ -18,6 +18,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<Product> getAllAvailableProducts() {
+        return productRepository.findAllByIsAvailable();
+    }
+
     public Product getProductById(Long id){
         Optional<Product> optionalProduct = Optional.of(productRepository.findById(id).get());
         return optionalProduct.orElse(null);
