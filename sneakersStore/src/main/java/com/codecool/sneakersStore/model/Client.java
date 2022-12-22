@@ -39,6 +39,13 @@ public class Client {
     @JsonBackReference
     private Cart cart;
 
+    public Client(String firstName, String lastName, String email, String encodedPassword) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setEmail(email);
+        this.setPassword(encodedPassword);
+    }
+
 //    @OneToMany(mappedBy = "client")
 //    private List<Order> orders;
 
