@@ -57,6 +57,7 @@ public class AdminController {
         product.setPurchaseDate(productRequest.getPurchaseDate());
         product.setTotalStock(productRequest.getTotalStock());
         product.setDiscount(productRequest.getDiscount());
+        product.setIsAvailable(productRequest.getIsAvailable());
         return productService.updateProduct(product);
     }
 

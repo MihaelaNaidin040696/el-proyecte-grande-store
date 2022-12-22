@@ -4,8 +4,26 @@ import moment from 'moment';
 import classes from './Table.module.css';
 import {Checkbox} from "@mui/material";
 import {pink} from "@mui/material/colors";
+import {useState} from "react";
 
-export default function ReadOnlyRow({ product, index, handleEditClick}) {
+export default function ReadOnlyRow({product, index, handleEditClick}) {
+    const baseURL = "http://localhost:8080/admin";
+    const [checked, setChecked] = useState(product.isAvailable);
+
+    const handleCheckboxChange = (event) => {
+        setChecked(event.target.checked);
+        product.isAvailable = !checked;
+
+        fetch(`${baseURL}/edit-product/${product.id}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({...product})
+        })
+            .then((response) => {
+                return response.json();
+            });
+    }
+
     return (
         <TableRow
             key={index}
@@ -13,14 +31,16 @@ export default function ReadOnlyRow({ product, index, handleEditClick}) {
         >
             <TableCell>
                 <Checkbox
-                defaultChecked
-                sx={{
-                    color: pink[800],
-                    '&.Mui-checked': {
-                        color: pink[600],
-                    },
-                }}
-            /></TableCell>
+                    checked={checked}
+                    onChange={handleCheckboxChange}
+                    sx={{
+                        color: pink[800],
+                        '&.Mui-checked': {
+                            color: pink[600],
+                        },
+                    }}
+                />
+            </TableCell>
             <TableCell scope="row">{product.productName}</TableCell>
             <TableCell align="left">{product.referenceCode}</TableCell>
             <TableCell align="left">{product.descriptionColor}</TableCell>
@@ -35,7 +55,10 @@ export default function ReadOnlyRow({ product, index, handleEditClick}) {
             <TableCell align="left">{product.discount}</TableCell>
 
             <TableCell align="left">
-                <button type='button' className={classes.status} style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}} onClick={(event) => handleEditClick(event, product)}>Edit</button>
+                <button type='button' className={classes.status}
+                        style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}
+                        onClick={(event) => handleEditClick(event, product)}>Edit
+                </button>
             </TableCell>
         </TableRow>
     )
