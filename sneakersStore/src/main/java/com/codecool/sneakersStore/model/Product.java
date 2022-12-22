@@ -2,7 +2,6 @@ package com.codecool.sneakersStore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,11 +22,10 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name="brand_id",referencedColumnName = "id")
@@ -41,6 +39,7 @@ public class Product {
     @JoinColumn(name="supplier_id", referencedColumnName = "id")
     @JsonBackReference
     private Supplier supplier;
+
     private String productName;
     private String referenceCode;
     private String descriptionColor;
@@ -49,25 +48,35 @@ public class Product {
     private String descriptionSole;
     private String image;
     private String size;
-    private float sellingPrice;
-    private float purchasePrice;
+    private Float sellingPrice;
+    private Float purchasePrice;
     private Date purchaseDate;
-    private int totalStock;
-    private float discount;
+    private Integer totalStock;
+    private Float discount;
+    private Boolean isAvailable;
 
-    public Product(String productName,
-                   String referenceCode,
-                   String descriptionColor,
-                   String descriptionMaterial,
-                   String descriptionInterior,
-                   String descriptionSole,
-//                   String image,
-                   String size,
-                   Float sellingPrice,
-                   Float purchasePrice,
-                   Date purchaseDate,
-                   Integer totalStock,
-                   Float discount) {
+    public Product(
+            Category category,
+            Brand brand,
+            Supplier supplier,
+            String productName,
+            String referenceCode,
+            String descriptionColor,
+            String descriptionMaterial,
+            String descriptionInterior,
+            String descriptionSole,
+            //String image,
+            String size,
+            Float sellingPrice,
+            Float purchasePrice,
+            Date purchaseDate,
+            Integer totalStock,
+            Float discount,
+            Boolean isAvailable
+    ) {
+        this.setCategory(category);
+        this.setBrand(brand);
+        this.setSupplier(supplier);
         this.setProductName(productName);
         this.setReferenceCode(referenceCode);
         this.setDescriptionColor(descriptionColor);
@@ -81,5 +90,7 @@ public class Product {
         this.setPurchaseDate(purchaseDate);
         this.setTotalStock(totalStock);
         this.setDiscount(discount);
+        this.setIsAvailable(isAvailable);
     }
+
 }

@@ -1,10 +1,10 @@
-import classes from './Cards.module.css';
+import classes from './ReportsCards.module.css';
 import { UilClipboardAlt } from "@iconscout/react-unicons";
 import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
 
-import Card from "./Card";
+import ReportCard from "./ReportCard";
 
-export default function Cards() {
+export default function ReportsCards() {
     const cardsData = [
         {
             title: "Sales",
@@ -62,7 +62,7 @@ export default function Cards() {
             {cardsData.map((card, id) => {
                 return (
                     <div className={classes.parentContainer} key={id}>
-                        <Card
+                        <ReportCard
                             title={card.title}
                             color={card.color}
                             barValue={card.barValue}

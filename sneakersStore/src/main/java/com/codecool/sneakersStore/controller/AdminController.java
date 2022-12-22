@@ -1,38 +1,45 @@
 package com.codecool.sneakersStore.controller;
 
+import com.codecool.sneakersStore.model.Brand;
+import com.codecool.sneakersStore.model.Category;
 import com.codecool.sneakersStore.model.Product;
+import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.payload.ProductRequest;
+import com.codecool.sneakersStore.service.BrandService;
+import com.codecool.sneakersStore.service.CategoryService;
 import com.codecool.sneakersStore.service.ProductService;
+import com.codecool.sneakersStore.service.SupplierService;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(value = {"*"})
+@CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
     private final ProductService productService;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
+    private final SupplierService supplierService;
 
-    public AdminController(ProductService productService) {
+    public AdminController(ProductService productService, CategoryService categoryService, BrandService brandService, SupplierService supplierService) {
         this.productService = productService;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
+        this.supplierService = supplierService;
     }
 
     @GetMapping
     public List<Product> getProducts() {
         return productService.getAllProducts();
-    }
-
-    @DeleteMapping("/delete-product/{id}")
-    public void deleteProductById(@PathVariable Long id) {
-        productService.deleteProduct(id);
     }
 
     @PutMapping("/edit-product/{prodId}")
@@ -50,12 +57,20 @@ public class AdminController {
         product.setPurchaseDate(productRequest.getPurchaseDate());
         product.setTotalStock(productRequest.getTotalStock());
         product.setDiscount(productRequest.getDiscount());
+        product.setIsAvailable(productRequest.getIsAvailable());
         return productService.updateProduct(product);
     }
 
     @PostMapping("/add-new-product")
     public Product saveNewProduct(@RequestBody ProductRequest productRequest) {
+        Category category = categoryService.getCategoryById(productRequest.getCategoryId());
+        Brand brand = brandService.getBrandById(productRequest.getBrandId());
+        Supplier supplier = supplierService.getSupplierById(productRequest.getSupplierId());
+
         Product product = new Product(
+                category,
+                brand,
+                supplier,
                 productRequest.getProductName(),
                 productRequest.getReferenceCode(),
                 productRequest.getDescriptionColor(),
@@ -68,7 +83,8 @@ public class AdminController {
                 productRequest.getPurchasePrice(),
                 productRequest.getPurchaseDate(),
                 productRequest.getTotalStock(),
-                productRequest.getDiscount()
+                productRequest.getDiscount(),
+                true
         );
         return productService.saveNewProduct(product);
     }

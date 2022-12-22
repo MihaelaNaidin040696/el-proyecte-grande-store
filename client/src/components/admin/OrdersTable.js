@@ -39,7 +39,7 @@ const makeStyle = (status) => {
     }
 }
 
-export default function BasicTable() {
+export default function OrdersTable() {
     return (
         <div className={classes.Table}>
             <h3>Recent Orders</h3>

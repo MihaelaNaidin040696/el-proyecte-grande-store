@@ -1,9 +1,11 @@
 package com.codecool.sneakersStore.controller;
 
 import com.codecool.sneakersStore.model.Client;
+import com.codecool.sneakersStore.payload.ClientRequest;
 import com.codecool.sneakersStore.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin(value = {"*"} )
 @RequestMapping("/client")
 public class ClientController {
     private final ClientService clientService;
@@ -29,25 +32,16 @@ public class ClientController {
     }
 
     @PostMapping(value = "add-client")
-    public void addClient(@RequestBody Client client) {
+    public void addClient(@RequestBody ClientRequest clientRequest) {
         Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32, 64, 1, 15 * 1024, 2);
-        String textPassword = client.getPassword();
+        String textPassword = clientRequest.getPassword();
         String encodedPassword = encoder.encode(textPassword);
 
         Boolean validPassword = encoder.matches(textPassword, encodedPassword);
         System.out.println(validPassword);
 
-        Client client1 = null;
-//                new Client(
-//                client.getId(),
-//                client.getFirstName(),
-//                client.getLastName(),
-//                client.getEmail(),
-//                encodedPassword
-//                client.getCart(),
-//                client.getOrders()
-//        );
-        clientService.addClient(client1);
+        Client client = new Client(clientRequest.getFirstName(), clientRequest.getLastName(), clientRequest.getEmail(), encodedPassword);
+        clientService.addClient(client);
     }
 
     @GetMapping("/get-client/{id}")

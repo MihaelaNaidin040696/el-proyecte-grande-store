@@ -10,7 +10,7 @@ export default function Modal({ setModal }) {
   const [qty,setQty] = useState();
   // console.log(cart)
   // console.log("Cart iteeeeeem",cartItems);
-  
+
   function addItemQty(e){
       console.log(e.target.innerText)
       let newList = [];
@@ -22,7 +22,7 @@ export default function Modal({ setModal }) {
           setItemQty({id:p,quantity:element.quantity})
 
           console.log(p, e.currentTarget.id)
-          
+
       if(p == e.currentTarget.id){
           const sellingPer = element.product.sellingPrice;
           if(e.target.innerText=="+"){
@@ -32,10 +32,10 @@ export default function Modal({ setModal }) {
               element.quantity -= 1;
 
           }
-          
+
           element.totalPrice = element.quantity * sellingPer;
       }
-      
+
       newList.push(element);
       total += element.totalPrice;
       cart.totalPrices = total;
@@ -45,13 +45,13 @@ export default function Modal({ setModal }) {
 
 
   }
-      
+
       setCart(cart);
       setCartItems(newList);
       fetchUpdateCartItemQuantity();
 
   }
-  
+
   function closeModal() {
       setModal(false);
   }
@@ -78,11 +78,11 @@ export default function Modal({ setModal }) {
       // // console.log("Responseeee"+response);
       // setCart(response);
       // setCartItems(response.cartItems)
-      
+
   }
 
   useEffect(() =>{
- 
+
   }, [cartItems])
 
   useEffect(()=>{
@@ -94,7 +94,7 @@ export default function Modal({ setModal }) {
       }
       fetchCart();
   },[])
-  
+
       const fetchDeleteItemFromCart = async (e)=>{
           const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${e.target.id}`,{method:'DELETE'})
           const response = await request.json();
@@ -105,9 +105,9 @@ export default function Modal({ setModal }) {
       <>
 
       <div className={classes.container}>
-          
+
           <div className={classes.modalContainer}>
-              <> 
+              <>
               <div className={classes.close_container}>
               <h1 className={classes.wrapper}>Shopping Cart</h1>
               <span className={classes.close_btn}>
@@ -118,18 +118,18 @@ export default function Modal({ setModal }) {
                               ></i>
               </span>
               </div>
-           
+
                       <div className={classes.project}>
                           <div className={classes.shop}>
-                          {cartItems && cartItems.map(item=>(  
+                          {cartItems && cartItems.map(item=>(
                                <div className={classes.box}>
                                    <img src={item.product.image} alt=""/>
                                    <div className={classes.content}>
-                                      <h3>{item.product.productName}</h3> 
+                                      <h3>{item.product.productName}</h3>
                                       <h4>{item.product.sellingPrice * item.quantity} $</h4>
                                       <p className={classes.unit}>Quantity:
                                        <button onClick={addItemQty}id={item.product.id} data-sign={"-"}>-</button>
-                                       <input 
+                                       <input
                                        onChange={(e)=> setQty(item.quantity)}
                                        value={item.quantity}/>
                                        <button onClick={addItemQty} id={item.product.id} data-sign={"+"}>+</button></p>

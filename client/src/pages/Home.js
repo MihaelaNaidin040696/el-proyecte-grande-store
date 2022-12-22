@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProductCardList from "../components/ProductCardList";
+import ProductCardList from "../components/user/ProductCardList";
 import Slider from "../components/slider/Slider";
 
 function Home() {
