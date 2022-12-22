@@ -19,7 +19,7 @@ export default function Modal({ setModal }) {
       for (let index = 0; index < cartItems.length; index++) {
           const element = cartItems[index];
           const p = element.product.id
-          // setItemQty({id:p,quantity:element.quantity})
+          setItemQty({id:p,quantity:element.quantity})
 
           console.log(p, e.currentTarget.id)
           
@@ -27,11 +27,9 @@ export default function Modal({ setModal }) {
           const sellingPer = element.product.sellingPrice;
           if(e.target.innerText=="+"){
               element.quantity += 1;
-              setItemQty({id:p,quantity:element.quantity})
 
           }else{
               element.quantity -= 1;
-              setItemQty({id:p,quantity:element.quantity})
 
           }
           
@@ -63,7 +61,7 @@ export default function Modal({ setModal }) {
   const fetchUpdateCartItemQuantity = async ()=>{
       fetch("http://localhost:8080/cart/update-cart-item-quantity",{ method: 'POST',
       body: JSON.stringify({
-        id: itemQty.id,quantity: itemQty.quantity+1
+        id: itemQty.id,quantity: itemQty.quantity
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',

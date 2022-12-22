@@ -51,13 +51,12 @@ public class CartController {
     @PostMapping ("/update-cart-item-quantity")
     public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
         System.out.println(cartItemRequest.getQuantity());
-        System.out.println(cartItemRequest.getProductId());
+        System.out.println(cartItemRequest.getId());
         System.out.println("intra");
-        Product product = productService.getProductById(Long.valueOf(cartItemRequest.getProductId()));
-
+        Product product = productService.getProductById((long) cartItemRequest.getId());
 
         Client client = clientService.findByUsername("test");
-        return cartService.updateItemInCart(product, Integer.parseInt(String.valueOf(cartItemRequest.getQuantity())), client);
+        return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
     }
 
     @DeleteMapping("/delete-cart-item/{id}")

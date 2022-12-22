@@ -87,6 +87,7 @@ public class CartService {
         Cart cart = client.getCart();
         List<CartItem> cartItems = cart.getCartItems();
         CartItem cartItem = findCartItem(cartItems,product.getId());
+        System.out.println("carrrrtttt item"+cartItem);
 
         cartItem.setQuantity(quantity);
         cartItem.setTotalPrice(quantity*product.getSellingPrice());
@@ -146,10 +147,9 @@ public class CartService {
 
         for (CartItem item : cartItems) {
             if (Objects.equals(item.getProduct().getId(), productId)) {
-                cartItem = item;
+               cartItem = item;
             }
         }
         return cartItem;
     }
-
 }
