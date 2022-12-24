@@ -39,10 +39,10 @@ function Register() {
             password: "",
             confirmPassword: ""
         };
-
+        
         if (!client.firstName && !client.lastName && !client.email && !client.password) {
-            setError({
-                ...inputError,
+        setError({
+            ...inputError,
                 firstName: "Enter your first name.",
                 lastName: "Enter your last name.",
                 email: "Enter valid email address.",

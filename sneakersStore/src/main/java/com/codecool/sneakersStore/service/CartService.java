@@ -63,7 +63,7 @@ public class CartService {
                 cartItem.setProduct(product);
                 cartItem.setQuantity(quantity);
                 product.setTotalStock(product.getTotalStock()-1);
-                cartItem.setTotalPrice(quantity*product.getSellingPrice());
+                cartItem.setTotalPrice(quantity * product.getSellingPrice());
                 cartItems.add(cartItem);
             }else{
                 cartItem.setQuantity(cartItem.getQuantity()+quantity);
