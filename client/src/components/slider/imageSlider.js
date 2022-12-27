@@ -3,21 +3,21 @@ export default [
     {
         title: "First Slider Image",
         description: " first image of carousel",
-        urls: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_hGl4R4r5EZJmAl-qkpXylGwRMH2WvLmrmXA-fpQuwilSOSYdm89jeqIgyyhGpVMvPzA&usqp=CAU",
+        urls: "https://wallpaperaccess.com/full/211188.jpg",
     },
     {
         title: "Second Slider Image",
         description: " Second image of carousel",
-        urls: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSWi8BG8i1iESdthM1bE7n_njhczIsjkzwZWzB5PvM1YLUi1csO_xTMtffUtfkGugpesE&usqp=CAU",
+        urls: "https://thumbs.dreamstime.com/b/nike-air-force-pavia-italy-june-one-shoe-studio-portrait-black-background-reflection-illustrative-editorial-153333163.jpg",
     },
     {
         title: "Third Slider Image",
         descriptions: " Third image of carousel",
-        urls: "https://www.highsnobiety.com/static-assets/thumbor/L66mZiIy0WP1_bwJlVY2hiSPjvk=/1600x960/www.highsnobiety.com/static-assets/wp-content/uploads/2020/08/07170255/is-it-too-hard-to-buy-sneakers-dropcast-feat.jpg",
+        urls:"https://sneakernews.com/wp-content/uploads/2017/03/jordan-4-kaws-detailed-photos.jpg?w=780&h=550&crop=1",
     },
     {
         title: "Fourth Slider Image",
         description: " Fourth image of carousel",
-        urls: "https://sothebys-com.brightspotcdn.com/05/41/7aaf75e941c4a46f9f072ee2af31/22011-jt-sb-shot-03-031.jpg",
+        urls:"https://wallpapercave.com/wp/wp1870228.jpg",
     },
 ];
