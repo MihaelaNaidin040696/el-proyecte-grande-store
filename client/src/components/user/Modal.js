@@ -42,11 +42,17 @@ export default function Modal({ setModal }) {
     }
 
     function getTotal(){
-        return cartItems.reduce((acc,c)=>{
-            return acc+(c.quantity*c.totalPrice);
-            
-        },0)
+        let sum = 0;
+        for(let i = 0; i < cartItems.length;i++){
+            sum += (cartItems[i].product.sellingPrice * cartItems[i].quantity)
+        }
+        return sum;
 
+    }
+    function getTotalWithTaxes(){
+        let sum = getTotal();
+        let total = (0.05*sum) + sum + 20;
+        return total
     }
 
 
@@ -66,20 +72,13 @@ export default function Modal({ setModal }) {
        })
        .catch((err) => {
           console.log(err.message);})
-
   }
-
-
-
 
     const fetchCart = async () =>{
         const request = await fetch("http://localhost:8080/cart/get-cart")
         const response = await request.json();
         setCart(response);
         setCartItems(response.cartItems);
-        setTotal(response.totalPrices)
-
-        
     }
 
     useEffect(()=>{
@@ -151,16 +150,16 @@ export default function Modal({ setModal }) {
                                 ))}
                           </div>
                       <div className={classes.rightBar}>
-                          <p><span>Subtotal</span> <span>{cart.totalPrices}</span></p>
+                          <p><span>Subtotal</span> <span>${getTotal()}</span></p>
                           <hr>
                           </hr>
-                          <p><span>Tax</span> <span>{cart.totalPrices}</span></p>
+                          <p><span>Tax</span> <span>5%</span></p>
                           <hr>
                           </hr>
-                          <p><span>Shipping</span> <span>{cart.totalPrices}</span></p>
+                          <p><span>Shipping</span> <span>$20</span></p>
                           <hr>
                           </hr>
-                          <p><span>Total</span> <span>{getTotal()}</span></p>
+                          <p><span>Total</span> <span>${getTotalWithTaxes()}</span></p>
                           <a href="/order"><i className="fa fa-shopping-cart"></i>Checkout</a>
                       </div>
                       </div>
