@@ -128,7 +128,8 @@ public class CartService {
         for (CartItem item : cartItems) {
             totalPrice += item.getTotalPrice();
         }
-        return totalPrice;
+        double total = (0.05 * totalPrice) + totalPrice + 20;
+        return total;
     }
 
     private int totalItems(List<CartItem> cartItems) {
