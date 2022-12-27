@@ -1,4 +1,4 @@
-import { PermDataSettingTwoTone } from "@mui/icons-material";
+import { PermDataSettingTwoTone, South } from "@mui/icons-material";
 import React,{ useEffect, useState } from "react";
 import classes from "./Modal.module.css";
 
@@ -7,9 +7,7 @@ export default function Modal({ setModal }) {
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
     const [qty,setQty] = useState();
-    // const [myId,setMyId] = useState();
-    // const [extracted, setExtracted] = useState([])
-
+    const [total,setTotal] = useState();
 
     function handleClick(e){
         const {type,id} = e.target.dataset
@@ -25,101 +23,31 @@ export default function Modal({ setModal }) {
                     if(copy[index].quantity > 1){
                         --copy[index].quantity
                         fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
-                        break;
+                    }else{
+                        deleteItem(copy[index].product.id);
+
                     }
                 
+                    break;
                 }
                 case 'increment':{
                     ++copy[index].quantity;
                     fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
                     break;
-                }
-                case 'remove':{
-                    if(copy[index].quantity < 1){
-                        copy.splice(index,1);
-                        deleteItem(copy[index].product.id);
-                        break;
-                    }
-                }
-       
+                }    
             }
             setCartItems(copy)
         }
+ 
     }
 
-    // console.log(extracted);
-    // const updateQuantity = (currentId) => {
-    //     let element = extracted.filter(x=>x.id == currentId)[0];
-    //     let filteredArray = extracted.filter(x => x!=element);
-    //     console.log("elementtt",element.quantity)
-    //     let newElement = {id:parseInt(currentId),quantity:qty};
-    //     filteredArray.push(newElement);
-    //     setExtracted(filteredArray);
-    // }
+    function getTotal(){
+        return cartItems.reduce((acc,c)=>{
+            return acc+(c.quantity*c.totalPrice);
+            
+        },0)
 
-    // const updateCartItem = async (e) =>{
-    //     e.preventDefault();
-    //     const currentId = e.currentTarget.id;  
-
-    //     let test;
-    //     var htmlText = e.currentTarget.value;
-    //     console.log("html text",htmlText)
-    //     if(htmlText == "+"){
-    //         setQty(99)
-    //     }
-    //     if(htmlText=="-"){
-    //         setQty("11111")
-    //     }    
-    //     updateQuantity(currentId,test);
-    // }
-
-
-
-//   function addItemQty(e){
-//     // console.log(newlist)
-//   }
-
-    //   console.log(e.target.innerText)
-    //   let newList = [];
-    //   let obj = {id: '', quantity: ''}
-    //   let total = 0;
-    //   for (let index = 0; index < cartItems.length; index++) {
-    //       const element = cartItems[index];
-    //       const p = element.product.id
-    //       setItemQty({id:p,quantity:element.quantity})
-
-    //       console.log(p, e.currentTarget.id)
-
-    //   if(p == e.currentTarget.id){
-    //       const sellingPer = element.product.sellingPrice;
-    //       if(e.target.innerText=="+"){
-    //           element.quantity += 1;
-
-    //       }else{
-    //           element.quantity -= 1;
-
-    //       }
-
-    //       element.totalPrice = element.quantity * sellingPer;
-    //   }
-
-    //   newList.push(element);
-    //   total += element.totalPrice;
-    //   cart.totalPrices = total;
-    //   obj.id = p;
-    //   obj.quantity = element.quantity;
-    //   setItemQty({id:p,quantity:element.quantity})
-
-
-//   }
-
-//       setCart(cart);
-//       setCartItems(newList);
-//       fetchUpdateCartItemQuantity();
-
-//   }
-
-
+    }
 
 
   const fetchUpdateCartItemQuantity = async (id,quantity)=>{
@@ -148,24 +76,15 @@ export default function Modal({ setModal }) {
         const request = await fetch("http://localhost:8080/cart/get-cart")
         const response = await request.json();
         setCart(response);
-        setCartItems(response.cartItems)
+        setCartItems(response.cartItems);
+        setTotal(response.totalPrices)
+
+        
     }
 
     useEffect(()=>{
         fetchCart();
     },[])
-
-    // useEffect(()=>{
-    //     extract();
-    // },[cartItems])
-
-    // const extract = () =>{
-    //     for(let c of cartItems){
-    //         console.log(c.product.id)
-    //         const newObj = {id:c.product.id, quantity: c.quantity}
-    //         setExtracted(extracted => [...extracted,newObj])
-    //     }
-    // }
     
     const deleteItem = async (id) =>{
         const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${id}`,{method:'DELETE'})
@@ -241,7 +160,7 @@ export default function Modal({ setModal }) {
                           <p><span>Shipping</span> <span>{cart.totalPrices}</span></p>
                           <hr>
                           </hr>
-                          <p><span>Total</span> <span>{cart.totalPrices}</span></p>
+                          <p><span>Total</span> <span>{getTotal()}</span></p>
                           <a href="/order"><i className="fa fa-shopping-cart"></i>Checkout</a>
                       </div>
                       </div>
