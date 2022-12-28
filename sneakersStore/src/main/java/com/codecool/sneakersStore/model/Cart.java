@@ -29,16 +29,12 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private int totalItems;
-
     private double totalPrices;
-
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @JsonBackReference
     private Client client;
-
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "cart")
     private List<CartItem> cartItems;

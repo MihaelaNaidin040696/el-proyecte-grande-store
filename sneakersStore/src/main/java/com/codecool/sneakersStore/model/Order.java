@@ -24,19 +24,21 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
+    private String email;
+    private String first_name;
+    private String last_name;
+    private String phone_number;
+    private String country;
+    private String city;
+    private String address;
+    private String postal_code;
     private Date orderDate;
-
     private Date deliveryDate;
-
     private Double totalPrice;
-
     private String notes;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")

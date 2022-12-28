@@ -7,12 +7,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,6 +42,10 @@ public class Client {
     @OneToOne(mappedBy = "client")
     @JsonBackReference
     private Cart cart;
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy = "client")
+    @JsonManagedReference
+    private List<Order> orders;
+
 
     public Client(String firstName, String lastName, String email, String encodedPassword) {
         this.setFirstName(firstName);
@@ -46,7 +54,5 @@ public class Client {
         this.setPassword(encodedPassword);
     }
 
-//    @OneToMany(mappedBy = "client")
-//    private List<Order> orders;
 
 }
