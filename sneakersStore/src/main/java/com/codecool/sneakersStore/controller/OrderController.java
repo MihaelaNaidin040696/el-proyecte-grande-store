@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.controller;
 
+import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Order;
 import com.codecool.sneakersStore.service.ClientService;
@@ -25,9 +26,8 @@ public class OrderController {
     }
 
     @GetMapping("/get-order")
-    public List<Order> getClientOrder(){
+    public List<Order> getClientOrders(){
         Client client = clientService.findByUsername("test");
-        System.out.println(client.getOrders());
         return client.getOrders();
     }
 }
