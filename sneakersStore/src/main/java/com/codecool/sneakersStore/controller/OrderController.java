@@ -3,10 +3,13 @@ package com.codecool.sneakersStore.controller;
 import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Order;
+import com.codecool.sneakersStore.payload.OrderRequest;
 import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.OrderService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +32,13 @@ public class OrderController {
     public List<Order> getClientOrders(){
         Client client = clientService.findByUsername("test");
         return client.getOrders();
+    }
+
+    @PostMapping("/add-order")
+    public Order addOrders(@RequestBody OrderRequest orderRequest){
+        System.out.println(orderRequest);
+        Client client = clientService.findByUsername("test");
+        Order order = orderService.addOrder(orderRequest,client);
+        return order;
     }
 }
