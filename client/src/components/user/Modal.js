@@ -25,9 +25,7 @@ export default function Modal({ setModal }) {
                         fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
                     }else{
                         deleteItem(copy[index].product.id);
-
                     }
-                
                     break;
                 }
                 case 'increment':{
