@@ -42,7 +42,12 @@ public class OrderService {
         order.setOrderDate(new Date());
         order.setDeliveryDate(new Date());
         order.setTotalPrice(cart.getTotalPrices());
-        order.setNotes(orderRequest.getNotes());
+//        if(orderRequest.getNotes()==null){
+//            order.setNotes("none");
+//        }else{
+//            order.setNotes(orderRequest.getNotes());
+//        }
+        order.setNotes(orderRequest.getNotes()!=null ? orderRequest.getNotes() : "none");
         order.setClient(client1);
 
         saveOrder(order);

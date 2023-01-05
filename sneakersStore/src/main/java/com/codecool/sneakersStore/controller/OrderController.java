@@ -36,7 +36,9 @@ public class OrderController {
 
     @PostMapping("/add-order")
     public Order addOrders(@RequestBody OrderRequest orderRequest){
-        System.out.println(orderRequest);
+        System.out.println(orderRequest.getFirst_name());
+        System.out.println("requessstu   "+orderRequest.toString());
+
         Client client = clientService.findByUsername("test");
         Order order = orderService.addOrder(orderRequest,client);
         return order;
