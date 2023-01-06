@@ -1,5 +1,6 @@
 package com.codecool.sneakersStore.payload;
 
+import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.model.Client;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter

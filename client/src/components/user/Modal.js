@@ -38,7 +38,6 @@ export default function Modal({ setModal }) {
                         }
                         fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
                         break;
-                   
                 }    
             }
             setCartItems(copy)

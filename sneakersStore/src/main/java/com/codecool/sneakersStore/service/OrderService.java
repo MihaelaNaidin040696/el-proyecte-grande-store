@@ -2,6 +2,7 @@ package com.codecool.sneakersStore.service;
 
 
 import com.codecool.sneakersStore.model.Cart;
+import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Order;
 import com.codecool.sneakersStore.payload.OrderRequest;
@@ -9,6 +10,7 @@ import com.codecool.sneakersStore.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -42,15 +44,19 @@ public class OrderService {
         order.setOrderDate(new Date());
         order.setDeliveryDate(new Date());
         order.setTotalPrice(cart.getTotalPrices());
-//        if(orderRequest.getNotes()==null){
-//            order.setNotes("none");
-//        }else{
-//            order.setNotes(orderRequest.getNotes());
-//        }
         order.setNotes(orderRequest.getNotes()!=null ? orderRequest.getNotes() : "none");
         order.setClient(client1);
 
         saveOrder(order);
         return order;
+    }
+    public void handleStock(List<CartItem> cartItemList){
+        for (CartItem cartItem : cartItemList) {
+            System.out.println("product total stock ++++  "+cartItem.getProduct().getTotalStock());
+            cartItem.getProduct().setTotalStock(cartItem.getProduct().getTotalStock()-cartItem.getQuantity());
+            if(cartItem.getProduct().getTotalStock()<1){
+                cartItem.getProduct().setIsAvailable(false);
+            }
+        }
     }
 }

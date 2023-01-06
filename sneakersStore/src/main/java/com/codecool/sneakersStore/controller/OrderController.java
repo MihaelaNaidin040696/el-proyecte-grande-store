@@ -1,6 +1,7 @@
 package com.codecool.sneakersStore.controller;
 
 import com.codecool.sneakersStore.model.Cart;
+import com.codecool.sneakersStore.model.CartItem;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Order;
 import com.codecool.sneakersStore.payload.OrderRequest;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
@@ -22,6 +25,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final ClientService clientService;
+
 
     public OrderController(OrderService orderService, ClientService clientService) {
         this.orderService = orderService;
@@ -37,10 +41,12 @@ public class OrderController {
     @PostMapping("/add-order")
     public Order addOrders(@RequestBody OrderRequest orderRequest){
         System.out.println(orderRequest.getFirst_name());
-        System.out.println("requessstu   "+orderRequest.toString());
-
         Client client = clientService.findByUsername("test");
+        Cart cart = client.getCart();
+        List<CartItem> cartItemList = cart.getCartItems();
+        orderService.handleStock(cartItemList);
         Order order = orderService.addOrder(orderRequest,client);
         return order;
     }
+
 }

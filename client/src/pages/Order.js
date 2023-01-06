@@ -3,7 +3,6 @@ import {useState,useEffect} from 'react';
 function Order() {
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
-    const [test,setTest] = useState([])
     const [qty,setQty] = useState();
 
     const [details,setDetails] =useState({
@@ -17,7 +16,7 @@ function Order() {
         postal_code:"",
         observations:"",
         payment:"",
-        delivery:""
+        delivery:"",
     },[])
 
     const handleFormChange = (e)=>{
@@ -37,19 +36,17 @@ function Order() {
     useEffect(()=>{
         if(cart.length==0){
             fetchCart();
-        }
-        console.log(cart)
-
-        
+        }        
     },[])
 
 
   const fetchOrder = async (e)=>{
-    console.log("sullli"+details)
-    e.preventDefault();
+    
+    // e.preventDefault();
     fetch("http://localhost:8080/order/add-order",{ method: 'POST',
     body: JSON.stringify(
       details
+
     ),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -63,6 +60,20 @@ function Order() {
      .catch((err) => {
         console.log(err.message);})
 }
+
+// const fetchHandleStock = async (e)=>{
+//     e.preventDefault();
+//     console.log(cartItems)
+//     fetch("http://localhost:8080/order/handle-stock",{ method: 'POST',
+//     body: JSON.stringify(
+
+//     ),
+//     headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//     },
+//   })
+// }
+
     return (
         <div className={classes.bodydiv}>
             <div className={classes.center}>
@@ -232,7 +243,7 @@ function Order() {
                     </textarea>
 
                     <input
-                        onClick={fetchOrder}
+                        onClick={(e)=>{fetchOrder(e)}}
                         className={classes.inputstyle}
                         type="submit"
                         value="Order"

@@ -52,7 +52,6 @@ public class CartController {
     public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
         System.out.println(cartItemRequest.getQuantity());
         System.out.println(cartItemRequest.getId());
-        System.out.println(cartItemRequest.getTest());
 
         Product product = productService.getProductById((long) cartItemRequest.getId());
 
