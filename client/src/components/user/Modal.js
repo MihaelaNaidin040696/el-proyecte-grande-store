@@ -7,10 +7,12 @@ export default function Modal({ setModal }) {
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
     const [qty,setQty] = useState();
-    const [total,setTotal] = useState();
+    const [disabled,setDisabled] = useState(false);
+
 
     function handleClick(e){
         const {type,id} = e.target.dataset
+
 
         const copy = [...cartItems];
         const index = copy.findIndex(cartItems=>{
@@ -22,6 +24,7 @@ export default function Modal({ setModal }) {
                 case 'decrement':{
                     if(copy[index].quantity > 1){
                         --copy[index].quantity
+                        setDisabled(false);
                         fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
                     }else{
                         deleteItem(copy[index].product.id);
@@ -29,14 +32,17 @@ export default function Modal({ setModal }) {
                     break;
                 }
                 case 'increment':{
-                    ++copy[index].quantity;
-                    fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
-                    break;
+                        ++copy[index].quantity;
+                        if(copy[index].product.totalStock===copy[index].quantity){
+                            setDisabled(true);
+                        }
+                        fetchUpdateCartItemQuantity(copy[index].product.id,copy[index].quantity)
+                        break;
+                   
                 }    
             }
             setCartItems(copy)
         }
- 
     }
 
     function getTotal(){
@@ -45,8 +51,8 @@ export default function Modal({ setModal }) {
             sum += (cartItems[i].product.sellingPrice * cartItems[i].quantity)
         }
         return sum;
-
     }
+
     function getTotalWithTaxes(){
         let sum = getTotal();
         let total = (0.05*sum) + sum + 20;
@@ -55,6 +61,7 @@ export default function Modal({ setModal }) {
 
 
   const fetchUpdateCartItemQuantity = async (id,quantity)=>{
+    console.log(quantity)
       fetch("http://localhost:8080/cart/update-cart-item-quantity",{ method: 'POST',
       body: JSON.stringify({
         id: id,quantity:quantity
@@ -65,7 +72,7 @@ export default function Modal({ setModal }) {
     })
        .then((response) => response.json())
        .then((data) => {
-          console.log(data);
+        //   console.log(data);
           // Handle data
        })
        .catch((err) => {
@@ -124,7 +131,7 @@ export default function Modal({ setModal }) {
                                       <h3>{item.product.productName}</h3>
                                       <h4>{item.product.sellingPrice * item.quantity} $</h4>
                                       <p className={classes.unit}>Quantity:
-                                       <button 
+                                       <button
                                        value={"-"}
                                        data-type="decrement"
                                        onClick={handleClick}
@@ -136,6 +143,7 @@ export default function Modal({ setModal }) {
                                        <button
                                        value={"+"}  
                                        data-type="increment"
+                                       disabled={disabled}
                                        onClick={handleClick}
                                        id={item.product.id} 
                                        data-id={item.product.id}>+</button></p>

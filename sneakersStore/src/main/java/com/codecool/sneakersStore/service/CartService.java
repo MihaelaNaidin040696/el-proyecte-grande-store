@@ -53,7 +53,6 @@ public class CartService {
             cartItem.setCart(cart);
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
-            product.setTotalStock(product.getTotalStock()-1);
             cartItem.setTotalPrice(quantity*product.getSellingPrice());
             cartItems.add(cartItem);
         }else{
@@ -62,12 +61,10 @@ public class CartService {
                 cartItem.setCart(cart);
                 cartItem.setProduct(product);
                 cartItem.setQuantity(quantity);
-                product.setTotalStock(product.getTotalStock()-1);
                 cartItem.setTotalPrice(quantity * product.getSellingPrice());
                 cartItems.add(cartItem);
             }else{
                 cartItem.setQuantity(cartItem.getQuantity()+quantity);
-                product.setTotalStock(product.getTotalStock()-1);
                 cartItem.setTotalPrice(cartItem.getTotalPrice()+(quantity*product.getSellingPrice()));
 
             }
@@ -83,24 +80,38 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
+//    public boolean checkStock(Product product, int quantity){
+//        if(product.getTotalStock()>=1){
+//            product.setTotalStock(product.getTotalStock()-quantity);
+//            return true;
+//        }
+//        product.setIsAvailable(false);
+//        return false;
+//    }
+
     public Cart updateItemInCart(Product product, int quantity, Client client){
         Cart cart = client.getCart();
-        List<CartItem> cartItems = cart.getCartItems();
-        CartItem cartItem = findCartItem(cartItems,product.getId());
-        System.out.println("carrrrtttt item"+cartItem);
 
-        cartItem.setQuantity(quantity);
-        cartItem.setTotalPrice(quantity*product.getSellingPrice());
+//        if(checkStock(product,quantity)){
 
-        cartItemRepository.save(cartItem);
+            List<CartItem> cartItems = cart.getCartItems();
+            CartItem cartItem = findCartItem(cartItems,product.getId());
+            System.out.println("carrrrtttt item"+cartItem);
 
-        int totalItems = totalItems(cartItems);
-        double totalPrice = totalPrice(cartItems);
+            cartItem.setQuantity(quantity);
+            cartItem.setTotalPrice(quantity*product.getSellingPrice());
 
-        cart.setTotalItems(totalItems);
-        cart.setTotalPrices(totalPrice);
+            cartItemRepository.save(cartItem);
 
-        return cartRepository.save(cart);
+            int totalItems = totalItems(cartItems);
+            double totalPrice = totalPrice(cartItems);
+
+            cart.setTotalItems(totalItems);
+            cart.setTotalPrices(totalPrice);
+
+            return cartRepository.save(cart);
+
+
     }
 
     public Cart deleteItemFromCart(Product product,Client client){

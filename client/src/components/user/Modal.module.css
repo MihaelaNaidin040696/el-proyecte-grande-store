@@ -78,6 +78,16 @@
 	color: #fff;
 	font-weight: 600;
 }
+
+.unit {
+	display: flex;
+    gap: 5px;
+}
+
+.unit button{
+	padding: 0 5px;
+
+}
 .unit input {
 	width: 40px;
 	padding: 5px;
