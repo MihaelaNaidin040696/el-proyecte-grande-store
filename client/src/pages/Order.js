@@ -1,6 +1,10 @@
 import classes from "./Order.module.css";
 import {useState,useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
+
 function Order() {
+    const navigate = useNavigate();
+
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
     const [qty,setQty] = useState();
@@ -60,6 +64,10 @@ function Order() {
      .catch((err) => {
         console.log(err.message);})
 }
+    const navigateToHome = async (e)=>{
+        navigate("/");
+
+    }
 
 // const fetchHandleStock = async (e)=>{
 //     e.preventDefault();
@@ -243,7 +251,7 @@ function Order() {
                     </textarea>
 
                     <input
-                        onClick={(e)=>{fetchOrder(e)}}
+                        onClick={(e)=>{fetchOrder(e);navigateToHome(e)}}
                         className={classes.inputstyle}
                         type="submit"
                         value="Order"
