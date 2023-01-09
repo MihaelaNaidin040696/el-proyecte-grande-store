@@ -80,36 +80,25 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-//    public boolean checkStock(Product product, int quantity){
-//        if(product.getTotalStock()>=1){
-//            product.setTotalStock(product.getTotalStock()-quantity);
-//            return true;
-//        }
-//        product.setIsAvailable(false);
-//        return false;
-//    }
-
     public Cart updateItemInCart(Product product, int quantity, Client client){
         Cart cart = client.getCart();
 
-//        if(checkStock(product,quantity)){
+        List<CartItem> cartItems = cart.getCartItems();
+        CartItem cartItem = findCartItem(cartItems,product.getId());
+        System.out.println("carrrrtttt item"+cartItem);
 
-            List<CartItem> cartItems = cart.getCartItems();
-            CartItem cartItem = findCartItem(cartItems,product.getId());
-            System.out.println("carrrrtttt item"+cartItem);
+        cartItem.setQuantity(quantity);
+        cartItem.setTotalPrice(quantity*product.getSellingPrice());
 
-            cartItem.setQuantity(quantity);
-            cartItem.setTotalPrice(quantity*product.getSellingPrice());
+        cartItemRepository.save(cartItem);
 
-            cartItemRepository.save(cartItem);
+        int totalItems = totalItems(cartItems);
+        double totalPrice = totalPrice(cartItems);
 
-            int totalItems = totalItems(cartItems);
-            double totalPrice = totalPrice(cartItems);
+        cart.setTotalItems(totalItems);
+        cart.setTotalPrices(totalPrice);
 
-            cart.setTotalItems(totalItems);
-            cart.setTotalPrices(totalPrice);
-
-            return cartRepository.save(cart);
+        return cartRepository.save(cart);
 
 
     }
@@ -132,6 +121,10 @@ public class CartService {
         cart.setTotalItems(totalItems);
 
         return cartRepository.save(cart);
+    }
+
+    public void deleteCart(Cart cart){
+        cartItemRepository.deleteAll(cart.getCartItems());
     }
 
     private double totalPrice(List<CartItem> cartItems) {
