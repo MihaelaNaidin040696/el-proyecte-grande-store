@@ -1,5 +1,4 @@
 package com.codecool.sneakersStore.security.configuration;
-
 import com.codecool.sneakersStore.security.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -33,12 +32,12 @@ public class SecurityConfiguration {
                         "/auth/**").permitAll()
                 )
                 .authorizeHttpRequests((request) -> request.antMatchers(
-                        "/prod/product/**",
-                        "/client/**",
-                        "/cart/**",
-                        "/cart/get-cart/**",
-                        "/cart-item/**",
-                        "/order/**")
+                                "/prod/product/**",
+                                "/client/**",
+                                "/cart/**",
+                                "/cart/get-cart/**",
+                                "/cart-item/**",
+                                "/order/**")
                         .hasRole(String.valueOf(Role.USER))
                         .anyRequest()
                         .authenticated()

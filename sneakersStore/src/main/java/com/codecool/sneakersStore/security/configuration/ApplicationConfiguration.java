@@ -1,5 +1,4 @@
 package com.codecool.sneakersStore.security.configuration;
-
 import com.codecool.sneakersStore.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
