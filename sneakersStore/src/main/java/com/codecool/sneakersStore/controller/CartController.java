@@ -34,7 +34,7 @@ public class CartController {
 
     @GetMapping("/get-cart")
     public Cart getClientCart() {
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("puli@gaf.com");
         return client.getCart();
     }
 

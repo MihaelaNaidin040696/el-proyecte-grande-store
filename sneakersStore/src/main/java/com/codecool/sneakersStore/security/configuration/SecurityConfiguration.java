@@ -34,8 +34,9 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests((request) -> request.antMatchers(
                         "/prod/product/**",
-                        "client/**",
+                        "/client/**",
                         "/cart/**",
+                        "/cart/get-cart/**",
                         "/cart-item/**",
                         "/order/**")
                         .hasRole(String.valueOf(Role.USER))
