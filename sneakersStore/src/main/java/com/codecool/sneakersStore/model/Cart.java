@@ -33,9 +33,9 @@ public class Cart {
     private double totalPrices;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
-    @JsonBackReference
+    @JsonBackReference(value = "client-cart")
     private Client client;
-    @JsonManagedReference
+    @JsonManagedReference(value = "cart-cartitem")
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "cart")
     private List<CartItem> cartItems;
 

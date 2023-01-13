@@ -41,7 +41,7 @@ public class Order {
     private Date deliveryDate;
     private Double totalPrice;
     private String notes;
-    @JsonBackReference
+    @JsonBackReference(value = "client-orders")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;

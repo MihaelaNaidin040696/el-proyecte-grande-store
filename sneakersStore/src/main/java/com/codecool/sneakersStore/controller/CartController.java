@@ -1,69 +1,69 @@
-package com.codecool.sneakersStore.controller;
-
-import com.codecool.sneakersStore.model.Cart;
-import com.codecool.sneakersStore.model.Client;
-import com.codecool.sneakersStore.model.Product;
-import com.codecool.sneakersStore.payload.CartItemRequest;
-import com.codecool.sneakersStore.service.CartService;
-import com.codecool.sneakersStore.service.ClientService;
-import com.codecool.sneakersStore.service.ProductService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-
-@CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
-@RestController
-@RequestMapping("/cart")
-public class CartController {
-    private final CartService cartService;
-    private final ClientService clientService;
-    private final ProductService productService;
-
-    public CartController(CartService cartService, ClientService clientService, ProductService productService) {
-        this.cartService = cartService;
-        this.clientService = clientService;
-        this.productService = productService;
-    }
-
-    @GetMapping("/get-cart")
-    public Cart getClientCart() {
-        Client client = clientService.findByUsername("puli@gaf.com");
-        return client.getCart();
-    }
-
-    @PostMapping("/add-to-cart/{id}")
-    public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
-        System.out.println("sizzzzzzzzzzzzzzzzz" + size);
-        Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("test");
-        Cart cart = cartService.addItemToCartTest(product, 1, client);
-        return cart;
-    }
-
-    @PostMapping ("/update-cart-item-quantity")
-    public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
-        System.out.println(cartItemRequest.getQuantity());
-        System.out.println(cartItemRequest.getId());
-
-        Product product = productService.getProductById((long) cartItemRequest.getId());
-
-        Client client = clientService.findByUsername("test");
-        return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
-    }
-
-    @DeleteMapping("/delete-cart-item/{id}")
-    public Cart deleteCartitem(@PathVariable Long id){
-        Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("test");
-        Cart cart = cartService.deleteItemFromCart(product,client);
-
-        return cart;
-    }
-}
+//package com.codecool.sneakersStore.controller;
+//
+//import com.codecool.sneakersStore.model.Cart;
+//import com.codecool.sneakersStore.model.Client;
+//import com.codecool.sneakersStore.model.Product;
+//import com.codecool.sneakersStore.payload.CartItemRequest;
+//import com.codecool.sneakersStore.service.CartService;
+//import com.codecool.sneakersStore.service.ClientService;
+//import com.codecool.sneakersStore.service.ProductService;
+//import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMethod;
+//import org.springframework.web.bind.annotation.RestController;
+//
+//
+//@CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
+//@RestController
+//@RequestMapping("/cart")
+//public class CartController {
+//    private final CartService cartService;
+//    private final ClientService clientService;
+//    private final ProductService productService;
+//
+//    public CartController(CartService cartService, ClientService clientService, ProductService productService) {
+//        this.cartService = cartService;
+//        this.clientService = clientService;
+//        this.productService = productService;
+//    }
+//
+//    @GetMapping("/get-cart")
+//    public Cart getClientCart() {
+//        Client client = clientService.findByUsername("puli@gaf.com");
+//        return client.getCart();
+//    }
+//
+//    @PostMapping("/add-to-cart/{id}")
+//    public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
+//        System.out.println("sizzzzzzzzzzzzzzzzz" + size);
+//        Product product = productService.getProductById(id);
+//        Client client = clientService.findByUsername("test");
+//        Cart cart = cartService.addItemToCartTest(product, 1, client);
+//        return cart;
+//    }
+//
+//    @PostMapping ("/update-cart-item-quantity")
+//    public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
+//        System.out.println(cartItemRequest.getQuantity());
+//        System.out.println(cartItemRequest.getId());
+//
+//        Product product = productService.getProductById((long) cartItemRequest.getId());
+//
+//        Client client = clientService.findByUsername("test");
+//        return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
+//    }
+//
+//    @DeleteMapping("/delete-cart-item/{id}")
+//    public Cart deleteCartitem(@PathVariable Long id){
+//        Product product = productService.getProductById(id);
+//        Client client = clientService.findByUsername("test");
+//        Cart cart = cartService.deleteItemFromCart(product,client);
+//
+//        return cart;
+//    }
+//}
