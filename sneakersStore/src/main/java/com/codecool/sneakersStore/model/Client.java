@@ -56,16 +56,16 @@ public class Client implements UserDetails {
     @JsonBackReference(value = "client-cart")
     private Cart cart;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "client")
-    @JsonManagedReference(value = "client-orders")
+    @JsonIgnore
     private List<Order> orders;
 
 
-    public Client(String firstName, String lastName, String email, String encodedPassword) {
-        this.setUsername(firstName);
-        this.setLastName(lastName);
-        this.setEmail(email);
-        this.setPassword(encodedPassword);
-    }
+//    public Client(String firstName, String lastName, String email, String encodedPassword) {
+//        this.setUsername(firstName);
+//        this.setLastName(lastName);
+//        this.setEmail(email);
+//        this.setPassword(encodedPassword);
+//    }
 
     @Override
     public String toString() {
@@ -87,15 +87,6 @@ public class Client implements UserDetails {
         return null;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
 
     @Override
     public boolean isAccountNonExpired() {

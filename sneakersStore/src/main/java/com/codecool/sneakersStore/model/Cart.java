@@ -1,6 +1,7 @@
 package com.codecool.sneakersStore.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,8 @@ public class Cart {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @JsonBackReference(value = "client-cart")
     private Client client;
-    @JsonManagedReference(value = "cart-cartitem")
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "cart")
     private List<CartItem> cartItems;
 

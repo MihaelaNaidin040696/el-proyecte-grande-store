@@ -14,14 +14,15 @@ import java.util.Optional;
 
 @Service
 public class ClientService implements UserDetailsService {
-    private final ClientRepository clientRepository;
+    @Autowired
+    private  ClientRepository clientRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+//    @Autowired
+//    public ClientService(ClientRepository clientRepository) {
+//        this.clientRepository = clientRepository;
+//    }
 
     public void addClientGeorge(Client client){
         client.setPassword(passwordEncoder.encode(client.getPassword()));
