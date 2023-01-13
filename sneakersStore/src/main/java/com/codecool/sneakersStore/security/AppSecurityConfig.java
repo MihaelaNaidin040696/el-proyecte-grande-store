@@ -27,6 +27,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         this.jWTTokenHelper = jWTTokenHelper;
         this.authenticationEntryPoint = authenticationEntryPoint;
     }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,7 +39,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",
-                        "/client/register").permitAll()
+                        "/client/register",
+                        "/client/login").permitAll()
 
                 )
                 .authorizeRequests((request) -> request.antMatchers(
@@ -45,8 +51,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
         http.csrf().disable().cors().and().headers().frameOptions().disable();
-
-
     }
 
     @Bean
