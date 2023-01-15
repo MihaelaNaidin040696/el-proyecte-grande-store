@@ -35,7 +35,8 @@ public class CartController {
 
     @GetMapping("/get-cart")
     public Cart getClientCart() {
-        Client client = clientService.findByUsername("test");
+        System.out.println(cartService.getCartById());
+        Client client = clientService.findByUsername("jjj");
         return client.getCart();
     }
 
@@ -43,7 +44,7 @@ public class CartController {
     public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
         System.out.println("sizzzzzzzzzzzzzzzzz" + size);
         Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("jjj");
         Cart cart = cartService.addItemToCartTest(product, 1, client);
         return cart;
     }
@@ -55,14 +56,14 @@ public class CartController {
 
         Product product = productService.getProductById((long) cartItemRequest.getId());
 
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("jjj");
         return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
     }
 
     @DeleteMapping("/delete-cart-item/{id}")
     public Cart deleteCartitem(@PathVariable Long id){
         Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("jjj");
         Cart cart = cartService.deleteItemFromCart(product,client);
 
         return cart;
