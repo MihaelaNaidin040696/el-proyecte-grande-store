@@ -20,38 +20,39 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .exceptionHandling()
-                .and()
-                .authorizeHttpRequests((request) -> request.antMatchers(
-                        "/prod/products",
-                        "/auth/**").permitAll()
-                )
-                .authorizeHttpRequests((request) -> request.antMatchers(
-                                "/prod/product/**",
-                                "/client/**",
-                                "/cart/**",
-                                "/cart/get-cart/**",
-                                "/cart-item/**",
-                                "/order/**")
-                        .hasRole(String.valueOf(Role.USER))
-                        .anyRequest()
-                        .authenticated()
-                )
+//        http
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authenticationProvider(authenticationProvider)
+//                .exceptionHandling()
+//                .and()
 //                .authorizeHttpRequests((request) -> request.antMatchers(
-//                        "/admin/**")
-//                        .hasRole(String.valueOf(Role.ADMIN))
+//                        "/prod/products",
+//                        "/auth/**").permitAll()
+//                )
+//                .authorizeHttpRequests((request) -> request.antMatchers(
+//                                "/prod/product/**",
+//                                "/client/**",
+//                                "/cart/**",
+//                                "/cart/get-cart/**",
+//                                "/cart-item/**",
+//                                "/order/**")
+//                        .hasRole(String.valueOf(Role.USER))
 //                        .anyRequest()
 //                        .authenticated()
 //                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.csrf().disable().cors().and().headers().frameOptions().disable();
-
+////                .authorizeHttpRequests((request) -> request.antMatchers(
+////                        "/admin/**")
+////                        .hasRole(String.valueOf(Role.ADMIN))
+////                        .anyRequest()
+////                        .authenticated()
+////                )
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        http.csrf().disable().cors().and().headers().frameOptions().disable();
+//
+//        return http.build();
         return http.build();
     }
 }
