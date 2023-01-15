@@ -44,7 +44,7 @@ public class Client implements UserDetails {
     private List<String> roles = new ArrayList<>();
 
     @OneToOne(mappedBy = "client")
-    @JsonBackReference(value = "client-cart")
+    @JsonBackReference
     private Cart cart;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "client")
     @JsonIgnore

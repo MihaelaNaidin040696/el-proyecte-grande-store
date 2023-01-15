@@ -35,22 +35,30 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request) -> request.antMatchers(
-                        "/",
-                        "/client/register",
-                        "/client/login").permitAll()
-
-                )
-                .authorizeRequests((request) -> request.antMatchers(
-                                "/prod/products",
-                        "/prod/products/1"
-                        ).hasRole("USER")
-                        .anyRequest().authenticated())
-                .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
-                        UsernamePasswordAuthenticationFilter.class);
-        http.csrf().disable().cors().and().headers().frameOptions().disable();
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
+//                .authenticationEntryPoint(authenticationEntryPoint).and()
+//                .authorizeRequests((request) -> request.antMatchers(
+//                        "/",
+//                        "/prod/products",
+//                        "/client/register",
+//                        "/client/login").permitAll())
+//                .authorizeRequests((request) -> request.antMatchers(
+//                                "/prod/products",
+//                        "/prod/products/1",
+//                        "/cart/get-cart",
+//                        "/cart/add-to-cart/**",
+//                        "/cart/update-cart-item-quantity",
+//                        "/cart/delete-cart-item/**",
+//                        "/cart-item",
+//                        "/cart-item/increase-cart-value/**",
+//                        "/cart-item/decrease-cart-value/**",
+//                        "/cart-item/delete-cart-item/**",
+//                        "/cart-item/get-cart-item/**"
+//                        ).hasRole("USER")
+//                        .anyRequest().authenticated())
+//                .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
+//                        UsernamePasswordAuthenticationFilter.class);
+//        http.csrf().disable().cors().and().headers().frameOptions().disable();
     }
 
     @Bean
