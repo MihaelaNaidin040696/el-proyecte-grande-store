@@ -4,6 +4,7 @@ import com.codecool.sneakersStore.model.Cart;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.payload.CartItemRequest;
+import com.codecool.sneakersStore.security.AuthenticationRequest;
 import com.codecool.sneakersStore.service.CartService;
 import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.ProductService;
@@ -34,7 +35,9 @@ public class CartController {
 
     @GetMapping("/get-cart")
     public Cart getClientCart() {
-        Client client = clientService.findByUsername("jjj");
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+
+        Client client = clientService.findByUsername(authenticationRequest.getUsername());
         Cart cart = client.getCart();
         return cart;
     }
