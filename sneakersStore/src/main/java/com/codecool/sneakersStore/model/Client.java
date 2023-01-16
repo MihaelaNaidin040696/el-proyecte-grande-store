@@ -12,13 +12,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,6 +41,7 @@ public class Client implements UserDetails {
     private String firstName;
 
     private String lastName;
+    private String username;
 
     private String email;
 
@@ -50,6 +54,9 @@ public class Client implements UserDetails {
     @JsonManagedReference
     private List<Order> orders;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<String> roles = new ArrayList<>();
 
     public Client(String firstName, String lastName, String email, String encodedPassword) {
         this.setFirstName(firstName);

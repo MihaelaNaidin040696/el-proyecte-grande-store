@@ -1,11 +1,17 @@
 package com.codecool.sneakersStore.security;
 
 import com.codecool.sneakersStore.service.ClientService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -27,25 +33,20 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",
-                        "/api/*/count",
-                        "/api/campaigns",
-                        "/api/campaigns/campaign/*",
-                        "/api/campaigns/get-user-by-campaign/*",
-                        "/api/opinions/get-user-by-opinion/*",
-                        "/api/users/register",
-                        "/api/users/login",
-                        "/api/users/user/*",
-                        "/api/opinions/*",
-                        "/api/payment/create-payment-intent",
-                        "/api/payment/add-payment/*/*/*",
-                        "/api/payment/get-user-by-payment/*").permitAll()
+                        "/prod/products"
+                     ).permitAll()
 
                 )
                 .authorizeRequests((request) -> request.antMatchers(
-                                "/api/campaigns/add-campaign/*",
-                                "/api/opinions/add-opinion/*",
-                                "/api/campaigns/delete-campaign/*",
-                                "/api/opinions/delete-opinion/*"
+                        "/",
+                                "/prod/products",
+                                "/prod/product/**",
+                                "/cart/get-cart",
+                                "/cart/add-to-cart/**",
+                                "/cart/update-cart-item-quantity",
+                                "/cart/delete-cart-item/**",
+                                "/order/get-order",
+                                "/order/add-order"
                         ).hasRole("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
