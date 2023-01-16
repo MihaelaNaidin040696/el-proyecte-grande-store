@@ -4,17 +4,44 @@ import moment from 'moment';
 import classes from './Table.module.css';
 import {Checkbox} from "@mui/material";
 import {pink} from "@mui/material/colors";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function ReadOnlyRow({product, index, handleEditClick}) {
-    const baseURL = "http://localhost:8080/admin";
+    const baseURL = "http://localhost:8080";
     const [checked, setChecked] = useState(product.isAvailable);
+    const [category, setCategory] = useState([]);
+    const [brand, setBrand] = useState([]);
+    const [supplier, setSupplier] = useState([]);
+
+    useEffect(() => {
+        fetch(`${baseURL}/category/${product.id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setCategory(data);
+            });
+        fetch(`${baseURL}/brand/${product.id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setBrand(data);
+            });
+        fetch(`${baseURL}/supplier/${product.id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setSupplier(data);
+            });
+    }, []);
 
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);
         product.isAvailable = !checked;
 
-        fetch(`${baseURL}/edit-product/${product.id}`, {
+        fetch(`${baseURL}/admin/edit-product/${product.id}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({...product})
@@ -53,6 +80,9 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
             <TableCell align="left">{moment(product.purchaseDate).format('DD-MM-YYYY')}</TableCell>
             <TableCell align="left">{product.totalStock}</TableCell>
             <TableCell align="left">{product.discount}</TableCell>
+            <TableCell align="left">{category.name}</TableCell>
+            <TableCell align="left">{brand.name}</TableCell>
+            <TableCell align="left">{supplier.name}</TableCell>
 
             <TableCell align="left">
                 <button type='button' className={classes.status}

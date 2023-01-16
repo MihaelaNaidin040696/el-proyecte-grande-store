@@ -4,6 +4,7 @@ import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.service.SupplierService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,10 @@ public class SupplierController {
     @GetMapping
     public List<Supplier> getSuppliers() {
         return supplierService.getAllSuppliers();
+    }
+
+    @GetMapping("/{productId}")
+    public Supplier getSupplierByProductId (@PathVariable String productId) {
+        return supplierService.getSupplierByProductId(Long.valueOf(productId));
     }
 }

@@ -116,6 +116,10 @@ export default function ProductsTable({products, setProducts}) {
                             <TableCell align="left">Purchase Date</TableCell>
                             <TableCell align="left">Total Stock</TableCell>
                             <TableCell align="left">Discount</TableCell>
+                            <TableCell align="left">Category</TableCell>
+                            <TableCell align="left">Brand</TableCell>
+                            <TableCell align="left">Supplier</TableCell>
+                            <TableCell align="left"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody style={{color: "white"}}>

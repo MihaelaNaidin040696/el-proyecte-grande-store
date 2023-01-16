@@ -41,6 +41,12 @@ public class AdminController {
     public List<Product> getProducts() {
         return productService.getAllProducts();
     }
+//
+//    @GetMapping("/products-join")
+//    public List<Object> getAllProductsJoinedDetails() {
+//        System.out.println(productService.getAllProductsJoin());
+//        return productService.getAllProductsJoin();
+//    }
 
     @PutMapping("/edit-product/{prodId}")
     public Product updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {

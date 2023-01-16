@@ -21,4 +21,8 @@ public class CategoryService {
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).get();
     }
+
+    public Category getCategoryByProductId(Long productId) {
+        return categoryRepository.getCategoryByProductId(productId);
+    }
 }

@@ -21,4 +21,8 @@ public class SupplierService {
     public Supplier getSupplierById(Long id) {
         return supplierRepository.findById(id).get();
     }
+
+    public Supplier getSupplierByProductId(Long productId) {
+        return supplierRepository.getSupplierByProductId(productId);
+    }
 }
