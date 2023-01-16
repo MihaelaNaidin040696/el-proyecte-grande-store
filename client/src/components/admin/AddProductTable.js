@@ -4,9 +4,11 @@ import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import {useEffect, useState} from "react";
 import {MenuItem, TextField} from "@mui/material";
+import FileBase64 from "react-file-base64";
 
 export default function AddProductTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
+    const [image, setImage] = useState([]);
     const [addFormData, setAddFormData] = useState({
         categoryId: 0,
         brandId: 0,
@@ -17,6 +19,7 @@ export default function AddProductTable({products, setProducts}) {
         descriptionMaterial: "",
         descriptionInterior: "",
         descriptionSole: "",
+        image: "",
         size: "",
         sellingPrice: 0,
         purchasePrice: 0,
@@ -25,6 +28,9 @@ export default function AddProductTable({products, setProducts}) {
         discount: 0,
     });
 
+    const uploadImage = (file) => {
+        setImage(file.base64);
+    }
 
     const [selectedCategory, setSelectedCategory] = useState(0);
     const [selectedBrand, setSelectedBrand] = useState(0);
@@ -96,6 +102,7 @@ export default function AddProductTable({products, setProducts}) {
             descriptionMaterial: addFormData.descriptionMaterial,
             descriptionInterior: addFormData.descriptionInterior,
             descriptionSole: addFormData.descriptionSole,
+            image: image,
             size: addFormData.size,
             sellingPrice: addFormData.sellingPrice,
             purchasePrice: addFormData.purchasePrice,
@@ -239,6 +246,8 @@ export default function AddProductTable({products, setProducts}) {
                         placeholder="Purchase Date"
                         onChange={handleAddFormChange}
                     />
+
+                    <FileBase64 multiple={false} onDone={uploadImage} />
 
                     <TextField
                         id="standard-select-category"

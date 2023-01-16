@@ -19,7 +19,7 @@ public class ProductRequest {
     private String descriptionMaterial;
     private String descriptionInterior;
     private String descriptionSole;
-//    private String image;
+    private String image;
     private String size;
     private Float sellingPrice;
     private Float purchasePrice;

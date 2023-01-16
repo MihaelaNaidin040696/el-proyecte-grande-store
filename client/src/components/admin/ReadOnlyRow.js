@@ -4,7 +4,7 @@ import moment from 'moment';
 import classes from './Table.module.css';
 import {Checkbox} from "@mui/material";
 import {pink} from "@mui/material/colors";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 export default function ReadOnlyRow({product, index, handleEditClick}) {
     const baseURL = "http://localhost:8080";
@@ -12,8 +12,9 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
     const [category, setCategory] = useState([]);
     const [brand, setBrand] = useState([]);
     const [supplier, setSupplier] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+    if (isLoading === true) {
         fetch(`${baseURL}/category/${product.id}`)
             .then((response) => {
                 return response.json();
@@ -35,7 +36,8 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
             .then((data) => {
                 setSupplier(data);
             });
-    },[]);
+        setIsLoading(false);
+    }
 
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);
@@ -69,6 +71,13 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
                 />
             </TableCell>
             <TableCell scope="row">{product.productName}</TableCell>
+            <TableCell scope="row">
+                <img
+                    className={classes.image}
+                    src={product.image}
+                    alt="No image"
+                />
+            </TableCell>
             <TableCell align="left">{product.referenceCode}</TableCell>
             <TableCell align="left">{product.descriptionColor}</TableCell>
             <TableCell align="left">{product.descriptionMaterial}</TableCell>

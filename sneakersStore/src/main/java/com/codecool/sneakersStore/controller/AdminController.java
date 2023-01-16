@@ -87,7 +87,7 @@ public class AdminController {
                 productRequest.getDescriptionMaterial(),
                 productRequest.getDescriptionInterior(),
                 productRequest.getDescriptionSole(),
-//                productRequest.getImage(),
+                productRequest.getImage(),
                 productRequest.getSize(),
                 productRequest.getSellingPrice(),
                 productRequest.getPurchasePrice(),

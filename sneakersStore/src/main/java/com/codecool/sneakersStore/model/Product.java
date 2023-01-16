@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -45,6 +46,7 @@ public class Product {
     private String descriptionMaterial;
     private String descriptionInterior;
     private String descriptionSole;
+    @Column(length = 10485760)
     private String image;
     private String size;
     private Float sellingPrice;
@@ -64,7 +66,7 @@ public class Product {
             String descriptionMaterial,
             String descriptionInterior,
             String descriptionSole,
-            //String image,
+            String image,
             String size,
             Float sellingPrice,
             Float purchasePrice,
@@ -82,7 +84,7 @@ public class Product {
         this.setDescriptionMaterial(descriptionMaterial);
         this.setDescriptionInterior(descriptionInterior);
         this.setDescriptionSole(descriptionSole);
-//        this.setImage(image);
+        this.setImage(image);
         this.setSize(size);
         this.setSellingPrice(sellingPrice);
         this.setPurchasePrice(purchasePrice);

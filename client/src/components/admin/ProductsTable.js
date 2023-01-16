@@ -171,6 +171,7 @@ export default function ProductsTable({products, setProducts}) {
                         <TableRow>
                             <TableCell>Show / Hide Product</TableCell>
                             <TableCell>Product Name</TableCell>
+                            <TableCell align="left">Product Image</TableCell>
                             <TableCell align="left">Reference Code</TableCell>
                             <TableCell align="left">Color</TableCell>
                             <TableCell align="left">Material</TableCell>
