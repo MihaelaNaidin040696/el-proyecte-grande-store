@@ -32,16 +32,17 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers(
-                        "/",
+
                         "/prod/products",
-                        "/client/register"
+                        "/client/register",
+                        "/client/login"
                      ).permitAll()
                 )
                 .authorizeRequests((request) -> request.antMatchers(
-                        "/",
+                                "/cart",
+                                "/cart/get-cart",
                                 "/prod/products",
                                 "/prod/product/**",
-                                "/cart/get-cart",
                                 "/cart/add-to-cart/**",
                                 "/cart/update-cart-item-quantity",
                                 "/cart/delete-cart-item/**",
@@ -52,8 +53,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
         http.csrf().disable().cors().and().headers().frameOptions().disable();
-
-
     }
 
     @Bean

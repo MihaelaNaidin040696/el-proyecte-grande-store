@@ -36,7 +36,7 @@ public class ClientService implements UserDetailsService {
         client.setLastName(client.getLastName());
         client.setFirstName(client.getFirstName());
         client.setUsername(client.getUsername());
-        client.getRoles().add("USER");
+        client.getRoles().add("ROLE_USER");
         clientRepository.save(client);
     }
     public Client getClientById(Long id) {

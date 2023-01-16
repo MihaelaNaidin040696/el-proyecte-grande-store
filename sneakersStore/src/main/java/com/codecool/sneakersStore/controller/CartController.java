@@ -7,6 +7,7 @@ import com.codecool.sneakersStore.payload.CartItemRequest;
 import com.codecool.sneakersStore.service.CartService;
 import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.ProductService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class CartController {
         this.clientService = clientService;
         this.productService = productService;
     }
-
+//    @PreAuthorize("hasRole('USER')")
     @GetMapping("/get-cart")
     public Cart getClientCart() {
         Client client = clientService.findByUsername("jjj");

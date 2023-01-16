@@ -46,8 +46,9 @@ public class CartService {
         }
         List<CartItem> cartItems = cart.getCartItems();
         CartItem cartItem = findCartItem(cartItems,product.getId());
-
+        System.out.println("inainte de if");
         if(cartItems==null){
+            System.out.println("intra in if");
             cartItems = new ArrayList<>();
             cartItem = new CartItem();
             cartItem.setCart(cart);

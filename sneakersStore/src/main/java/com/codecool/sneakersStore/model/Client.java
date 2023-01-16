@@ -55,12 +55,15 @@ public class Client implements UserDetails {
     @JsonIgnore
     private List<String> roles = new ArrayList<>();
 
-    public Client(String firstName, String lastName, String email, String encodedPassword) {
+    public Client(String firstName, String lastName, String email, String username,String encodedPassword) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
         this.setPassword(encodedPassword);
+
     }
+
+
 
 
     @JsonIgnore
@@ -69,10 +72,6 @@ public class Client implements UserDetails {
         return null;
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
