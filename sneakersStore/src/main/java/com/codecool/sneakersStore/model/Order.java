@@ -29,6 +29,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long trackingId;
     private String email;
     private String first_name;
     private String last_name;

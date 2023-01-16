@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class OrderService {
@@ -46,6 +47,9 @@ public class OrderService {
         order.setTotalPrice(cart.getTotalPrices());
         order.setNotes(orderRequest.getNotes()!=null ? orderRequest.getNotes() : "none");
         order.setClient(client1);
+
+        Random random = new Random();
+        order.setTrackingId(random.nextLong());
 
         saveOrder(order);
         return order;
