@@ -37,18 +37,15 @@ public class Client implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonManagedReference
     private String firstName;
-
     private String lastName;
     private String username;
-
     private String email;
 
     private String password;
 
     @OneToOne(mappedBy = "client")
-    @JsonBackReference
+    @JsonIgnore
     private Cart cart;
     @OneToMany(cascade = CascadeType.MERGE,mappedBy = "client")
     @JsonManagedReference
