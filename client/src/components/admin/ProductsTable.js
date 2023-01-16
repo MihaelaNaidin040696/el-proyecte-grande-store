@@ -11,9 +11,35 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 
 export default function ProductsTable({products, setProducts}) {
-    const baseURL = "http://localhost:8080/admin";
+    const baseURL = "http://localhost:8080";
     const [editProductId, setEditProductId] = useState(null);
+
+    const [category, setCategory] = useState([]);
+    const [brand, setBrand] = useState([]);
+    const [supplier, setSupplier] = useState([]);
+
+    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [selectedBrand, setSelectedBrand] = useState(0);
+    const [selectedSupplier, setSelectedSupplier] = useState(0);
+
+    const menuClickedCategory = (event) => {
+        event.preventDefault();
+        setSelectedCategory(event.target.value);
+    };
+
+    const menuClickedBrand = (event) => {
+        event.preventDefault();
+        setSelectedBrand(event.target.value);
+    };
+
+    const menuClickedSupplier = (event) => {
+        event.preventDefault();
+        setSelectedSupplier(event.target.value);
+    };
     const [editFormData, setEditFormData] = useState({
+        categoryId: 0,
+        brandId: 0,
+        supplierId: 0,
         productName: "",
         referenceCode: "",
         descriptionColor: "",
@@ -40,6 +66,9 @@ export default function ProductsTable({products, setProducts}) {
     const handleEditFormSubmit = (event) => {
         event.preventDefault();
         const editedProduct = {
+            categoryId: selectedCategory.valueOf(),
+            brandId: selectedBrand.valueOf(),
+            supplierId: selectedSupplier.valueOf(),
             productName: editFormData.productName,
             referenceCode: editFormData.referenceCode,
             descriptionColor: editFormData.descriptionColor,
@@ -53,7 +82,7 @@ export default function ProductsTable({products, setProducts}) {
             totalStock: editFormData.totalStock,
             discount: editFormData.discount,
         };
-        fetch(`${baseURL}/edit-product/${editProductId}`, {
+        fetch(`${baseURL}/admin/edit-product/${editProductId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(editedProduct)
@@ -64,6 +93,12 @@ export default function ProductsTable({products, setProducts}) {
             .then(() => {
                 const newProducts = [...products];
                 newProducts[editProductId] = editedProduct;
+                console.log("PRODUCTS");
+                console.log(products);
+                console.log("NEW PRODUCTS");
+                console.log(newProducts);
+                console.log("EDITED PRODUCT");
+                console.log(editedProduct);
                 setProducts(newProducts);
                 setEditProductId(null);
             })
@@ -72,21 +107,52 @@ export default function ProductsTable({products, setProducts}) {
     const handleEditClick = (event, product) => {
         event.preventDefault();
         setEditProductId(product.id);
-        const formValues = {
-            productName: product.productName,
-            referenceCode: product.referenceCode,
-            descriptionColor: product.descriptionColor,
-            descriptionMaterial: product.descriptionMaterial,
-            descriptionInterior: product.descriptionInterior,
-            descriptionSole: product.descriptionSole,
-            size: product.size,
-            sellingPrice: product.sellingPrice,
-            purchasePrice: product.purchasePrice,
-            purchaseDate: product.purchaseDate,
-            totalStock: product.totalStock,
-            discount: product.discount,
-        }
-        setEditFormData(formValues);
+
+        fetch(`${baseURL}/category/${product.id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setCategory(data);
+            })
+            .then(() => {
+                fetch(`${baseURL}/brand/${product.id}`)
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        setBrand(data);
+                    });
+            })
+            .then(() => {
+                fetch(`${baseURL}/supplier/${product.id}`)
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        setSupplier(data);
+                    });
+            })
+            .then(() => {
+                const formValues = {
+                    categoryId: category.id,
+                    brandId: brand.id,
+                    supplierId: supplier.id,
+                    productName: product.productName,
+                    referenceCode: product.referenceCode,
+                    descriptionColor: product.descriptionColor,
+                    descriptionMaterial: product.descriptionMaterial,
+                    descriptionInterior: product.descriptionInterior,
+                    descriptionSole: product.descriptionSole,
+                    size: product.size,
+                    sellingPrice: product.sellingPrice,
+                    purchasePrice: product.purchasePrice,
+                    purchaseDate: product.purchaseDate,
+                    totalStock: product.totalStock,
+                    discount: product.discount,
+                }
+                setEditFormData(formValues);
+            });
     };
 
     const handleCancelClick = () => {
@@ -131,6 +197,12 @@ export default function ProductsTable({products, setProducts}) {
                                         editProduct={product}
                                         handleEditFormChange={handleEditFormChange}
                                         handleCancelClick={handleCancelClick}
+                                        selectedCategory={selectedCategory}
+                                        selectedBrand={selectedBrand}
+                                        selectedSupplier={selectedSupplier}
+                                        menuClickedCategory={menuClickedCategory}
+                                        menuClickedBrand={menuClickedBrand}
+                                        menuClickedSupplier={menuClickedSupplier}
                                     />)
                                     :
                                     (<ReadOnlyRow

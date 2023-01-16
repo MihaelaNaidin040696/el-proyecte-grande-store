@@ -41,16 +41,20 @@ public class AdminController {
     public List<Product> getProducts() {
         return productService.getAllProducts();
     }
-//
-//    @GetMapping("/products-join")
-//    public List<Object> getAllProductsJoinedDetails() {
-//        System.out.println(productService.getAllProductsJoin());
-//        return productService.getAllProductsJoin();
-//    }
 
     @PutMapping("/edit-product/{prodId}")
     public Product updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {
         Product product = productService.getProductById(prodId);
+
+        if (productRequest.getCategoryId() != null || productRequest.getBrandId() != null || productRequest.getSupplierId() != null) {
+            Category category = categoryService.getCategoryById(productRequest.getCategoryId());
+            Brand brand = brandService.getBrandById(productRequest.getBrandId());
+            Supplier supplier = supplierService.getSupplierById(productRequest.getSupplierId());
+            product.setCategory(category);
+            product.setBrand(brand);
+            product.setSupplier(supplier);
+        }
+
         product.setProductName(productRequest.getProductName());
         product.setReferenceCode(productRequest.getReferenceCode());
         product.setDescriptionColor(productRequest.getDescriptionColor());

@@ -129,62 +129,6 @@ export default function AddProductTable({products, setProducts}) {
                     noValidate
                     autoComplete="off"
                 >
-
-                    <TextField
-                        id="standard-select-category"
-                        select
-                        required
-                        label="Category"
-                        defaultValue=""
-                        value={selectedCategory}
-                        helperText="Please select a category"
-                        variant="standard"
-                        onChange={menuClickedCategory}
-                    >
-                        {categories.map((category, index) => (
-                            <MenuItem key={index} value={category.id}>
-                                {category.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
-                    <TextField
-                        id="standard-select-brand"
-                        select
-                        required
-                        label="Brand"
-                        defaultValue=""
-                        value={selectedBrand}
-                        name="brand"
-                        helperText="Please select a brand"
-                        variant="standard"
-                        onChange={menuClickedBrand}
-                    >
-                        {brands.map((brand, index) => (
-                            <MenuItem key={index} value={brand.id}>
-                                {brand.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
-                    <TextField
-                        id="standard-select-supplier"
-                        select
-                        required
-                        label="Supplier"
-                        defaultValue=""
-                        value={selectedSupplier}
-                        helperText="Please select a supplier"
-                        variant="standard"
-                        onChange={menuClickedSupplier}
-                    >
-                        {suppliers.map((supplier, index) => (
-                            <MenuItem key={index} value={supplier.id}>
-                                {supplier.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
                     <TextField
                         id="standard-basic-name"
                         label="Name"
@@ -295,6 +239,61 @@ export default function AddProductTable({products, setProducts}) {
                         placeholder="Purchase Date"
                         onChange={handleAddFormChange}
                     />
+
+                    <TextField
+                        id="standard-select-category"
+                        select
+                        required
+                        label="Category"
+                        defaultValue=""
+                        value={selectedCategory}
+                        helperText="Please select a category"
+                        variant="standard"
+                        onChange={menuClickedCategory}
+                    >
+                        {categories.map((category, index) => (
+                            <MenuItem key={index} value={category.id}>
+                                {category.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        id="standard-select-brand"
+                        select
+                        required
+                        label="Brand"
+                        defaultValue=""
+                        value={selectedBrand}
+                        name="brand"
+                        helperText="Please select a brand"
+                        variant="standard"
+                        onChange={menuClickedBrand}
+                    >
+                        {brands.map((brand, index) => (
+                            <MenuItem key={index} value={brand.id}>
+                                {brand.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        id="standard-select-supplier"
+                        select
+                        required
+                        label="Supplier"
+                        defaultValue=""
+                        value={selectedSupplier}
+                        helperText="Please select a supplier"
+                        variant="standard"
+                        onChange={menuClickedSupplier}
+                    >
+                        {suppliers.map((supplier, index) => (
+                            <MenuItem key={index} value={supplier.id}>
+                                {supplier.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
 
                     <button type="submit" className={classes.status}
                             style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}>Add Product

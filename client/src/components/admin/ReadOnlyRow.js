@@ -35,7 +35,7 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
             .then((data) => {
                 setSupplier(data);
             });
-    }, []);
+    },[]);
 
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);

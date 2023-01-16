@@ -2,10 +2,55 @@ import classes from "./Table.module.css";
 import Input from '@mui/material/Input';
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+import {useEffect, useState} from "react";
+import {MenuItem, TextField} from "@mui/material";
 
-export default function EditableRow({editProduct, index, handleEditFormChange, handleCancelClick}) {
+export default function EditableRow({editProduct,
+                                        index,
+                                        handleEditFormChange,
+                                        handleCancelClick,
+                                        selectedCategory,
+                                        selectedBrand,
+                                        selectedSupplier,
+                                        menuClickedCategory,
+                                        menuClickedBrand,
+                                        menuClickedSupplier
+                                    }) {
+    const baseURL = "http://localhost:8080";
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
+
+    useEffect(() => {
+        fetch(`${baseURL}/category`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setCategories(data);
+            });
+
+        fetch(`${baseURL}/brand`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setBrands(data);
+            })
+
+        fetch(`${baseURL}/supplier`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setSuppliers(data);
+            })
+    }, []);
+
+
     return (
         <TableRow key={index}>
+            <TableCell></TableCell>
             <TableCell>
                 <Input
                     type="text"
@@ -124,6 +169,64 @@ export default function EditableRow({editProduct, index, handleEditFormChange, h
                     defaultValue={editProduct.discount}
                     onChange={handleEditFormChange}
                 />
+            </TableCell>
+            <TableCell>
+                <TextField
+                    id="standard-select-category"
+                    select
+                    required
+                    label="Category"
+                    defaultValue=""
+                    value={selectedCategory}
+                    helperText="Please select a category"
+                    variant="standard"
+                    onChange={menuClickedCategory}
+                >
+                    {categories.map((category, index) => (
+                        <MenuItem key={index} value={category.id}>
+                            {category.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </TableCell>
+            <TableCell>
+                <TextField
+                    id="standard-select-brand"
+                    select
+                    required
+                    label="Brand"
+                    defaultValue=""
+                    value={selectedBrand}
+                    name="brand"
+                    helperText="Please select a brand"
+                    variant="standard"
+                    onChange={menuClickedBrand}
+                >
+                    {brands.map((brand, index) => (
+                        <MenuItem key={index} value={brand.id}>
+                            {brand.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </TableCell>
+            <TableCell>
+                <TextField
+                    id="standard-select-supplier"
+                    select
+                    required
+                    label="Supplier"
+                    defaultValue=""
+                    value={selectedSupplier}
+                    helperText="Please select a supplier"
+                    variant="standard"
+                    onChange={menuClickedSupplier}
+                >
+                    {suppliers.map((supplier, index) => (
+                        <MenuItem key={index} value={supplier.id}>
+                            {supplier.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
             </TableCell>
             <TableCell>
                 <button type='submit' className={classes.status}
