@@ -3,13 +3,16 @@ package com.codecool.sneakersStore.service;
 import com.codecool.sneakersStore.model.Client;
 import com.codecool.sneakersStore.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientService {
+public class ClientService implements UserDetailsService {
     private final ClientRepository clientRepository;
 
     @Autowired
@@ -34,4 +37,13 @@ public class ClientService {
         return clientRepository.findClientByEmail(email);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Client user = clientRepository.findByUsername(username);
+
+        if (null == user) {
+            throw new UsernameNotFoundException("User Not Found with userName " + username);
+        }
+        return user;
+    }
 }

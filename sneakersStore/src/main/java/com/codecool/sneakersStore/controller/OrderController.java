@@ -36,14 +36,14 @@ public class OrderController {
 
     @GetMapping("/get-order")
     public List<Order> getClientOrders(){
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("jjj");
         return client.getOrders();
     }
 
     @PostMapping("/add-order")
     public Order addOrders(@RequestBody OrderRequest orderRequest){
         System.out.println(orderRequest.getFirst_name());
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername("jjj");
         Cart cart = client.getCart();
         List<CartItem> cartItemList = cart.getCartItems();
         orderService.handleStock(cartItemList);

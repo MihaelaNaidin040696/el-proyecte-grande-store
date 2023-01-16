@@ -30,7 +30,7 @@ public class OrderService {
     }
 
     public Order addOrder(OrderRequest orderRequest, Client client){
-        Client client1 = clientService.findByUsername("test");
+        Client client1 = clientService.findByUsername("jjj");
         Cart cart = client1.getCart();
         Order order = new Order();
         order.setEmail(client1.getEmail());
