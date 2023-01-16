@@ -26,6 +26,10 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @PostMapping("/register")
+    public void register(@RequestBody Client client){
+        clientService.addUserRegister(client);
+    }
     @GetMapping(value = "all-clients")
     public List<Client> getClients() {
         return clientService.getAllClients();

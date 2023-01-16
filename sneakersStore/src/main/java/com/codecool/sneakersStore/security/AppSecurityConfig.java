@@ -33,9 +33,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",
-                        "/prod/products"
+                        "/prod/products",
+                        "/client/register"
                      ).permitAll()
-
                 )
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.Optional;
 @Service
 public class ClientService implements UserDetailsService {
     private final ClientRepository clientRepository;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
@@ -27,7 +29,15 @@ public class ClientService implements UserDetailsService {
     public void addClient(Client client) {
         clientRepository.save(client);
     }
-
+    public void addUserRegister(Client client){
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
+        client.setEmail(client.getEmail());
+        client.setUsername(client.getUsername());
+        client.setLastName(client.getLastName());
+        client.setFirstName(client.getFirstName());
+        client.getRoles().add("USER");
+        clientRepository.save(client);
+    }
     public Client getClientById(Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
         return optionalClient.orElse(null);
