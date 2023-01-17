@@ -25,7 +25,6 @@ export default function OrdersTable() {
             })
             .then((data) => {
                 setOrders(data);
-                console.log(data);
             })
     }, []);
 
