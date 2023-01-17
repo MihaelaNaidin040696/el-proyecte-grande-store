@@ -97,11 +97,9 @@ public class AdminService {
     }
 
     public TreeMap<String, Float> getExpensesDetails() {
-        Float totalExpenses = (float) 0;
         TreeMap<String, Float> expenses = new TreeMap<>();
         List<Product> products = productService.getAllProducts();
         for (Product product : products) {
-            totalExpenses += product.getPurchasePrice();
             String strDate = convertDate(product.getPurchaseDate());
             if (expenses.containsKey(strDate)) {
                 expenses.put(strDate, expenses.get(strDate) + product.getPurchasePrice());
@@ -109,16 +107,13 @@ public class AdminService {
                 expenses.put(strDate, product.getPurchasePrice());
             }
         }
-        expenses.put("total", totalExpenses);
         return expenses;
     }
 
     public TreeMap<String, Float> getSalesDetails() {
-        Double totalSales = 0.0;
         TreeMap<String, Float> sales = new TreeMap<>();
         List<Order> orders = orderService.getAllOrders();
         for (Order order : orders) {
-            totalSales += order.getTotalPrice();
             String strDate = convertDate(order.getOrderDate());
             if (sales.containsKey(strDate)) {
                 sales.put(strDate, sales.get(strDate) + Float.parseFloat(String.valueOf(order.getTotalPrice())));
@@ -126,8 +121,25 @@ public class AdminService {
                 sales.put(strDate, Float.parseFloat(String.valueOf(order.getTotalPrice())));
             }
         }
-        sales.put("total", Float.parseFloat(String.valueOf(totalSales)));
         return sales;
+    }
+
+    public Float getTotalExpenses() {
+        float totalExpenses = 0;
+        List<Product> products = productService.getAllProducts();
+        for (Product product : products) {
+            totalExpenses += product.getPurchasePrice();
+        }
+        return totalExpenses;
+    }
+
+    public Float getTotalSales() {
+        float totalSales = (float) 0;
+        List<Order> orders = orderService.getAllOrders();
+        for (Order order : orders) {
+            totalSales += Float.parseFloat(String.valueOf(order.getTotalPrice()));
+        }
+        return totalSales;
     }
 
 }
