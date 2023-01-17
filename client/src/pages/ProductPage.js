@@ -3,35 +3,62 @@ import {useParams} from "react-router-dom";
 import classes from "./ProductPage.module.css";
 
 
+const setJwt = {
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + localStorage.getItem("token")
+    }
+};
 function ProductPage(props) {
     const [data, setData] = useState([]);
     let {id} = useParams();
     const [selects,setSelects] = useState();
 
 
-    const addToCart = async()=>{
+    const addToCart = async(e)=>{
+        e.preventDefault();
+        const name = localStorage.getItem("username")
+
         const requestOptions={
             method:'POST',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'Authorization': "Bearer " + localStorage.getItem("token")
+        
+              },
             mode:'no-cors',
             body: JSON.stringify({
                 "selects":selects
                 })}
                 
-            console.log(requestOptions)
-        
-            const request = await fetch(`http://localhost:8080/cart/add-to-cart/${id}`,requestOptions)
+
+            const request = await fetch(`http://localhost:8080/cart/add-to-cart/${id}/${name}`,{
+                method:'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Authorization': "Bearer " + localStorage.getItem("token")
+            
+                  },
+                // mode:'no-cors',
+                body: JSON.stringify({
+                    "selects":selects
+                    })})
+            console.log(request)
             const response = await request.json();
             console.log(response)
 
     }
     useEffect(() => {
         const fetchProductById = async () => {
+
             const request = await fetch(
-                "http://localhost:8080/prod/product/"+id
+                "http://localhost:8080/prod/product/"+id,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer " + localStorage.getItem("token")
+                    }
+                }
             )
             const response = await request.json();
             setData(response);

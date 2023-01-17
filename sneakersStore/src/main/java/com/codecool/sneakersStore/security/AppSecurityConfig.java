@@ -48,7 +48,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                                 "/cart/add-to-cart/**",
                                 "/cart/add-to-cart/**/**",
                                 "/cart/add-to-cart/*/*",
-                                "/cart/update-cart-item-quantity",
+                                "/cart/update-cart-item-quantity/*",
                                 "/cart/delete-cart-item/**",
                                 "/order/get-order",
                                 "/order/add-order"

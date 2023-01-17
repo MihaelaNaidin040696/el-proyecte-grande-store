@@ -52,14 +52,14 @@ public class CartController {
         return cart;
     }
 
-    @PostMapping ("/update-cart-item-quantity")
-    public Cart updateQuantityCartItem(@RequestBody CartItemRequest cartItemRequest) {
+    @PostMapping ("/update-cart-item-quantity/{username}")
+    public Cart updateQuantityCartItem(@PathVariable String username,@RequestBody CartItemRequest cartItemRequest) {
         System.out.println(cartItemRequest.getQuantity());
         System.out.println(cartItemRequest.getId());
 
         Product product = productService.getProductById((long) cartItemRequest.getId());
 
-        Client client = clientService.findByUsername("jjj");
+        Client client = clientService.findByUsername(username);
         return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
     }
 

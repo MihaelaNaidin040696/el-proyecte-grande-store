@@ -66,8 +66,9 @@ export default function Modal({ setModal }) {
 
 
   const fetchUpdateCartItemQuantity = async (id,quantity)=>{
+    let username = localStorage.getItem("username")
     console.log(quantity)
-      fetch("http://localhost:8080/cart/update-cart-item-quantity",{ method: 'POST',
+      fetch(`http://localhost:8080/cart/update-cart-item-quantity/${username}`,{ method: 'POST',
       body: JSON.stringify({
         id: id,quantity:quantity
       }),
