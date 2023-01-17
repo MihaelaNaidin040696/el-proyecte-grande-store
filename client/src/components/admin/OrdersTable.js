@@ -5,19 +5,21 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import classes from './Table.module.css';
 import {useEffect, useState} from "react";
 import moment from "moment/moment";
 import {Link} from "@mui/material";
+import OrdersModal from "./OrdersModal";
+import Box from "@mui/material/Box";
+import {NumericFormat} from 'react-number-format';
 
 export default function OrdersTable() {
     const baseURL = "http://localhost:8080";
     const [orders, setOrders] = useState([]);
+    const [clickedOrder, setClickedOrder] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        fetch(`${baseURL}/order/get-order`)
+        fetch(`${baseURL}/order`)
             .then((response) => {
                 return response.json();
             })
@@ -32,39 +34,102 @@ export default function OrdersTable() {
         document.body.style.overflow = "visible";
     }
 
+    function handleClickEvent(e, data) {
+        setClickedOrder(data);
+        openModal();
+    }
+
+    const headCells = [
+        {
+            id: 'Tracking ID',
+            align: 'center',
+            disablePadding: false,
+            label: 'Tracking ID'
+        },
+        {
+            id: 'Customer Name',
+            align: 'center',
+            disablePadding: false,
+            label: 'Customer Name'
+        },
+        {
+            id: 'Order Date',
+            align: 'center',
+            disablePadding: false,
+            label: 'Order Date'
+        },
+        {
+            id: 'Total amount',
+            align: 'center',
+            disablePadding: false,
+            label: 'Total Amount'
+        },
+        {
+            id: 'Details',
+            align: 'center',
+            disablePadding: false,
+            label: ' '
+        }
+    ];
+
     return (
-        <div className={classes.Table}>
-            <h3>Recent Orders</h3>
+        <>
+            <Box style={{boxShadow: "0px 13px 20px 0px #80808029"}}>
+                <h3 align='center'>Recent Orders</h3>
                 <TableContainer
-                    component={Paper}
-                    style={{boxShadow: "0px 13px 20px 0px #80808029"}}
+                    sx={{
+                        width: '100%',
+                        overflowX: 'auto',
+                        position: 'relative',
+                        display: 'block',
+                        maxWidth: '100%', '& td, & th': {whiteSpace: 'nowrap'}
+                    }}
                 >
-                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <Table
+                        aria-labelledby="tableTitle"
+                    >
                         <TableHead>
                             <TableRow>
-                                <TableCell>Tracking ID</TableCell>
-                                <TableCell align="left">Order Date</TableCell>
-                                <TableCell align="left">Total Price</TableCell>
-                                <TableCell align="left"></TableCell>
+                                {headCells.map((headCell) => (
+                                    <TableCell
+                                        key={headCell.id}
+                                        align={headCell.align}
+                                        padding={headCell.disablePadding ? 'none' : 'normal'}
+                                    >
+                                        {headCell.label}
+                                    </TableCell>
+                                ))}
                             </TableRow>
                         </TableHead>
-                        <TableBody style={{color: "white"}}>
+
+                        <TableBody>
                             {orders.map((order) => (
                                 <TableRow
+                                    hover
+                                    role="checkbox"
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                    tabIndex={-1}
                                     key={order.id}
-                                    sx={{"&:last-child td, &:last-child th": {border: 0}}}
                                 >
-                                    <TableCell align="left">{order.trackingId}</TableCell>
-                                    <TableCell align="left">{moment(order.orderDate).format('DD-MM-YYYY')}</TableCell>
-                                    <TableCell align="left">{order.totalPrice}</TableCell>
-                                    <TableCell align="left" className={classes.Details}>
-                                        <Link onClick={openModal}>Details</Link>
+                                    <TableCell align="center">{order.trackingId}</TableCell>
+                                    <TableCell align="center">{order.first_name} {order.last_name}</TableCell>
+                                    <TableCell align="center">{moment(order.orderDate).format('DD-MM-YYYY')}</TableCell>
+                                    <TableCell align="center">
+                                        <NumericFormat value={order.totalPrice} displayType="text" thousandSeparator
+                                                       prefix="$"/>
+                                    </TableCell>
+                                    <TableCell component="th" scope="row" align="center">
+                                        <Link onClick={((event) => handleClickEvent(event, order))}>
+                                            Details
+                                        </Link>
                                     </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-        </div>
+            </Box>
+            {modal && <OrdersModal setModal={setModal} order={clickedOrder}/>}
+        </>
     );
 }

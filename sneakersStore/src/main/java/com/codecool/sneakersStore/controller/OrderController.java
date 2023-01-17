@@ -10,6 +10,7 @@ import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.OrderService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +35,15 @@ public class OrderController {
     }
 
 
-    @GetMapping("/get-order")
+    @GetMapping()
     public List<Order> getClientOrders(){
         Client client = clientService.findByUsername("test");
         return client.getOrders();
+    }
+
+    @GetMapping("/{orderId}")
+    public Order getOrderById(@PathVariable String orderId) {
+        return orderService.getOrderById(Long.valueOf(orderId));
     }
 
     @PostMapping("/add-order")

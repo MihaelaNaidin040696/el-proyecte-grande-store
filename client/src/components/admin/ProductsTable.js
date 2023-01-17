@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import classes from './Table.module.css';
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
+import Box from "@mui/material/Box";
 
 export default function ProductsTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
@@ -160,11 +161,17 @@ export default function ProductsTable({products, setProducts}) {
     };
 
     return (<div className={classes.Table}>
-        <h3>All Products</h3>
+        <h3 style={{marginTop: '50px'}} align='center' >All Products</h3>
         <form onSubmit={handleEditFormSubmit} className={classes.Table}>
             <TableContainer
-                component={Paper}
+                component={Box}
                 style={{boxShadow: "0px 13px 20px 0px #80808029"}}
+                sx={{
+                    width: '100%',
+                    overflowX: 'auto',
+                    position: 'relative',
+                    display: 'block',
+                }}
             >
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>

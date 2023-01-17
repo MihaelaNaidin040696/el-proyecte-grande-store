@@ -126,15 +126,15 @@ export default function AddProductTable({products, setProducts}) {
 
     return (
         <div className={classes.Table}>
-            <h3>Add New Product</h3>
+            <h3 style={{marginTop: '50px'}} align='center'>Add New Product</h3>
             <form onSubmit={handleAddFormSubmit}>
                 <Box
-                    component={Paper}
                     sx={{
                         '& > :not(style)': {m: 1},
                     }}
                     noValidate
                     autoComplete="off"
+                    style={{boxShadow: "0px 13px 20px 0px #80808029"}}
                 >
                     <TextField
                         id="standard-basic-name"
