@@ -110,14 +110,32 @@ export default function Modal({ setModal }) {
     },[])
     
     const deleteItem = async (id) =>{
-        const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${id}`,{method:'DELETE'})
+        let username = localStorage.getItem("username");
+        const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${id}/${username}`,
+        {method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token"),
+
+        }})
         const response = await request.json();
         setCart(response);
         setCartItems(response.cartItems);
         }
 
     const fetchDeleteItemFromCart = async (e)=>{
-          const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${e.target.id}`,{method:'DELETE'})
+        let username = localStorage.getItem("username");
+          const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${e.target.id}/${username}`,
+          {
+            method:'DELETE',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token"),
+            'Access-Control-Allow-Origin': 'DELETE'
+
+        }
+    }
+          )
           const response = await request.json();
           setCart(response);
           setCartItems(response.cartItems);

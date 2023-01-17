@@ -63,10 +63,10 @@ public class CartController {
         return cartService.updateItemInCart(product, cartItemRequest.getQuantity(), client);
     }
 
-    @DeleteMapping("/delete-cart-item/{id}")
-    public Cart deleteCartitem(@PathVariable Long id){
+    @DeleteMapping("/delete-cart-item/{id}/{username}")
+    public Cart deleteCartitem(@PathVariable Long id,@PathVariable String username){
         Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("jjj");
+        Client client = clientService.findByUsername(username);
         Cart cart = cartService.deleteItemFromCart(product,client);
 
         return cart;
