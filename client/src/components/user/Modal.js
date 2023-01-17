@@ -75,7 +75,6 @@ export default function Modal({ setModal }) {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
         'Authorization': "Bearer " + localStorage.getItem("token")
-
       },
     })
        .then((response) => response.json())
@@ -94,7 +93,6 @@ export default function Modal({ setModal }) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + localStorage.getItem("token"),
-
             }
         }
         )

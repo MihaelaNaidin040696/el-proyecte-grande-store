@@ -41,7 +41,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",
                                 "/cart",
-                                "/prod",
+
                                 "/cart/get-cart",
                                 "/prod/product/*",
                                 "/prod/product/**",
@@ -50,8 +50,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                                 "/cart/add-to-cart/*/*",
                                 "/cart/update-cart-item-quantity/*",
                                 "/cart/delete-cart-item/*/*",
-                                "/order/get-order",
-                                "/order/add-order"
+                                "/order/get-order/*",
+                        "/order/add-order/*"
                         ).hasRole("USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),

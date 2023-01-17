@@ -10,6 +10,7 @@ import com.codecool.sneakersStore.service.ClientService;
 import com.codecool.sneakersStore.service.OrderService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,16 +35,16 @@ public class OrderController {
     }
 
 
-    @GetMapping("/get-order")
-    public List<Order> getClientOrders(){
-        Client client = clientService.findByUsername("jjj");
+    @GetMapping("/get-order/{username}")
+    public List<Order> getClientOrders(@PathVariable String username){
+        Client client = clientService.findByUsername(username);
         return client.getOrders();
     }
 
-    @PostMapping("/add-order")
-    public Order addOrders(@RequestBody OrderRequest orderRequest){
+    @PostMapping("/add-order/{username}")
+    public Order addOrders(@PathVariable String username,@RequestBody OrderRequest orderRequest){
         System.out.println(orderRequest.getFirst_name());
-        Client client = clientService.findByUsername("jjj");
+        Client client = clientService.findByUsername(username);
         Cart cart = client.getCart();
         List<CartItem> cartItemList = cart.getCartItems();
         orderService.handleStock(cartItemList);
