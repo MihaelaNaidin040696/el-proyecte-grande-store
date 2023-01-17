@@ -23,6 +23,10 @@ public class OrderService {
         this.clientService = clientService;
     }
 
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
     public void saveOrder(Order order){
         orderRepository.save(order);
     }
