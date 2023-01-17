@@ -4,6 +4,12 @@ import classes from "./Modal.module.css";
 
 
 export default function Modal({ setModal }) {
+    const setJwt = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")
+        }
+    };
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
     const [qty,setQty] = useState();
@@ -67,6 +73,8 @@ export default function Modal({ setModal }) {
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': "Bearer " + localStorage.getItem("token")
+
       },
     })
        .then((response) => response.json())
@@ -79,8 +87,19 @@ export default function Modal({ setModal }) {
   }
 
     const fetchCart = async () =>{
-        const request = await fetch("http://localhost:8080/cart/get-cart")
+        const name = localStorage.getItem("username")
+        const request = await fetch(`http://localhost:8080/cart/get-cart/${name}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token"),
+
+            }
+        }
+        )
+        console.log(request)
         const response = await request.json();
+        console.log(response)
         setCart(response);
         setCartItems(response.cartItems);
     }

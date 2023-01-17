@@ -13,6 +13,7 @@ function Home() {
         setIsLoading(true);
         fetch("http://localhost:8080/prod/products")
             .then((response) => {
+                console.log(response)
                 return response.json();
             })
             .then((data) => {

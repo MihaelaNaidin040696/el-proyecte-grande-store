@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
 
 @CrossOrigin(origins = "http://localhost:3000/", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST})
 @RestController
@@ -34,17 +37,17 @@ public class CartController {
         this.productService = productService;
     }
 //    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/get-cart")
-    public Cart getClientCart() {
-        Client client = clientService.findByUsername("jjj");
+    @GetMapping("/get-cart/{username}")
+    public Cart getClientCart(@PathVariable String username) {
+        Client client = clientService.findByUsername(username);
         return client.getCart();
     }
 
-    @PostMapping("/add-to-cart/{id}")
-    public Cart addItemToCart(@PathVariable Long id, @RequestBody String size) {
+    @PostMapping("/add-to-cart/{id}/{username}")
+    public Cart addItemToCart(@PathVariable("id") Long id,@PathVariable("username") String username, @RequestBody String size) {
         System.out.println("sizzzzzzzzzzzzzzzzz" + size);
         Product product = productService.getProductById(id);
-        Client client = clientService.findByUsername("jjj");
+        Client client = clientService.findByUsername(username);
         Cart cart = cartService.addItemToCartTest(product, 1, client);
         return cart;
     }

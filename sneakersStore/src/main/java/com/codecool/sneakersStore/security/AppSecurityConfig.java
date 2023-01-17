@@ -32,18 +32,22 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests((request) -> request.antMatchers(
-
+                        "/",
                         "/prod/products",
                         "/client/register",
                         "/client/login"
                      ).permitAll()
                 )
                 .authorizeRequests((request) -> request.antMatchers(
+                        "/",
                                 "/cart",
+                                "/prod",
                                 "/cart/get-cart",
-                                "/prod/products",
+                                "/prod/product/*",
                                 "/prod/product/**",
                                 "/cart/add-to-cart/**",
+                                "/cart/add-to-cart/**/**",
+                                "/cart/add-to-cart/*/*",
                                 "/cart/update-cart-item-quantity",
                                 "/cart/delete-cart-item/**",
                                 "/order/get-order",
