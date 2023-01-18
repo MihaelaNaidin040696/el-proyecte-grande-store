@@ -10,11 +10,14 @@ import ProductPage from "./pages/ProductPage";
 import Dashboard from "./pages/Dashboard";
 import Order from "./pages/Order";
 import { ToastContainer, toast} from 'react-toastify';
+import { useState } from "react";
 
 
 function App() {
+    const [name,setName] = useState();
+    console.log(name);
     return (
-        <Layout>
+        <Layout name={name}>
         <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -29,7 +32,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path='/admin' element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login setName={setName} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/sneakers" element={<Sneakers />} />

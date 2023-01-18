@@ -35,31 +35,41 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/",
                         "/prod/products",
                         "/client/register",
-                        "/client/login",
-                        "/admin/**",
-                        "/category/**",
-                        "/supplier/**",
-                        "/brand/**",
-                        "/order/**"
+                        "/client/login"
                      ).permitAll()
                 )
-                .authorizeRequests((request) -> request.antMatchers(
-                        "/",
-                                "/cart",
-                                "/cart/get-cart",
-                                "/prod/product/*",
-                                "/prod/product/**",
-                                "/cart/add-to-cart/**",
-                                "/cart/add-to-cart/**/**",
-                                "/cart/add-to-cart/*/*",
-                                "/cart/update-cart-item-quantity/*",
-                                "/cart/delete-cart-item/*/*",
-                                "/order/get-order/*",
-                        "/order/add-order/*"
-                        ).hasRole("USER")
-                        .anyRequest().authenticated())
-                .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
-                        UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests((request) -> {
+                    try {
+                        request.antMatchers(
+                                "/",
+                                        "/cart",
+                                        "/cart/get-cart",
+                                        "/prod/product/*",
+                                        "/prod/product/**",
+                                        "/cart/add-to-cart/**",
+                                        "/cart/add-to-cart/**/**",
+                                        "/cart/add-to-cart/*/*",
+                                        "/cart/update-cart-item-quantity/*",
+                                        "/cart/delete-cart-item/*/*",
+                                        "/order/get-order/*",
+                                        "/order/add-order/*"
+                                ).hasRole("USER")
+                                .and()
+                                .authorizeRequests((req) -> req.antMatchers(
+                                        "/admin",
+                                                "/admin/**",
+                                                "/category/**",
+                                                "/supplier/**",
+                                                "/brand/**",
+                                                "/order/**"
+                                        ).hasRole("ADMIN")
+                                .anyRequest().authenticated())
+                        .addFilterBefore(new JWTAuthenticationFilter(clientService, jWTTokenHelper),
+                                UsernamePasswordAuthenticationFilter.class);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         http.csrf().disable().cors().and().headers().frameOptions().disable();
     }
 
