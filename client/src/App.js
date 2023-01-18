@@ -9,11 +9,23 @@ import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import Dashboard from "./pages/Dashboard";
 import Order from "./pages/Order";
+import { ToastContainer, toast} from 'react-toastify';
 
 
 function App() {
     return (
         <Layout>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path='/admin' element={<Dashboard />} />
