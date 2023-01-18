@@ -1,7 +1,7 @@
 
 function SliderContent({activeIndex, imageSlider}) {
     return (
-        <section>
+        <>
             {imageSlider.map((slide, index) => (
                 <div
                     key={index}
@@ -12,7 +12,7 @@ function SliderContent({activeIndex, imageSlider}) {
                     <img className="slide-image" src={slide.urls} alt="" />
                 </div>
             ))}
-        </section>
+        </>
     );
 }
 

@@ -61,15 +61,16 @@ ul {
     width: 50px;
 }
 
-.footercol ul li:not(:last-child) {
-    margin: 10px;
-}
+/* .footercol ul li:not(:last-child) {
+    margin: -10px;
+} */
 
 .footercol ul li a {
     font-size: 16px;
     text-transform: capitalize;
     color: #ffffff;
     text-decoration: none;
+    line-height: 1.75rem;
     font-weight: 300;
     display: block;
     transition: all 0.3s ease;

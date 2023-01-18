@@ -7,6 +7,8 @@ import {useState} from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css'
+
 
 
 
@@ -74,6 +76,8 @@ function Login() {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    theme: "dark",
+                    style:{"--toastify-color-progress-dark": "#11ed23" }
                 })
                 redirect(response.status);
             })
