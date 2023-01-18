@@ -6,6 +6,7 @@ import com.codecool.sneakersStore.model.Order;
 import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.payload.ProductRequest;
+import com.sun.source.tree.Tree;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -133,6 +134,24 @@ public class AdminService {
         return sales;
     }
 
+    public TreeMap<String, Float> getRevenueDetails() {
+        TreeMap<String, Float> revenue = new TreeMap<>();
+        TreeMap<String, Float> expenses = getExpensesDetails();
+        TreeMap<String, Float> sales = getSalesDetails();
+        for (String date: sales.keySet()) {
+            if (expenses.containsKey(date)) {
+                revenue.put(date, sales.get(date) - expenses.get(date));
+                expenses.remove(date);
+            } else {
+                revenue.put(date, sales.get(date));
+            }
+        }
+        for (String date: expenses.keySet()){
+            revenue.put(date, expenses.get(date) - expenses.get(date) * 2);
+        }
+        return revenue;
+    }
+
     public Float getTotalExpenses(TreeMap<String, Float> expenses) {
         float totalExpenses = 0;
         for (Float value : expenses.values()) {
@@ -147,6 +166,14 @@ public class AdminService {
             totalSales += value;
         }
         return totalSales;
+    }
+
+    public Float getTotalRevenue(TreeMap<String, Float> revenue) {
+        float totalRevenue = 0;
+        for (Float value: revenue.values()) {
+            totalRevenue += value;
+        }
+        return totalRevenue;
     }
 
 }

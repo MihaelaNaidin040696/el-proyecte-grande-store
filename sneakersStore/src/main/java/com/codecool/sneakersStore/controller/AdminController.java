@@ -53,6 +53,17 @@ public class AdminController {
         return adminService.getTotalSales(sales);
     }
 
+    @GetMapping("/get-revenue")
+    public TreeMap<String, Float> getRevenueDetails() {
+        return adminService.getRevenueDetails();
+    }
+
+    @GetMapping("/get-total-revenue")
+    public Float getTotalRevenue() {
+        TreeMap<String, Float> revenue = adminService.getRevenueDetails();
+        return adminService.getTotalRevenue(revenue);
+    }
+
 
     @PutMapping("/edit-product/{prodId}")
     public Product updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {
