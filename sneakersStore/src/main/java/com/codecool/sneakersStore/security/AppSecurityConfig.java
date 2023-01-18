@@ -36,18 +36,16 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/prod/products",
                         "/client/register",
                         "/client/login",
-                        "/admin",
+                        "/admin/**",
                         "/category/**",
                         "/supplier/**",
                         "/brand/**",
                         "/order/**"
-
                      ).permitAll()
                 )
                 .authorizeRequests((request) -> request.antMatchers(
                         "/",
                                 "/cart",
-
                                 "/cart/get-cart",
                                 "/prod/product/*",
                                 "/prod/product/**",

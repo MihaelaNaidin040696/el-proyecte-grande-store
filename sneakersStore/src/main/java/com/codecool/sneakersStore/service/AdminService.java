@@ -6,7 +6,6 @@ import com.codecool.sneakersStore.model.Order;
 import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.payload.ProductRequest;
-import com.sun.source.tree.Tree;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
