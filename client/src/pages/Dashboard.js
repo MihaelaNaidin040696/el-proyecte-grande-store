@@ -9,7 +9,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`${baseURL}`)
+        fetch(`${baseURL}`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })

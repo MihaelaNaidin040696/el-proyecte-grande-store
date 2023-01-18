@@ -19,7 +19,8 @@ export default function OrdersTable() {
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        fetch(`${baseURL}/order`)
+        fetch(`${baseURL}/order`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })

@@ -85,7 +85,8 @@ export default function ProductsTable({products, setProducts}) {
         };
         fetch(`${baseURL}/admin/edit-product/${editProductId}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify(editedProduct)
         })
             .then((response) => {
@@ -109,7 +110,8 @@ export default function ProductsTable({products, setProducts}) {
         event.preventDefault();
         setEditProductId(product.id);
 
-        fetch(`${baseURL}/category/${product.id}`)
+        fetch(`${baseURL}/category/${product.id}`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -117,7 +119,8 @@ export default function ProductsTable({products, setProducts}) {
                 setCategory(data);
             })
             .then(() => {
-                fetch(`${baseURL}/brand/${product.id}`)
+                fetch(`${baseURL}/brand/${product.id}`,
+                {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
                     .then((response) => {
                         return response.json();
                     })
@@ -126,7 +129,8 @@ export default function ProductsTable({products, setProducts}) {
                     });
             })
             .then(() => {
-                fetch(`${baseURL}/supplier/${product.id}`)
+                fetch(`${baseURL}/supplier/${product.id}`,
+                {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
                     .then((response) => {
                         return response.json();
                     })

@@ -22,7 +22,8 @@ export default function EditableRow({editProduct,
     const [suppliers, setSuppliers] = useState([]);
 
     useEffect(() => {
-        fetch(`${baseURL}/category`)
+        fetch(`${baseURL}/category`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -30,7 +31,9 @@ export default function EditableRow({editProduct,
                 setCategories(data);
             });
 
-        fetch(`${baseURL}/brand`)
+        fetch(`${baseURL}/brand`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}}
+        )
             .then((response) => {
                 return response.json();
             })
@@ -38,7 +41,8 @@ export default function EditableRow({editProduct,
                 setBrands(data);
             })
 
-        fetch(`${baseURL}/supplier`)
+        fetch(`${baseURL}/supplier`
+        ,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })

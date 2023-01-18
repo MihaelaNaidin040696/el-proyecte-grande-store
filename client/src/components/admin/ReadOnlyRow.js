@@ -15,21 +15,24 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
     const [isLoading, setIsLoading] = useState(true);
 
     if (isLoading === true) {
-        fetch(`${baseURL}/category/${product.id}`)
+        fetch(`${baseURL}/category/${product.id}`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
                 setCategory(data);
             });
-        fetch(`${baseURL}/brand/${product.id}`)
+        fetch(`${baseURL}/brand/${product.id}`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
                 setBrand(data);
             });
-        fetch(`${baseURL}/supplier/${product.id}`)
+        fetch(`${baseURL}/supplier/${product.id}`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -45,7 +48,8 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
 
         fetch(`${baseURL}/admin/edit-product/${product.id}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify({...product})
         })
             .then((response) => {
