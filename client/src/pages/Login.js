@@ -6,7 +6,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useState} from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -49,13 +49,13 @@ function Login() {
                 draggable: true,
                 progress: undefined,
             });
-        };
-    };
+        }
+    }
     function redirect(status) {
         if (status === 200) {
             navigate("/");
-        };
-    };
+        }
+    }
 
 
     async function login() {
