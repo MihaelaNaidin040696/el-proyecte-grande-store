@@ -1,7 +1,7 @@
 package com.codecool.sneakersStore.model;
 
-import com.codecool.sneakersStore.security.Role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,19 +9,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,49 +40,41 @@ public class Client implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonManagedReference
     private String firstName;
-
     private String lastName;
-
+    private String username;
     private String email;
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     @OneToOne(mappedBy = "client")
-    @JsonBackReference
+    @JsonIgnore
     private Cart cart;
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "client")
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy = "client")
     @JsonManagedReference
     private List<Order> orders;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<String> roles = new ArrayList<>();
 
-    public Client(String firstName, String lastName, String email, String encodedPassword) {
+    public Client(String firstName, String lastName, String email, String username,String encodedPassword) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
         this.setPassword(encodedPassword);
-        this.setRole(Role.USER);
+
     }
 
 
+
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return null;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -100,4 +95,8 @@ public class Client implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
+
 }

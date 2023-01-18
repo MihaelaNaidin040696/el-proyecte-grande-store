@@ -4,6 +4,12 @@ import classes from "./Modal.module.css";
 
 
 export default function Modal({ setModal }) {
+    const setJwt = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")
+        }
+    };
     const [cart,setCart] = useState([]);
     const [cartItems,setCartItems] = useState([]);
     const [qty,setQty] = useState();
@@ -60,13 +66,15 @@ export default function Modal({ setModal }) {
 
 
   const fetchUpdateCartItemQuantity = async (id,quantity)=>{
+    let username = localStorage.getItem("username")
     console.log(quantity)
-      fetch("http://localhost:8080/cart/update-cart-item-quantity",{ method: 'POST',
+      fetch(`http://localhost:8080/cart/update-cart-item-quantity/${username}`,{ method: 'POST',
       body: JSON.stringify({
         id: id,quantity:quantity
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': "Bearer " + localStorage.getItem("token")
       },
     })
        .then((response) => response.json())
@@ -79,8 +87,18 @@ export default function Modal({ setModal }) {
   }
 
     const fetchCart = async () =>{
-        const request = await fetch("http://localhost:8080/cart/get-cart")
+        const name = localStorage.getItem("username")
+        const request = await fetch(`http://localhost:8080/cart/get-cart/${name}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token"),
+            }
+        }
+        )
+        console.log(request)
         const response = await request.json();
+        console.log(response)
         setCart(response);
         setCartItems(response.cartItems);
     }
@@ -90,14 +108,32 @@ export default function Modal({ setModal }) {
     },[])
     
     const deleteItem = async (id) =>{
-        const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${id}`,{method:'DELETE'})
+        let username = localStorage.getItem("username");
+        const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${id}/${username}`,
+        {method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token"),
+
+        }})
         const response = await request.json();
         setCart(response);
         setCartItems(response.cartItems);
         }
 
     const fetchDeleteItemFromCart = async (e)=>{
-          const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${e.target.id}`,{method:'DELETE'})
+        let username = localStorage.getItem("username");
+          const request = await fetch(`http://localhost:8080/cart/delete-cart-item/${e.target.id}/${username}`,
+          {
+            method:'DELETE',
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token"),
+            'Access-Control-Allow-Origin': 'DELETE'
+
+        }
+    }
+          )
           const response = await request.json();
           setCart(response);
           setCartItems(response.cartItems);

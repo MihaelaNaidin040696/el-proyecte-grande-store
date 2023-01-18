@@ -4,9 +4,19 @@ import Paper from "@mui/material/Paper";
 import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useState} from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+
+
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
+    let navigate = useNavigate();
+    const [formValues, setFormValues] = useState({
+        username:'',
+        password:''
+    })
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -14,10 +24,84 @@ function Login() {
         event.preventDefault();
     };
 
+    const handleChange = (e) => {
+        e.persist();
+        setFormValues(values => ({
+            ...values,
+            [e.target.name]: e.target.value
+
+        }));
+    }
+
+    console.log(formValues)
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (validValues()) {
+            login();
+        } else {
+            toast.error('Something went wrong, please try again!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        };
+    };
+    function redirect(status) {
+        if (status === 200) {
+            navigate("/");
+        };
+    };
+
+
+    async function login() {
+
+        await axios.post("http://localhost:8080/client/login", formValues)
+            .then(response => {
+                console.log(response.data);
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("username", response.data.username);
+                localStorage.setItem("userId", response.data.userId);
+                toast('Successfully Logged In', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+                redirect(response.status);
+            })
+            .catch(function (error) {
+                toast.error('Something went wrong, please try again!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+                redirect(error.response.data.status);
+            });
+    };
+
+    function validValues() {
+        if (formValues.username.length <= 0 || formValues.password.length <= 0) {
+            return false;
+        };
+        return true;
+    };
+
     return (
         <div className={classes.bodyDiv}>
                 <h1>LOGIN TO YOUR ACCOUNT</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Box
                         component={Paper}
                         sx={{
@@ -28,17 +112,18 @@ function Login() {
                         autoComplete="off"
                     >
 
-                        <TextField
+                        <TextField 
+                        onChange={handleChange}
                             id="standard-basic-email"
                             label="Email"
                             sx={{m: 1, width: "25ch"}}
-                            name="email"
+                            name="username"
                             required
                             variant="standard"/><br/>
 
                         <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
                             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                            <Input
+                            <Input onChange={handleChange}
                                 id="standard-adornment-password"
                                 name="password"
                                 type={showPassword ? 'text' : 'password'}
@@ -56,7 +141,7 @@ function Login() {
                             />
                         </FormControl><br/>
 
-                        <Button type="submit" variant="contained" href="/" style={{backgroundColor: 'black'}}>
+                        <Button type="submit" variant="contained"  style={{backgroundColor: 'black'}}>
                             Log In
                         </Button>
 

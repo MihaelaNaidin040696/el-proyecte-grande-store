@@ -35,21 +35,16 @@ public class OrderController {
     }
 
 
-    @GetMapping()
-    public List<Order> getClientOrders(){
-        Client client = clientService.findByUsername("test");
+    @GetMapping("/get-order/{username}")
+    public List<Order> getClientOrders(@PathVariable String username){
+        Client client = clientService.findByUsername(username);
         return client.getOrders();
     }
 
-    @GetMapping("/{orderId}")
-    public Order getOrderById(@PathVariable String orderId) {
-        return orderService.getOrderById(Long.valueOf(orderId));
-    }
-
-    @PostMapping("/add-order")
-    public Order addOrders(@RequestBody OrderRequest orderRequest){
+    @PostMapping("/add-order/{username}")
+    public Order addOrders(@PathVariable String username,@RequestBody OrderRequest orderRequest){
         System.out.println(orderRequest.getFirst_name());
-        Client client = clientService.findByUsername("test");
+        Client client = clientService.findByUsername(username);
         Cart cart = client.getCart();
         List<CartItem> cartItemList = cart.getCartItems();
         orderService.handleStock(cartItemList);

@@ -31,7 +31,14 @@ function Order() {
         })
     }
     const fetchCart = async () =>{
-        const request = await fetch("http://localhost:8080/cart/get-cart")
+        let username = localStorage.getItem("username");
+        const request = await fetch(`http://localhost:8080/cart/get-cart/${username}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token"),
+            }
+        })
         const response = await request.json();
         setCart(response);
         setCartItems(response.cartItems);
@@ -45,15 +52,17 @@ function Order() {
 
 
   const fetchOrder = async (e)=>{
-    
+    let username = localStorage.getItem("username");
     // e.preventDefault();
-    fetch("http://localhost:8080/order/add-order",{ method: 'POST',
+    fetch(`http://localhost:8080/order/add-order/${username}`,{ method: 'POST',
     body: JSON.stringify(
       details
 
     ),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
+      'Authorization': "Bearer " + localStorage.getItem("token")
+
     },
   })
      .then((response) => response.json())
