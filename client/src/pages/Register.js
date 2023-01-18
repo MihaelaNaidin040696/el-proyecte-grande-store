@@ -2,12 +2,47 @@ import classes from "./AuthForms.module.css";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {LineAxisOutlined, Visibility, VisibilityOff} from "@mui/icons-material";
 import {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
+
 
 function Register() {
     const baseURL = "http://localhost:8080";
     const [showPassword, setShowPassword] = useState(false);
+    let navigate = useNavigate();
+
+    const [formValues, setFormValues] = useState({
+        firstName:'',
+        lastName:'',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    async function register() {
+        await axios.post(baseURL + "/client/register", formValues)
+            .then(response => {
+                toast('Successfully Registered!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    style:{"--toastify-color-progress-light": "#39c41a" }
+
+                })
+                console.log(response);
+            })
+            .finally(navigate("/login"));
+    };
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -15,11 +50,47 @@ function Register() {
         event.preventDefault();
     };
 
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (validValues()) {
+            register();
+        } else {
+            toast.error('Something went wrong, please try again!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                // style:{"--toastify-color-progress-light": "#39c41a" }
+            });
+        };
+    };
+    function validValues() {
+        if (formValues.username.length <= 0 || formValues.password.length <= 0) {
+            return false;
+        };
+        return true;
+    };
+
+    const handleChange = (e) => {
+        e.persist();
+        setFormValues(values => ({
+            ...values,
+            [e.target.name]: e.target.value
+        }));
+    };
+
+
     const [client, setClient] = useState({
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword:''
     });
 
     const [error, setError] = useState({
@@ -48,7 +119,7 @@ function Register() {
                 email: "Enter valid email address.",
                 password: "Password should not be empty.",
             });
-            return;
+            return true;
         }
 
         if (!client.firstName && !client.lastName) {
@@ -57,7 +128,7 @@ function Register() {
                 firstName: "Enter your first name.",
                 lastName: "Enter your last name.",
             });
-            return;
+            return true;
         }
         if (!client.email && !client.password) {
             setError({
@@ -65,16 +136,18 @@ function Register() {
                 email: "Enter valid email address.",
                 password: "Password should not be empty.",
             });
-            return;
+            return true;
 
         }
 
-        if (client.confirmPassword !== client.password) {
+        if (client.password !== client.confirmPassword) {
+            console.log(client.password)
+            console.log(client.confirmPassword)
             setError({
                 ...inputError,
                 confirmPassword: "Password and confirm password should match.",
             });
-            return;
+            return true;
         }
 
         if (!client.firstName) {
@@ -82,7 +155,7 @@ function Register() {
                 ...inputError,
                 firstName: "Enter your first name."
             });
-            return;
+            return true;
         }
 
         if (!client.lastName) {
@@ -90,7 +163,7 @@ function Register() {
                 ...inputError,
                 lastName: "Enter your last name."
             });
-            return;
+            return true;
         }
 
         if (!client.email) {
@@ -98,7 +171,7 @@ function Register() {
                 ...inputError,
                 email: "Enter valid email address.",
             });
-            return;
+            return true;
         }
 
         if (!client.password) {
@@ -106,7 +179,7 @@ function Register() {
                 ...inputError,
                 password: "Password should not be empty.",
             });
-            return;
+            return true;
         }
 
         setError(inputError);
@@ -121,7 +194,7 @@ function Register() {
         setClient(newFormData);
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
         validateInput(event);
 
@@ -129,29 +202,71 @@ function Register() {
             firstName: client.firstName,
             lastName: client.lastName,
             email: client.email,
-            password: client.password
+            password: client.password,
+            confirmPassword: client.confirmPassword
         };
-        fetch(`${baseURL}/client/add-client`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true
-            },
-            body: JSON.stringify(newClient)
-        })
-            .then((response) => {
-                return response.text();
-            })
-            .then(() => {
-                setClient(newClient);
-            });
+
+        // async function register(){
+            // await axios.post(baseURL+"/clinet/register",newClient,)
+            //     .then(response => {
+            //         console.log(response)
+            //     })
+            //     .finally(navigate('/login'))
+        // }
+        // fetch(`${baseURL}/client/register`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+            
+        //     },
+        //     body: JSON.stringify(newClient)
+        // })
+        //     .then((response) => {
+        //         return response.text();
+        //     })
+        //     .then(() => {
+        //         setClient(newClient);
+        //     });
+
     }
+
+    async function test(event){
+        if(validValues() && validateInput(event)){
+            handleFormSubmit(event)
+            navigate('/login')
+        }
+        else
+        {{
+                toast.error('Something went wrong, please try again!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            };
+        }
+    }
+   
+    function validValues() {
+        if (formValues.password.length <= 0 || 
+            formValues.email.length <= 0 ||
+            formValues.firstName.length <=0 ||
+            formValues.lastName.length <=0 ||
+            formValues.confirmPassword.length <= 0 ||
+            formValues.password !== formValues.confirmPassword
+            ) {
+            return false;
+        };
+        return true;
+    };
 
     return (
         <div className={classes.bodyDiv}>
             <h1>CREATE AN ACCOUNT</h1>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleSubmit}>
                 <Box
                     component={Paper}
                     sx={{
@@ -167,16 +282,17 @@ function Register() {
                         label="First Name"
                         sx={{m: 1, width: "25ch"}}
                         name="firstName"
-                        onChange={handleFormChange}
+                        onChange={handleChange}
                         variant="standard"/>
                     <p style={{color: 'red'}}>{error.firstName}</p>
 
                     <TextField
+                    
                         id="standard-basic-last-name"
                         label="Last Name"
                         sx={{m: 1, width: "25ch"}}
                         name="lastName"
-                        onChange={handleFormChange}
+                        onChange={handleChange}
                         variant="standard"/>
                     <p style={{color: 'red'}}>{error.lastName}</p>
 
@@ -185,7 +301,7 @@ function Register() {
                         label="Email"
                         sx={{m: 1, width: "25ch"}}
                         name="email"
-                        onChange={handleFormChange}
+                        onChange={handleChange}
                         variant="standard"/>
                     <p style={{color: 'red'}}>{error.email}</p>
 
@@ -194,7 +310,7 @@ function Register() {
                         <Input
                             id="standard-adornment-password"
                             name="password"
-                            onChange={handleFormChange}
+                            onChange={handleChange}
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
@@ -216,6 +332,7 @@ function Register() {
                         <Input
                             id="standard-adornment-password-confirmation"
                             name="confirmPassword"
+                            onChange={handleChange}
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
