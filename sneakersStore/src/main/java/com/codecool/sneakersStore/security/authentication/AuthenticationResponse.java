@@ -1,6 +1,5 @@
 package com.codecool.sneakersStore.security.authentication;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

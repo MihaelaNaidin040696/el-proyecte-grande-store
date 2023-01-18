@@ -1,6 +1,5 @@
 package com.codecool.sneakersStore.security.configuration;
 
-
 import com.codecool.sneakersStore.model.Client;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
