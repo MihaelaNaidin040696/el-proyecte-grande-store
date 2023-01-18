@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import classes from './ReportCard.module.css';
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
@@ -35,16 +33,12 @@ function CompactCard({ param, setExpanded }) {
             onClick={setExpanded}
         >
             <div className={classes.radialBar}>
-                <CircularProgressbar
-                    value={param.barValue}
-                    text={`${param.barValue}%`}
-                />
+                <Png />
                 <span>{param.title}</span>
             </div>
             <div className={classes.detail}>
-                <Png />
-                <span>${param.value}</span>
-                <span>Last 24 hours</span>
+                <span>Last Month</span>
+                <span>{param.value} $</span>
             </div>
         </motion.div>
     );
@@ -58,17 +52,6 @@ function ExpandedCard({ param, setExpanded }) {
                 type: "area",
                 height: "auto",
             },
-
-            dropShadow: {
-                enabled: false,
-                enabledOnSeries: undefined,
-                top: 0,
-                left: 0,
-                blur: 3,
-                color: "#000",
-                opacity: 0.35,
-            },
-
             fill: {
                 colors: ["#fff"],
                 type: "gradient",
@@ -80,25 +63,11 @@ function ExpandedCard({ param, setExpanded }) {
                 curve: "smooth",
                 colors: ["white"],
             },
-            tooltip: {
-                x: {
-                    format: "dd/MM/yy HH:mm",
-                },
-            },
             grid: {
                 show: true,
             },
             xaxis: {
-                type: "datetime",
-                categories: [
-                    "2018-09-19T00:00:00.000Z",
-                    "2018-09-19T01:30:00.000Z",
-                    "2018-09-19T02:30:00.000Z",
-                    "2018-09-19T03:30:00.000Z",
-                    "2018-09-19T04:30:00.000Z",
-                    "2018-09-19T05:30:00.000Z",
-                    "2018-09-19T06:30:00.000Z",
-                ],
+                type: "category",
             },
         },
     };
@@ -119,7 +88,7 @@ function ExpandedCard({ param, setExpanded }) {
             <div className={classes.chartContainer}>
                 <Chart options={data.options} series={param.series} type="area" />
             </div>
-            <span>Last 24 hours</span>
+            <span>Last Month</span>
         </motion.div>
     );
 }

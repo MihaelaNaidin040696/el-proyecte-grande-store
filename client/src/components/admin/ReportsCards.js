@@ -4,7 +4,40 @@ import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
 
 import ReportCard from "./ReportCard";
 
-export default function ReportsCards() {
+export default function ReportsCards({sales, totalSales, expenses, totalExpenses, revenue, totalRevenue}) {
+    const salesDates = Object.keys(sales);
+    const expensesDates = Object.keys(expenses);
+    const revenueDates = Object.keys(revenue);
+    const salesValues = Object.values(sales);
+    const expensesValues = Object.values(expenses);
+    const revenueValues = Object.values(revenue);
+
+    const salesSeries = [];
+    const expensesSeries = [];
+    const revenueSeries = [];
+
+
+    for (let i = 0; i < salesDates.length; i++) {
+            salesSeries.push({
+                x: salesDates[i],
+                y: salesValues[i]
+            })
+    }
+
+    for (let i = 0; i < expensesDates.length; i++) {
+        expensesSeries.push({
+            x: expensesDates[i],
+            y: expensesValues[i]
+        })
+    }
+
+    for (let i = 0; i < revenueDates.length; i++) {
+        revenueSeries.push({
+            x: revenueDates[i],
+            y: revenueValues[i]
+        })
+    }
+
     const cardsData = [
         {
             title: "Sales",
@@ -12,13 +45,12 @@ export default function ReportsCards() {
                 backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
                 boxShadow: "0px 10px 20px 0px #e0c6f5",
             },
-            barValue: 70,
-            value: "25,970",
+            value: totalSales,
             png: UilUsdSquare,
             series: [
                 {
                     name: "Sales",
-                    data: [31, 40, 28, 51, 42, 109, 100],
+                    data: salesSeries,
                 },
             ],
         },
@@ -28,13 +60,12 @@ export default function ReportsCards() {
                 backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
                 boxShadow: "0px 10px 20px 0px #FDC0C7",
             },
-            barValue: 80,
-            value: "14,270",
+            value: totalRevenue,
             png: UilMoneyWithdrawal,
             series: [
                 {
                     name: "Revenue",
-                    data: [10, 100, 50, 70, 80, 30, 40],
+                    data: revenueSeries,
                 },
             ],
         },
@@ -45,13 +76,12 @@ export default function ReportsCards() {
                     "linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%)",
                 boxShadow: "0px 10px 20px 0px #F9D59B",
             },
-            barValue: 60,
-            value: "4,270",
+            value: totalExpenses,
             png: UilClipboardAlt,
             series: [
                 {
                     name: "Expenses",
-                    data: [10, 25, 15, 30, 12, 15, 20],
+                    data: expensesSeries,
                 },
             ],
         },
