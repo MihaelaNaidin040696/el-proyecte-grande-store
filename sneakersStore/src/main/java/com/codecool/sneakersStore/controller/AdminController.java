@@ -38,7 +38,8 @@ public class AdminController {
 
     @GetMapping("/get-total-expenses")
     public Float getTotalExpenses() {
-        return adminService.getTotalExpenses();
+        TreeMap<String, Float> expenses = adminService.getExpensesDetails();
+        return adminService.getTotalExpenses(expenses);
     }
 
     @GetMapping("/get-sales")
@@ -48,7 +49,8 @@ public class AdminController {
 
     @GetMapping("/get-total-sales")
     public Float getTotalSales() {
-        return adminService.getTotalSales();
+        TreeMap<String, Float> sales = adminService.getSalesDetails();
+        return adminService.getTotalSales(sales);
     }
 
 

@@ -7,11 +7,10 @@ import com.codecool.sneakersStore.model.Product;
 import com.codecool.sneakersStore.model.Supplier;
 import com.codecool.sneakersStore.payload.ProductRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
@@ -97,47 +96,55 @@ public class AdminService {
     }
 
     public TreeMap<String, Float> getExpensesDetails() {
+        LocalDate nowDate = LocalDate.now();
+        LocalDate currentMonthDate = nowDate.withDayOfMonth(1);
         TreeMap<String, Float> expenses = new TreeMap<>();
         List<Product> products = productService.getAllProducts();
         for (Product product : products) {
             String strDate = convertDate(product.getPurchaseDate());
-            if (expenses.containsKey(strDate)) {
-                expenses.put(strDate, expenses.get(strDate) + product.getPurchasePrice());
-            } else {
-                expenses.put(strDate, product.getPurchasePrice());
+            LocalDate localDate = LocalDate.parse(strDate);
+            if (localDate.isAfter(currentMonthDate.minusMonths(1)) && localDate.isBefore(currentMonthDate)){
+                if (expenses.containsKey(strDate)) {
+                    expenses.put(strDate, expenses.get(strDate) + product.getPurchasePrice());
+                } else {
+                    expenses.put(strDate, product.getPurchasePrice());
+                }
             }
         }
         return expenses;
     }
 
     public TreeMap<String, Float> getSalesDetails() {
+        LocalDate nowDate = LocalDate.now();
+        LocalDate currentMonthDate = nowDate.withDayOfMonth(1);
         TreeMap<String, Float> sales = new TreeMap<>();
         List<Order> orders = orderService.getAllOrders();
         for (Order order : orders) {
             String strDate = convertDate(order.getOrderDate());
-            if (sales.containsKey(strDate)) {
-                sales.put(strDate, sales.get(strDate) + Float.parseFloat(String.valueOf(order.getTotalPrice())));
-            } else {
-                sales.put(strDate, Float.parseFloat(String.valueOf(order.getTotalPrice())));
+            LocalDate localDate = LocalDate.parse(strDate);
+            if (localDate.isAfter(currentMonthDate.minusMonths(1)) && localDate.isBefore(currentMonthDate)) {
+                if (sales.containsKey(strDate)) {
+                    sales.put(strDate, sales.get(strDate) + Float.parseFloat(String.valueOf(order.getTotalPrice())));
+                } else {
+                    sales.put(strDate, Float.parseFloat(String.valueOf(order.getTotalPrice())));
+                }
             }
         }
         return sales;
     }
 
-    public Float getTotalExpenses() {
+    public Float getTotalExpenses(TreeMap<String, Float> expenses) {
         float totalExpenses = 0;
-        List<Product> products = productService.getAllProducts();
-        for (Product product : products) {
-            totalExpenses += product.getPurchasePrice();
+        for (Float value : expenses.values()) {
+            totalExpenses += value;
         }
         return totalExpenses;
     }
 
-    public Float getTotalSales() {
+    public Float getTotalSales(TreeMap<String, Float> sales) {
         float totalSales = (float) 0;
-        List<Order> orders = orderService.getAllOrders();
-        for (Order order : orders) {
-            totalSales += Float.parseFloat(String.valueOf(order.getTotalPrice()));
+        for (Float value : sales.values()) {
+            totalSales += value;
         }
         return totalSales;
     }

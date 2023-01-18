@@ -34,6 +34,10 @@ public class OrderController {
         this.cartService = cartService;
     }
 
+    @GetMapping
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 
     @GetMapping("/get-order/{username}")
     public List<Order> getClientOrders(@PathVariable String username){
