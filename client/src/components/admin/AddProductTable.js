@@ -55,7 +55,7 @@ export default function AddProductTable({products, setProducts}) {
     const [brands, setBrands] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
 
-    useEffect(() => {
+    const fetchData = () => {
         fetch(`${baseURL}/category`, {headers})
             .then(response => response.json())
             .then(data => setCategories(data));
@@ -67,6 +67,10 @@ export default function AddProductTable({products, setProducts}) {
         fetch(`${baseURL}/supplier`, {headers})
             .then(response => response.json())
             .then(data => setSuppliers(data));
+    }
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     const handleAddFormChange = (event) => {
@@ -97,6 +101,7 @@ export default function AddProductTable({products, setProducts}) {
             purchaseDate: addFormData.purchaseDate,
             totalStock: addFormData.totalStock,
             discount: addFormData.discount,
+            isAvailable: true
         }
         fetch(`${baseURL}/admin/add-new-product`, {
             method: 'POST',
@@ -104,11 +109,12 @@ export default function AddProductTable({products, setProducts}) {
             'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify(newProduct)
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then(() => {
                 const newProducts = [...products, newProduct];
                 setProducts(newProducts);
             })
+            window.location.reload();
     };
 
     return (
