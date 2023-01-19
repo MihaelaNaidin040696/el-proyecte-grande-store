@@ -22,16 +22,16 @@ export default function Navbar() {
     }
 
 
-    function test(){
-        let res = localStorage.getItem("username")
-        setUsername(localStorage.getItem(res))
+    // function test(){
+    //     let res = localStorage.getItem("username")
+    //     setUsername(localStorage.getItem(res))
 
-    }
-    useEffect(() => {
-        console.log(localStorage.getItem("username"))
-        test();
+    // }
+    // useEffect(() => {
+    //     console.log(localStorage.getItem("username"))
+    //     test();
 
-    },[username])
+    // },[username])
 
      function logout() {
         localStorage.clear();
@@ -71,73 +71,59 @@ export default function Navbar() {
                             onClick={() => setMobileNavbar(!mobileNavbar)}
                         ></i>
                     </label>
-                    <ul className={classes.right}>
-                        {localStorage.getItem("username") ? (<>
-                            <li
-                            onClick={() => openModal()}
-                            className={classes.cartNav}
-                        >
-                            <div>Cart</div>
-                        </li>
-
-                        <li>
-                            <a className={classes.aNav}>
-                                {localStorage.getItem("username")}
-                            </a>
-                        </li>
-                
-                        <li>
-                            <a className={classes.aNav} onClick={logout}>
-                                Logout
-                            </a>
-                        </li>
-                        </>)
-                    : localStorage.getItem("username")==="admin" ? (<>
-                    
-
-                        <li>
-                            <a className={classes.aNav} href="/admin">
-                                {localStorage.getItem("username")}
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a className={classes.aNav} onClick={logout}>
-                                Logout
-                            </a>
-                        </li>
-                    </>)
-                    :
-                    (<>
-                    
-                    <li
-                            onClick={() => openModal()}
-                            className={classes.cartNav}
-                        >
-                            <div>Cart</div>
-                        </li>
-
-                        <li>
-                            <a className={classes.aNav} href="/login">
-                                Login
-                            </a>
-                        </li>
-                        <li>
-                            <a className={classes.aNav} href="/register">
-                                Register
-                            </a>
-                        </li>
-                        <li>
-                            <a className={classes.aNav} onClick={logout}>
-                                Logout
-                            </a>
-                        </li>
-                    </>)
+                    {localStorage.getItem("username") ?
+                        localStorage.getItem("username") === "admin" ?
+                            <ul className={classes.right}>
+                                <li>
+                                    <a className={classes.aNav} href="/admin">
+                                        DASHBOARD
+                                    </a>
+                                </li>
+                                <li>
+                                    <a className={classes.aNav}>
+                                        {localStorage.getItem("username")}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a className={classes.aNav} onClick={logout} href="/">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                            :
+                            <ul className={classes.right}>
+                                <li
+                                    onClick={() => openModal()}
+                                    className={classes.cartNav}
+                                >
+                                    <div>Cart</div>
+                                </li>
+                                <li>
+                                    <a className={classes.aNav}>
+                                        {localStorage.getItem("username")}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a className={classes.aNav} onClick={logout} href="/">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        :
+                        <ul className={classes.right}>
+                            <li>
+                                <a className={classes.aNav} href="/login">
+                                    Login
+                                </a>
+                            </li>
+                            <li>
+                                <a className={classes.aNav} href="/register">
+                                    Register
+                                </a>
+                            </li>
+                        </ul>
                     }
-                    </ul>
-
-                        //admin o sa aibe admin si logout 
-                        //user cart username si logout
+                    
 
                     {mobileNavbar && (
                         <div className={classes.mobileContainer}>
