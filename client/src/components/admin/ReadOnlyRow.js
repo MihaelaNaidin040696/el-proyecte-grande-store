@@ -84,9 +84,8 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
             <TableCell align="left">{brand.name}</TableCell>
             <TableCell align="left">{supplier.name}</TableCell>
 
-            <TableCell align="left">
-                <button type='button' className={classes.status}
-                        style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}
+            <TableCell align="center">
+                <button type='button' className={classes.editBtn}
                         onClick={(event) => handleEditClick(event, product)}>Edit
                 </button>
             </TableCell>

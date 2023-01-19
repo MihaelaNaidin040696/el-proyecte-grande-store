@@ -117,11 +117,11 @@ export default function AddProductTable({products, setProducts}) {
             <form onSubmit={handleAddFormSubmit}>
                 <Box
                     sx={{
-                        '& > :not(style)': {m: 1},
+                        '& > :not(style)': {m: 3},
                     }}
                     noValidate
                     autoComplete="off"
-                    style={{boxShadow: "0px 13px 20px 0px #80808029"}}
+                    style={{boxShadow: "0px 13px 20px 0px #80808029", textAlign: 'center'}}
                 >
                     <TextField
                         id="standard-basic-name"
@@ -139,7 +139,7 @@ export default function AddProductTable({products, setProducts}) {
                         helperText="Please write product reference code"
                         required
                         onChange={handleAddFormChange}
-                        variant="standard"/>
+                        variant="standard"/><br/>
 
                     <TextField
                         id="standard-basic-color"
@@ -184,7 +184,7 @@ export default function AddProductTable({products, setProducts}) {
                         helperText="Please write product size"
                         required
                         onChange={handleAddFormChange}
-                        variant="standard"/>
+                        variant="standard"/><br/>
 
                     <TextField
                         id="filled-number-selling-price"
@@ -224,17 +224,7 @@ export default function AddProductTable({products, setProducts}) {
                         required
                         type="number"
                         onChange={handleAddFormChange}
-                        variant="standard"/>
-
-                    <Input
-                        type="date"
-                        name="purchaseDate"
-                        required
-                        placeholder="Purchase Date"
-                        onChange={handleAddFormChange}
-                    />
-
-                    <FileBase64 multiple={false} onDone={uploadImage} />
+                        variant="standard"/><br/>
 
                     <TextField
                         id="standard-select-category"
@@ -289,11 +279,19 @@ export default function AddProductTable({products, setProducts}) {
                                 {supplier.name}
                             </MenuItem>
                         ))}
-                    </TextField>
+                    </TextField><br/>
 
-                    <button type="submit" className={classes.status}
-                            style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}>Add Product
-                    </button>
+                    <Input
+                        type="date"
+                        name="purchaseDate"
+                        required
+                        placeholder="Purchase Date"
+                        onChange={handleAddFormChange}
+                    />
+
+                    <FileBase64 multiple={false} onDone={uploadImage} /><br/>
+
+                    <button type="submit" className={classes.addBtn}>Add Product</button>
                 </Box>
             </form>
         </div>

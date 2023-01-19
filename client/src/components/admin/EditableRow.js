@@ -50,6 +50,7 @@ export default function EditableRow({editProduct,
                     onChange={handleEditFormChange}
                 />
             </TableCell>
+            <TableCell></TableCell>
             <TableCell>
                 <Input
                     type="text"
@@ -218,15 +219,10 @@ export default function EditableRow({editProduct,
                 </TextField>
             </TableCell>
             <TableCell>
-                <button type='submit' className={classes.status}
-                        style={{background: 'rgb(145 254 159 / 47%)', color: 'green', border: 'none'}}>Save
-                </button>
+                <button type='submit' className={classes.saveBtn}>Save</button>
             </TableCell>
             <TableCell>
-                <button type='button' className={classes.status}
-                        style={{background: '#ffadad8f', color: 'red', border: 'none'}}
-                        onClick={handleCancelClick}>Cancel
-                </button>
+                <button type='button' className={classes.cancelBtn} onClick={handleCancelClick}>Cancel</button>
             </TableCell>
         </TableRow>
     );

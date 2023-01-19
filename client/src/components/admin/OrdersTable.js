@@ -1,4 +1,5 @@
 import * as React from "react";
+import classes from './Table.module.css';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -115,9 +116,9 @@ export default function OrdersTable() {
                                                        prefix="$"/>
                                     </TableCell>
                                     <TableCell component="th" scope="row" align="center">
-                                        <Link onClick={((event) => handleClickEvent(event, order))}>
-                                            Details
-                                        </Link>
+                                        <button type='button' className={classes.detailsBtn}
+                                                onClick={(event) => handleClickEvent(event, order)}>Details
+                                        </button>
                                     </TableCell>
                                 </TableRow>
                             ))}
