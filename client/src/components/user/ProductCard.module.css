@@ -49,6 +49,7 @@
 
 .productName {
     font-size: 1.5rem;
+    inline-size: 250px;
     line-height: 1;
     height: 50px;
 }
