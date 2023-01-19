@@ -31,46 +31,48 @@ export default function Dashboard() {
         await getTotalExpensesFetch();
     }
 
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
+
     async function getProductsFetch() {
-        const request = await fetch(`${baseURL}`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setLoadedProducts(response);
+        fetch(baseURL, {headers})
+            .then(response => response.json())
+            .then(data => setLoadedProducts(data));
     }
 
     async function getSalesFetch() {
-        const request = await fetch(`${baseURL}/get-sales`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setSales(response);
+        fetch(`${baseURL}/get-sales`, {headers})
+            .then(response => response.json())
+            .then(data => setSales(data));
     }
 
     async function getRevenueFetch() {
-        const request = await fetch(`${baseURL}/get-revenue`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setRevenue(response);
+        fetch(`${baseURL}/get-revenue`, {headers})
+            .then(response => response.json())
+            .then(data => setRevenue(data));
     }
 
     async function getExpensesFetch() {
-        const request = await fetch(`${baseURL}/get-expenses`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setExpenses(response);
+        fetch(`${baseURL}/get-expenses`, {headers})
+            .then(response => response.json())
+            .then(data => setExpenses(data));
     }
 
     async function getTotalSalesFetch() {
-        const request = await fetch(`${baseURL}/get-total-sales`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setTotalSales(response);
+        fetch(`${baseURL}/get-total-sales`, {headers})
+            .then(response => response.json())
+            .then(data => setTotalSales(data));
     }
 
     async function getTotalRevenueFetch() {
-        const request = await fetch(`${baseURL}/get-total-revenue`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setTotalRevenue(response);
+        fetch(`${baseURL}/get-total-revenue`, {headers})
+            .then(response => response.json())
+            .then(data => setTotalRevenue(data));
     }
 
     async function getTotalExpensesFetch() {
-        const request = await fetch(`${baseURL}/get-total-expenses`,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}});
-        const response = await request.json();
-        setTotalExpenses(response);
+        fetch(`${baseURL}/get-total-expenses`, {headers})
+            .then(response => response.json())
+            .then(data => setTotalExpenses(data));
     }
 
     return (
