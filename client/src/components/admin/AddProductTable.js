@@ -1,4 +1,3 @@
-import Paper from "@mui/material/Paper";
 import classes from './Table.module.css';
 import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
@@ -8,6 +7,7 @@ import FileBase64 from "react-file-base64";
 
 export default function AddProductTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
     const [image, setImage] = useState([]);
     const [addFormData, setAddFormData] = useState({
         categoryId: 0,
@@ -56,32 +56,17 @@ export default function AddProductTable({products, setProducts}) {
     const [suppliers, setSuppliers] = useState([]);
 
     useEffect(() => {
-        fetch(`${baseURL}/category`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setCategories(data);
-            });
+        fetch(`${baseURL}/category`, {headers})
+            .then(response => response.json())
+            .then(data => setCategories(data));
 
-        fetch(`${baseURL}/brand`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setBrands(data);
-            })
+        fetch(`${baseURL}/brand`, {headers})
+            .then(response => response.json())
+            .then(data => setBrands(data));
 
-        fetch(`${baseURL}/supplier`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setSuppliers(data);
-            })
+        fetch(`${baseURL}/supplier`, {headers})
+            .then(response => response.json())
+            .then(data => setSuppliers(data));
     }, []);
 
     const handleAddFormChange = (event) => {
@@ -119,9 +104,7 @@ export default function AddProductTable({products, setProducts}) {
             'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify(newProduct)
         })
-            .then((response) => {
-                return response.json();
-            })
+            .then(response => response.json())
             .then(() => {
                 const newProducts = [...products, newProduct];
                 setProducts(newProducts);

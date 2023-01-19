@@ -14,19 +14,15 @@ import {NumericFormat} from 'react-number-format';
 
 export default function OrdersTable() {
     const baseURL = "http://localhost:8080";
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
     const [orders, setOrders] = useState([]);
     const [clickedOrder, setClickedOrder] = useState([]);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
-        fetch(`${baseURL}/order`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setOrders(data);
-            })
+        fetch(`${baseURL}/order`, {headers})
+            .then(response => response.json())
+            .then(data => setOrders(data));
     }, []);
 
     function openModal() {

@@ -5,7 +5,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import classes from './Table.module.css';
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
@@ -13,6 +12,7 @@ import Box from "@mui/material/Box";
 
 export default function ProductsTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
     const [editProductId, setEditProductId] = useState(null);
 
     const [category, setCategory] = useState([]);
@@ -89,18 +89,10 @@ export default function ProductsTable({products, setProducts}) {
             'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify(editedProduct)
         })
-            .then((response) => {
-                return response.json();
-            })
+            .then(response => response.json())
             .then(() => {
                 const newProducts = [...products];
                 newProducts[editProductId] = editedProduct;
-                console.log("PRODUCTS");
-                console.log(products);
-                console.log("NEW PRODUCTS");
-                console.log(newProducts);
-                console.log("EDITED PRODUCT");
-                console.log(editedProduct);
                 setProducts(newProducts);
                 setEditProductId(null);
             })
@@ -110,33 +102,18 @@ export default function ProductsTable({products, setProducts}) {
         event.preventDefault();
         setEditProductId(product.id);
 
-        fetch(`${baseURL}/category/${product.id}`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setCategory(data);
+        fetch(`${baseURL}/category/${product.id}`, {headers})
+            .then(response => response.json())
+            .then(data => setCategory(data))
+            .then(() => {
+                fetch(`${baseURL}/brand/${product.id}`, {headers})
+                    .then(response => response.json())
+                    .then(data => setBrand(data));
             })
             .then(() => {
-                fetch(`${baseURL}/brand/${product.id}`,
-                {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        setBrand(data);
-                    });
-            })
-            .then(() => {
-                fetch(`${baseURL}/supplier/${product.id}`,
-                {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        setSupplier(data);
-                    });
+                fetch(`${baseURL}/supplier/${product.id}`, {headers})
+                    .then(response => response.json())
+                    .then(data => setSupplier(data));
             })
             .then(() => {
                 const formValues = {
@@ -164,7 +141,8 @@ export default function ProductsTable({products, setProducts}) {
         setEditProductId(null);
     };
 
-    return (<div className={classes.Table}>
+    return (
+    <div className={classes.Table}>
         <h3 style={{marginTop: '50px'}} align='center' >All Products</h3>
         <form onSubmit={handleEditFormSubmit} className={classes.Table}>
             <TableContainer

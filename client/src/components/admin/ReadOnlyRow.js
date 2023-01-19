@@ -8,6 +8,7 @@ import {useState} from "react";
 
 export default function ReadOnlyRow({product, index, handleEditClick}) {
     const baseURL = "http://localhost:8080";
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
     const [checked, setChecked] = useState(product.isAvailable);
     const [category, setCategory] = useState([]);
     const [brand, setBrand] = useState([]);
@@ -15,30 +16,18 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
     const [isLoading, setIsLoading] = useState(true);
 
     if (isLoading === true) {
-        fetch(`${baseURL}/category/${product.id}`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setCategory(data);
-            });
-        fetch(`${baseURL}/brand/${product.id}`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setBrand(data);
-            });
-        fetch(`${baseURL}/supplier/${product.id}`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setSupplier(data);
-            });
+        fetch(`${baseURL}/category/${product.id}`, {headers})
+            .then(response => response.json())
+            .then(data => setCategory(data));
+
+        fetch(`${baseURL}/brand/${product.id}`, {headers})
+            .then(response => response.json())
+            .then(data => setBrand(data));
+
+        fetch(`${baseURL}/supplier/${product.id}`, {headers})
+            .then(response => response.json())
+            .then(data => setSupplier(data));
+
         setIsLoading(false);
     }
 
@@ -52,9 +41,7 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
             'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify({...product})
         })
-            .then((response) => {
-                return response.json();
-            });
+            .then(response => response.json());
     }
 
     return (

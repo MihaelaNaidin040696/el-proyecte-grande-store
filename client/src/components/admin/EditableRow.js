@@ -17,38 +17,23 @@ export default function EditableRow({editProduct,
                                         menuClickedSupplier
                                     }) {
     const baseURL = "http://localhost:8080";
+    const headers = {'Authorization': "Bearer " + localStorage.getItem("token")};
     const [categories, setCategories] = useState([]);
     const [brands, setBrands] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
 
     useEffect(() => {
-        fetch(`${baseURL}/category`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setCategories(data);
-            });
+        fetch(`${baseURL}/category`, {headers})
+            .then(response => response.json())
+            .then(data => setCategories(data));
 
-        fetch(`${baseURL}/brand`,
-        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}}
-        )
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setBrands(data);
-            })
+        fetch(`${baseURL}/brand`, {headers})
+            .then(response => response.json())
+            .then(data => setBrands(data));
 
-        fetch(`${baseURL}/supplier`
-        ,{headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setSuppliers(data);
-            })
+        fetch(`${baseURL}/supplier`, {headers})
+            .then(response => response.json())
+            .then(data => setSuppliers(data));
     }, []);
 
 

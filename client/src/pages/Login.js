@@ -10,21 +10,15 @@ import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css'
 
 
-
-
 function Login({setName}) {
     const [showPassword, setShowPassword] = useState(false);
-    let navigate = useNavigate();
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => event.preventDefault();
+    const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         username:'',
         password:''
     })
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
 
     const handleChange = (e) => {
         e.persist();
@@ -35,7 +29,6 @@ function Login({setName}) {
         }));
     }
 
-    console.log(formValues)
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -53,12 +46,12 @@ function Login({setName}) {
             });
         }
     }
+
     function redirect(status) {
         if (status === 200) {
             navigate("/");
         }
     }
-
 
     async function login() {
 
@@ -94,14 +87,11 @@ function Login({setName}) {
                 })
                 redirect(error.response.data.status);
             });
-    };
+    }
 
     function validValues() {
-        if (formValues.username.length <= 0 || formValues.password.length <= 0) {
-            return false;
-        };
-        return true;
-    };
+        return !(formValues.username.length <= 0 || formValues.password.length <= 0);
+    }
 
     return (
         <div className={classes.bodyDiv}>
