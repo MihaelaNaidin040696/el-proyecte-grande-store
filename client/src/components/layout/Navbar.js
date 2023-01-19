@@ -1,11 +1,16 @@
 import classes from "./Navbar.module.css";
 import { useState, useEffect,useReducer } from "react";
 import Modal from "../user/Modal";
+import { NAME } from "../../STORE";
+import { atom,useAtom } from "jotai"; 
 
-export default function Navbar({name}) {
+
+export default function Navbar() {
     const [mobileNavbar, setMobileNavbar] = useState(false);
     const [modal, setModal] = useState(false);
     const [username, setUsername] = useState("")
+    const [atomName, setAtomName] = useAtom(NAME)
+
 
     function openModal() {
         setModal(true);
@@ -28,10 +33,10 @@ export default function Navbar({name}) {
     async function logout() {
         localStorage.clear();
       };
-    
+    // console.log(atomName)
     return (
         <>
-        {name
+        {localStorage.getItem("username")
             ? (<>
              <div className={classes.container}>
                 <nav>
@@ -70,7 +75,8 @@ export default function Navbar({name}) {
 
                         <li>
                             <a className={classes.aNav}>
-                                {name}
+                                {/* Login */}
+                                {localStorage.getItem("username")}
                             </a>
                         </li>
                         {/* <li>
@@ -122,8 +128,8 @@ export default function Navbar({name}) {
                                     <div>Cart</div>
                                 </li>
                                 <li>
-                                    <a className={classes.aNav} href="/login">
-                                        Login
+                                    <a className={classes.aNav}>
+                                         {atomName} 
                                     </a>
                                 </li>
                                 <li>

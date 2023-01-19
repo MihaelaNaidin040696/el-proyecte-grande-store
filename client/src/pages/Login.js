@@ -8,12 +8,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css'
+import { useAtom } from "jotai"; 
+import { NAME } from "../STORE";
 
 
 
-
-function Login({setName}) {
+function Login() {
     const [showPassword, setShowPassword] = useState(false);
+    const [atomName, setAtomName] = useAtom(NAME)
     let navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         username:'',
@@ -68,7 +70,8 @@ function Login({setName}) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("username", response.data.username);
                 localStorage.setItem("userId", response.data.userId);
-                setName(response.data.username)
+                // setName(response.data.username)
+                setAtomName(response.data.username)
                 toast('Successfully Logged In', {
                     position: "top-right",
                     autoClose: 5000,
