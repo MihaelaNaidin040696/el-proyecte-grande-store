@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 
-function Login() {
+function Login({setName}) {
     const [showPassword, setShowPassword] = useState(false);
     let navigate = useNavigate();
     const [formValues, setFormValues] = useState({
@@ -68,6 +68,7 @@ function Login() {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("username", response.data.username);
                 localStorage.setItem("userId", response.data.userId);
+                setName(response.data.username)
                 toast('Successfully Logged In', {
                     position: "top-right",
                     autoClose: 5000,

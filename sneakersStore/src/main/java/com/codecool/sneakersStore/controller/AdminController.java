@@ -41,7 +41,6 @@ public class AdminController {
         TreeMap<String, Float> expenses = adminService.getExpensesDetails();
         return adminService.getTotalExpenses(expenses);
     }
-
     @GetMapping("/get-sales")
     public TreeMap<String, Float> getSalesDetails() {
         return adminService.getSalesDetails();
@@ -63,7 +62,6 @@ public class AdminController {
         TreeMap<String, Float> revenue = adminService.getRevenueDetails();
         return adminService.getTotalRevenue(revenue);
     }
-
 
     @PutMapping("/edit-product/{prodId}")
     public Product updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {

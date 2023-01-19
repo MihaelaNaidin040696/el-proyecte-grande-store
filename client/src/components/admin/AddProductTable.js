@@ -56,7 +56,8 @@ export default function AddProductTable({products, setProducts}) {
     const [suppliers, setSuppliers] = useState([]);
 
     useEffect(() => {
-        fetch(`${baseURL}/category`)
+        fetch(`${baseURL}/category`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -64,7 +65,8 @@ export default function AddProductTable({products, setProducts}) {
                 setCategories(data);
             });
 
-        fetch(`${baseURL}/brand`)
+        fetch(`${baseURL}/brand`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -72,7 +74,8 @@ export default function AddProductTable({products, setProducts}) {
                 setBrands(data);
             })
 
-        fetch(`${baseURL}/supplier`)
+        fetch(`${baseURL}/supplier`,
+        {headers:{'Authorization': "Bearer " + localStorage.getItem("token")}})
             .then((response) => {
                 return response.json();
             })
@@ -112,7 +115,8 @@ export default function AddProductTable({products, setProducts}) {
         }
         fetch(`${baseURL}/admin/add-new-product`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")},
             body: JSON.stringify(newProduct)
         })
             .then((response) => {
