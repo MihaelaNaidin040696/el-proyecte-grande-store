@@ -19,6 +19,7 @@
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
     "framer-motion": "^7.9.0",
+    "jotai": "^1.13.1",
     "mdb-react-ui-kit": "^5.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
