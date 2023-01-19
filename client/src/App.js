@@ -15,9 +15,9 @@ import { useState } from "react";
 
 function App() {
     const [name,setName] = useState();
-    console.log(name);
+    // console.log(name);
     return (
-        <Layout name={name}>
+        <Layout>
         <ToastContainer
             position="top-right"
             autoClose={5000}
@@ -32,7 +32,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path='/admin' element={<Dashboard />} />
-                <Route path="/login" element={<Login setName={setName} />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/sneakers" element={<Sneakers />} />

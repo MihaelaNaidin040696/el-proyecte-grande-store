@@ -8,17 +8,25 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css'
+import { useAtom } from "jotai";
+import { NAME } from "../STORE";
 
 
-function Login({setName}) {
+
+function Login() {
     const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => event.preventDefault();
-    const navigate = useNavigate();
+    const [atomName, setAtomName] = useAtom(NAME)
+    let navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         username:'',
         password:''
     })
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const handleChange = (e) => {
         e.persist();
@@ -29,6 +37,7 @@ function Login({setName}) {
         }));
     }
 
+    console.log(formValues)
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -61,7 +70,8 @@ function Login({setName}) {
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("username", response.data.username);
                 localStorage.setItem("userId", response.data.userId);
-                setName(response.data.username)
+                // setName(response.data.username)
+                setAtomName(response.data.username)
                 toast('Successfully Logged In', {
                     position: "top-right",
                     autoClose: 5000,
