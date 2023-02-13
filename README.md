@@ -28,7 +28,7 @@
 - On the admin page you cand find graphs that contain information about reports from last months, like expenses, sales or revenue. These repots can be downloaded on your computer as image (PNG) or table (CSV)
   
 
-- The admin side contains all orders from the clients and he can see all details from every order  
+- The admin side contains all client orders and the details of each order
   
 
 <br/>  
