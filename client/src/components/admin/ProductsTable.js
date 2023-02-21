@@ -9,6 +9,7 @@ import classes from './Table.module.css';
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import Box from "@mui/material/Box";
+import {toast} from "react-toastify";
 
 export default function ProductsTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
@@ -90,11 +91,21 @@ export default function ProductsTable({products, setProducts}) {
             body: JSON.stringify(editedProduct)
         })
             .then(response => response.json())
-            .then(() => {
-                const newProducts = [...products];
-                newProducts[editProductId] = editedProduct;
-                setProducts(newProducts);
+            .then((data) => {
+                setProducts(data);
                 setEditProductId(null);
+            })
+        toast('Product successfully edited!',
+            {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                style:{"--toastify-color-progress-dark": "#11ed23" }
             })
     };
 
