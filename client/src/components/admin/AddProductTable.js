@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import {useEffect, useState} from "react";
 import {MenuItem, TextField} from "@mui/material";
 import FileBase64 from "react-file-base64";
+import {toast} from "react-toastify";
 
 export default function AddProductTable({products, setProducts}) {
     const baseURL = "http://localhost:8080";
@@ -110,11 +111,22 @@ export default function AddProductTable({products, setProducts}) {
             body: JSON.stringify(newProduct)
         })
             .then((response) => response.json())
-            .then(() => {
-                const newProducts = [...products, newProduct];
+            .then((data) => {
+                const newProducts = [...products, data];
                 setProducts(newProducts);
             })
-            window.location.reload();
+        toast('Product successfully added!',
+            {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                style:{"--toastify-color-progress-dark": "#11ed23" }
+            })
     };
 
     return (
