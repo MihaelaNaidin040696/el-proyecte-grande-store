@@ -21,13 +21,18 @@ export default function ProductCard(props) {
                             ${props.sellingPrice}
                         </div>
 
-                        <FaShoppingCart
-                            onClick={() => {
-                                navigate("/product/" + props.id);
-                            }}
-                            className={classes.productCard__cart}
-                            values={props.id}
-                        />
+                        {localStorage.getItem("username")
+                            ?
+                                <FaShoppingCart
+                                    onClick={() => {
+                                        navigate("/product/" + props.id);
+                                    }}
+                                    className={classes.productCard__cart}
+                                    values={props.id}
+                                />
+                            :
+                            <></>}
+
                     </div>
                     <div className={classes.productSales}>
                         {props.size} size
