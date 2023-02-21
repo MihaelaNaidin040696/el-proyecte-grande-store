@@ -64,8 +64,9 @@ public class AdminController {
     }
 
     @PutMapping("/edit-product/{prodId}")
-    public Product updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {
-        return adminService.updateProductById(productRequest, prodId);
+    public List<Product> updateProductById(@RequestBody ProductRequest productRequest, @PathVariable Long prodId) {
+        adminService.updateProductById(productRequest, prodId);
+        return getProducts();
     }
 
     @PostMapping("/add-new-product")
