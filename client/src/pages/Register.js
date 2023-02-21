@@ -93,6 +93,7 @@ export default function Register() {
                     noValidate
                     textAlign='center'
                     autoComplete="off"
+                    className={classes.bodyDiv}
                 >
 
                     <TextField
@@ -100,6 +101,7 @@ export default function Register() {
                         label="First Name"
                         sx={{m: 1, width: "25ch"}}
                         name="firstName"
+                        required
                         onChange={handleChange}
                         variant="standard"/>
 
@@ -108,6 +110,7 @@ export default function Register() {
                         label="Last Name"
                         sx={{m: 1, width: "25ch"}}
                         name="lastName"
+                        required
                         onChange={handleChange}
                         variant="standard"/>
 
@@ -116,10 +119,11 @@ export default function Register() {
                         label="Email"
                         sx={{m: 1, width: "25ch"}}
                         name="email"
+                        required
                         onChange={handleChange}
                         variant="standard"/>
 
-                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
+                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard" required>
                         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                         <Input
                             id="standard-adornment-password"
@@ -140,7 +144,7 @@ export default function Register() {
                         />
                     </FormControl>
 
-                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
+                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard" required>
                         <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
                         <Input
                             id="standard-adornment-password-confirmation"
@@ -165,12 +169,11 @@ export default function Register() {
                         Sign Up
                     </Button>
 
-                    <p>You are a member?
-                        <Button type="button" variant="contained" href="/login"
-                                style={{backgroundColor: 'black'}}>
-                            Log In
-                        </Button>
-                    </p><br/>
+                    <p>You are a member?</p>
+                    <Button type="button" variant="contained" href="/login"
+                            style={{backgroundColor: 'black'}}>
+                        Log In
+                    </Button><br/>
                 </Box>
             </form>
         </div>

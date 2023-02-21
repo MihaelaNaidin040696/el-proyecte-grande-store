@@ -5,12 +5,11 @@ import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel, Text
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useState} from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css'
-import { useAtom } from "jotai";
-import { NAME } from "../STORE";
-
+import {useAtom} from "jotai";
+import {NAME} from "../STORE";
 
 
 function Login() {
@@ -18,8 +17,8 @@ function Login() {
     const [atomName, setAtomName] = useAtom(NAME)
     let navigate = useNavigate();
     const [formValues, setFormValues] = useState({
-        username:'',
-        password:''
+        username: '',
+        password: ''
     })
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -38,6 +37,7 @@ function Login() {
     }
 
     console.log(formValues)
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -81,7 +81,7 @@ function Login() {
                     draggable: true,
                     progress: undefined,
                     theme: "dark",
-                    style:{"--toastify-color-progress-dark": "#11ed23" }
+                    style: {"--toastify-color-progress-dark": "#11ed23"}
                 })
                 redirect(response.status);
             })
@@ -105,57 +105,58 @@ function Login() {
 
     return (
         <div className={classes.bodyDiv}>
-                <h1>LOGIN TO YOUR ACCOUNT</h1>
-                <form onSubmit={handleSubmit}>
-                    <Box
-                        component={Paper}
-                        sx={{
-                            '& > :not(style)': {m: 3},
-                        }}
-                        noValidate
-                        textAlign='center'
-                        autoComplete="off"
-                    >
+            <h1>LOGIN TO YOUR ACCOUNT</h1>
+            <form onSubmit={handleSubmit}>
+                <Box
+                    component={Paper}
+                    sx={{
+                        '& > :not(style)': {m: 3},
+                    }}
+                    noValidate
+                    textAlign='center'
+                    autoComplete="off"
+                    className={classes.bodyDiv}
+                >
 
-                        <TextField 
+                    <TextField
                         onChange={handleChange}
-                            id="standard-basic-email"
-                            label="Email"
-                            sx={{m: 1, width: "25ch"}}
-                            name="username"
-                            required
-                            variant="standard"/><br/>
+                        id="standard-basic-email"
+                        label="Email"
+                        sx={{m: 1, width: "25ch"}}
+                        name="username"
+                        required
+                        variant="standard"/>
 
-                        <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
-                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                            <Input onChange={handleChange}
-                                id="standard-adornment-password"
-                                name="password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl><br/>
+                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard" required>
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <Input onChange={handleChange}
+                               id="standard-adornment-password"
+                               name="password"
+                               type={showPassword ? 'text' : 'password'}
+                               endAdornment={
+                                   <InputAdornment position="end">
+                                       <IconButton
+                                           aria-label="toggle password visibility"
+                                           onClick={handleClickShowPassword}
+                                           onMouseDown={handleMouseDownPassword}
+                                       >
+                                           {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                       </IconButton>
+                                   </InputAdornment>
+                               }
+                        />
+                    </FormControl>
 
-                        <Button type="submit" variant="contained"  style={{backgroundColor: 'black'}}>
-                            Log In
-                        </Button>
+                    <Button type="submit" variant="contained" style={{backgroundColor: 'black'}}>
+                        Log In
+                    </Button>
 
-                        <p>Not a member?</p>
-                        <Button type="button" variant="contained" href="/register" style={{backgroundColor: 'black'}}>
-                            Sign Up
-                        </Button>
-                    </Box>
-                </form>
+                    <p>Not a member?</p>
+                    <Button type="button" variant="contained" href="/register" style={{backgroundColor: 'black'}}>
+                        Sign Up
+                    </Button><br/>
+                </Box>
+            </form>
         </div>
     );
 }
