@@ -1,15 +1,22 @@
 import classes from './OrdersModal.module.css';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import moment from "moment/moment";
 
 export default function OrdersModal({setModal, order}) {
 
     function closeModal() {
         setModal(false);
+        document.body.style.overflow = 'visible';
     }
 
+    const [pageHeight, setPageHeight] = useState(document.body.clientHeight - 80);
+
+    useEffect(() => {
+        setPageHeight(document.body.clientHeight - 80);
+    },[pageHeight])
+
     return (
-        <div className={classes.container}>
+        <div className={classes.container} style={{height: pageHeight}}>
             <div>
                     <span className={classes.close_btn}>
                         <i className="fas fa-close" onClick={closeModal}></i>

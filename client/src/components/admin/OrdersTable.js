@@ -27,7 +27,7 @@ export default function OrdersTable() {
 
     function openModal() {
         setModal(true);
-        document.body.style.overflow = "visible";
+        document.body.style.overflow = "hidden";
     }
 
     function handleClickEvent(e, data) {
@@ -69,7 +69,7 @@ export default function OrdersTable() {
     ];
 
     return (
-        <>
+        <div className={classes.Table}>
             <Box style={{boxShadow: "0px 13px 20px 0px #80808029"}}>
                 <h3 align='center'>Recent Orders</h3>
                 <TableContainer
@@ -126,6 +126,6 @@ export default function OrdersTable() {
                 </TableContainer>
             </Box>
             {modal && <OrdersModal setModal={setModal} order={clickedOrder}/>}
-        </>
+        </div>
     );
 }
