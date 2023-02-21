@@ -86,8 +86,10 @@ export default function ProductsTable({products, setProducts}) {
         };
         fetch(`${baseURL}/admin/edit-product/${editProductId}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("token")},
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token")
+            },
             body: JSON.stringify(editedProduct)
         })
             .then(response => response.json())
@@ -105,7 +107,7 @@ export default function ProductsTable({products, setProducts}) {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                style:{"--toastify-color-progress-dark": "#11ed23" }
+                style: {"--toastify-color-progress-dark": "#11ed23"}
             })
     };
 
@@ -153,69 +155,69 @@ export default function ProductsTable({products, setProducts}) {
     };
 
     return (
-    <div className={classes.Table}>
-        <h3 style={{marginTop: '50px'}} align='center' >All Products</h3>
-        <form onSubmit={handleEditFormSubmit} className={classes.Table}>
-            <TableContainer
-                component={Box}
-                style={{boxShadow: "0px 13px 20px 0px #80808029"}}
-                sx={{
-                    width: '100%',
-                    overflowX: 'auto',
-                    position: 'relative',
-                    display: 'block',
-                }}
-            >
-                <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Show / Hide Product</TableCell>
-                            <TableCell>Product Name</TableCell>
-                            <TableCell align="left">Product Image</TableCell>
-                            <TableCell align="left">Reference Code</TableCell>
-                            <TableCell align="left">Color</TableCell>
-                            <TableCell align="left">Material</TableCell>
-                            <TableCell align="left">Interior</TableCell>
-                            <TableCell align="left">Sole</TableCell>
-                            <TableCell align="left">Size</TableCell>
-                            <TableCell align="left">Selling Price</TableCell>
-                            <TableCell align="left">Purchase Price</TableCell>
-                            <TableCell align="left">Purchase Date</TableCell>
-                            <TableCell align="left">Total Stock</TableCell>
-                            <TableCell align="left">Discount</TableCell>
-                            <TableCell align="left">Category</TableCell>
-                            <TableCell align="left">Brand</TableCell>
-                            <TableCell align="left">Supplier</TableCell>
-                            <TableCell align="left"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody style={{color: "white"}}>
-                        {products.map((product) => (
-                            <Fragment key={product.id}>
-                                {editProductId === product.id ?
-                                    (<EditableRow
-                                        index={product.id}
-                                        editProduct={product}
-                                        handleEditFormChange={handleEditFormChange}
-                                        handleCancelClick={handleCancelClick}
-                                        selectedCategory={selectedCategory}
-                                        selectedBrand={selectedBrand}
-                                        selectedSupplier={selectedSupplier}
-                                        menuClickedCategory={menuClickedCategory}
-                                        menuClickedBrand={menuClickedBrand}
-                                        menuClickedSupplier={menuClickedSupplier}
-                                    />)
-                                    :
-                                    (<ReadOnlyRow
-                                        index={product.id}
-                                        product={product}
-                                        handleEditClick={handleEditClick}
-                                    />)}
-                            </Fragment>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </form>
-    </div>);
+        <div className={classes.Table}>
+            <h3 style={{marginTop: '50px'}} align='center'>All Products</h3>
+            <form onSubmit={handleEditFormSubmit} className={classes.Table}>
+                <TableContainer
+                    component={Box}
+                    style={{boxShadow: "0px 13px 20px 0px #80808029"}}
+                    sx={{
+                        width: '100%',
+                        overflowX: 'auto',
+                        position: 'relative',
+                        display: 'block',
+                    }}
+                >
+                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Show / Hide Product</TableCell>
+                                <TableCell>Product Name</TableCell>
+                                <TableCell align="left">Product Image</TableCell>
+                                <TableCell align="left">Reference Code</TableCell>
+                                <TableCell align="left">Color</TableCell>
+                                <TableCell align="left">Material</TableCell>
+                                <TableCell align="left">Interior</TableCell>
+                                <TableCell align="left">Sole</TableCell>
+                                <TableCell align="left">Size</TableCell>
+                                <TableCell align="left">Selling Price</TableCell>
+                                <TableCell align="left">Purchase Price</TableCell>
+                                <TableCell align="left">Purchase Date</TableCell>
+                                <TableCell align="left">Total Stock</TableCell>
+                                <TableCell align="left">Discount</TableCell>
+                                <TableCell align="left">Category</TableCell>
+                                <TableCell align="left">Brand</TableCell>
+                                <TableCell align="left">Supplier</TableCell>
+                                <TableCell align="left"></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody style={{color: "white"}}>
+                            {products.map((product) => (
+                                <Fragment key={product.id}>
+                                    {editProductId === product.id ?
+                                        (<EditableRow
+                                            index={product.id}
+                                            editProduct={product}
+                                            handleEditFormChange={handleEditFormChange}
+                                            handleCancelClick={handleCancelClick}
+                                            selectedCategory={selectedCategory}
+                                            selectedBrand={selectedBrand}
+                                            selectedSupplier={selectedSupplier}
+                                            menuClickedCategory={menuClickedCategory}
+                                            menuClickedBrand={menuClickedBrand}
+                                            menuClickedSupplier={menuClickedSupplier}
+                                        />)
+                                        :
+                                        (<ReadOnlyRow
+                                            index={product.id}
+                                            product={product}
+                                            handleEditClick={handleEditClick}
+                                        />)}
+                                </Fragment>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </form>
+        </div>);
 }

@@ -1,6 +1,6 @@
-import { FaShoppingCart } from "react-icons/fa";
+import {FaShoppingCart} from "react-icons/fa";
 import classes from './ProductCard.module.css';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function ProductCard(props) {
     const navigate = useNavigate();

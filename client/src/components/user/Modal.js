@@ -3,22 +3,13 @@ import classes from "./Modal.module.css";
 
 
 export default function Modal({setModal}) {
-    const setJwt = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("token")
-        }
-    };
     const [cart, setCart] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [qty, setQty] = useState();
     const [disabled, setDisabled] = useState(false);
 
-
     function handleClick(e) {
-        const {type, id} = e.target.dataset
-
-
+        const {type, id} = e.target.dataset;
         const copy = [...cartItems];
         const index = copy.findIndex(cartItems => {
             return cartItems.product.id === +id;
@@ -28,9 +19,9 @@ export default function Modal({setModal}) {
             switch (type) {
                 case 'decrement': {
                     if (copy[index].quantity > 1) {
-                        --copy[index].quantity
+                        --copy[index].quantity;
                         setDisabled(false);
-                        fetchUpdateCartItemQuantity(copy[index].product.id, copy[index].quantity)
+                        fetchUpdateCartItemQuantity(copy[index].product.id, copy[index].quantity);
                     } else {
                         deleteItem(copy[index].product.id);
                     }
@@ -45,7 +36,7 @@ export default function Modal({setModal}) {
                     break;
                 }
             }
-            setCartItems(copy)
+            setCartItems(copy);
         }
     }
 
@@ -59,8 +50,7 @@ export default function Modal({setModal}) {
 
     function getTotalWithTaxes() {
         let sum = getTotal();
-        let total = (0.05 * sum) + sum + 20;
-        return total
+        return (0.05 * sum) + sum + 20;
     }
 
 
@@ -93,9 +83,7 @@ export default function Modal({setModal}) {
                 }
             }
         )
-        console.log(request)
         const response = await request.json();
-        console.log(response)
         setCart(response);
         setCartItems(response.cartItems);
     }
@@ -129,7 +117,6 @@ export default function Modal({setModal}) {
                     'Content-Type': 'application/json',
                     'Authorization': "Bearer " + localStorage.getItem("token"),
                     'Access-Control-Allow-Origin': 'DELETE'
-
                 }
             }
         )
@@ -195,14 +182,11 @@ export default function Modal({setModal}) {
                             </div>
                             <div className={classes.rightBar}>
                                 <p><span>Subtotal</span> <span>${getTotal()}</span></p>
-                                <hr>
-                                </hr>
+                                <hr></hr>
                                 <p><span>Tax</span> <span>5%</span></p>
-                                <hr>
-                                </hr>
+                                <hr></hr>
                                 <p><span>Shipping</span> <span>$20</span></p>
-                                <hr>
-                                </hr>
+                                <hr></hr>
                                 <p><span>Total</span> <span>${getTotalWithTaxes()}</span></p>
                                 <a href="/order"><i className="fa fa-shopping-cart"></i>Checkout</a>
                             </div>

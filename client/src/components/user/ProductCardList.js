@@ -1,10 +1,9 @@
 import ProductCard from "./ProductCard";
-import classes from "./ProductCardList.module.css";
 
-function ProductCardList(props) {
+export default function ProductCardList(props) {
     return (
-        <div className={classes.container}>
-            <ul className={classes.myUL}>
+        <div style={{textAlign: 'center'}}>
+            <ul style={{textAlign: 'center'}}>
                 {props.products.map((product) => (
                     <li key={product.id}>
                         <ProductCard
@@ -20,5 +19,3 @@ function ProductCardList(props) {
         </div>
     );
 }
-
-export default ProductCardList;

@@ -106,8 +106,10 @@ export default function AddProductTable({products, setProducts}) {
         }
         fetch(`${baseURL}/admin/add-new-product`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("token")},
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token")
+            },
             body: JSON.stringify(newProduct)
         })
             .then((response) => response.json())
@@ -125,7 +127,7 @@ export default function AddProductTable({products, setProducts}) {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                style:{"--toastify-color-progress-dark": "#11ed23" }
+                style: {"--toastify-color-progress-dark": "#11ed23"}
             })
     };
 
@@ -307,7 +309,7 @@ export default function AddProductTable({products, setProducts}) {
                         onChange={handleAddFormChange}
                     />
 
-                    <FileBase64 multiple={false} onDone={uploadImage} /><br/>
+                    <FileBase64 multiple={false} onDone={uploadImage}/><br/>
 
                     <button type="submit" className={classes.addBtn}>Add Product</button>
                 </Box>

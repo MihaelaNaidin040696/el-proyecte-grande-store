@@ -1,6 +1,6 @@
 import classes from './ReportsCards.module.css';
-import { UilClipboardAlt } from "@iconscout/react-unicons";
-import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
+import {UilClipboardAlt} from "@iconscout/react-unicons";
+import {UilUsdSquare, UilMoneyWithdrawal} from "@iconscout/react-unicons";
 
 import ReportCard from "./ReportCard";
 
@@ -18,10 +18,10 @@ export default function ReportsCards({sales, totalSales, expenses, totalExpenses
 
 
     for (let i = 0; i < salesDates.length; i++) {
-            salesSeries.push({
-                x: salesDates[i],
-                y: salesValues[i]
-            })
+        salesSeries.push({
+            x: salesDates[i],
+            y: salesValues[i]
+        })
     }
 
     for (let i = 0; i < expensesDates.length; i++) {

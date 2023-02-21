@@ -5,7 +5,8 @@ import TableCell from "@mui/material/TableCell";
 import {useEffect, useState} from "react";
 import {MenuItem, TextField} from "@mui/material";
 
-export default function EditableRow({editProduct,
+export default function EditableRow({
+                                        editProduct,
                                         index,
                                         handleEditFormChange,
                                         handleCancelClick,

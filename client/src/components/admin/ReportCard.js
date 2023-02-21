@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import classes from './ReportCard.module.css';
-import { motion, AnimateSharedLayout } from "framer-motion";
-import { UilTimes } from "@iconscout/react-unicons";
+import {motion, AnimateSharedLayout} from "framer-motion";
+import {UilTimes} from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
 
 // parent Card
@@ -11,16 +11,16 @@ export default function ReportCard(props) {
     return (
         <AnimateSharedLayout>
             {expanded ? (
-                <ExpandedCard param={props} setExpanded={() => setExpanded(false)} />
+                <ExpandedCard param={props} setExpanded={() => setExpanded(false)}/>
             ) : (
-                <CompactCard param={props} setExpanded={() => setExpanded(true)} />
+                <CompactCard param={props} setExpanded={() => setExpanded(true)}/>
             )}
         </AnimateSharedLayout>
     );
 };
 
 // Compact Card
-function CompactCard({ param, setExpanded }) {
+function CompactCard({param, setExpanded}) {
     const Png = param.png;
     return (
         <motion.div
@@ -33,7 +33,7 @@ function CompactCard({ param, setExpanded }) {
             onClick={setExpanded}
         >
             <div className={classes.radialBar}>
-                <Png />
+                <Png/>
                 <span>{param.title}</span>
             </div>
             <div className={classes.detail}>
@@ -45,7 +45,7 @@ function CompactCard({ param, setExpanded }) {
 }
 
 // Expanded Card
-function ExpandedCard({ param, setExpanded }) {
+function ExpandedCard({param, setExpanded}) {
     const data = {
         options: {
             chart: {
@@ -81,12 +81,12 @@ function ExpandedCard({ param, setExpanded }) {
             }}
             layoutId="expandableCard"
         >
-            <div style={{ alignSelf: "flex-end", cursor: "pointer", color: "white" }}>
-                <UilTimes onClick={setExpanded} />
+            <div style={{alignSelf: "flex-end", cursor: "pointer", color: "white"}}>
+                <UilTimes onClick={setExpanded}/>
             </div>
             <span>{param.title}</span>
             <div className={classes.chartContainer}>
-                <Chart options={data.options} series={param.series} type="area" />
+                <Chart options={data.options} series={param.series} type="area"/>
             </div>
             <span>Last Month</span>
         </motion.div>

@@ -1,5 +1,4 @@
-
-function SliderContent({activeIndex, imageSlider}) {
+export default function SliderContent({activeIndex, imageSlider}) {
     return (
         <>
             {imageSlider.map((slide, index) => (
@@ -9,11 +8,9 @@ function SliderContent({activeIndex, imageSlider}) {
                         index === activeIndex ? "slides active" : "inactive"
                     }
                 >
-                    <img className="slide-image" src={slide.urls} alt="" />
+                    <img className="slide-image" src={slide.urls} alt=""/>
                 </div>
             ))}
         </>
     );
 }
-
-export default SliderContent;

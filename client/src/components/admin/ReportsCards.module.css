@@ -4,22 +4,23 @@
     margin-top: 50px;
     margin-bottom: 100px;
 }
-.parentContainer{
+
+.parentContainer {
     width: 100%;
 }
 
 @media screen and (max-width: 1200px) {
-    .Cards{
+    .Cards {
         flex-direction: column;
     }
-    .parentContainer{
+
+    .parentContainer {
         height: 9rem;
     }
 }
 
-@media screen and (max-width: 768px)
-{
-    .Cards{
+@media screen and (max-width: 768px) {
+    .Cards {
         width: 90%;
     }
 }

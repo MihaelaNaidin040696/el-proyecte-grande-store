@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SliderContent from "./SliderContent";
-import imageSlider from "./imageSlider";
+import {images} from "./imageSlider";
 import Arrows from "./Arrows";
 import Dots from "./Dots";
 import "./slider.css";
 
-const len = imageSlider.length - 1;
+const len = images.length - 1;
 
-function Slider() {
+export default function Slider() {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function Slider() {
         <div className="slider-container">
             <SliderContent
                 activeIndex={activeIndex}
-                imageSlider={imageSlider}
+                imageSlider={images}
             />
             <Arrows
                 prevSlide={() =>
@@ -33,11 +33,9 @@ function Slider() {
             />
             <Dots
                 activeIndex={activeIndex}
-                sliderImage={imageSlider}
+                sliderImage={images}
                 onclick={(activeIndex) => setActiveIndex(activeIndex)}
             />
         </div>
     );
 }
-
-export default Slider;

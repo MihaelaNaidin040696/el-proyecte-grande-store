@@ -53,58 +53,56 @@ nav ul li a {
 }
 
 a.active, a:hover {
-    /*background: #e91e63;*/
     transition: .5s;
 }
 
-.aNav:hover{
+.aNav:hover {
     background: #dd0026;
     transition: .5s;
-
 }
 
-@media only screen and (max-width: 1320px){
-    .right{
+@media only screen and (max-width: 1320px) {
+    .right {
         display: none;
     }
+
     .left {
         display: none;
     }
-    .hamburger{
+
+    .hamburger {
         display: block !important;
         float: right;
         margin: 25px;
         font-size: 25px;
     }
-
 }
 
-@media only screen and (max-width: 920px){
+@media only screen and (max-width: 920px) {
     .left {
         display: none;
     }
-    .hamburger{
+
+    .hamburger {
         display: block !important;
         float: right;
         margin: 25px;
         font-size: 25px;
     }
-
 }
 
-@media only screen and (max-width: 468px){
-    label.logo{
+@media only screen and (max-width: 468px) {
+    label.logo {
         font-size: 20px;
     }
 }
 
-
-.hamburger{
+.hamburger {
     color: white !important;
     display: none;
 }
 
-.mobileContainer{
+.mobileContainer {
     position: fixed;
     background: black;
     height: 100%;
@@ -112,13 +110,12 @@ a.active, a:hover {
     width: 100%;
 }
 
-.mobileNav{
+.mobileNav {
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     float: none !important;
-
 }
 
 .cartNav {
@@ -128,11 +125,9 @@ a.active, a:hover {
     border-radius: 3px;
     text-transform: uppercase;
     line-height: 25px;
-    
 }
 
-.cartNav:hover{
+.cartNav:hover {
     background: #dd0026;
     transition: .5s;
-
 }

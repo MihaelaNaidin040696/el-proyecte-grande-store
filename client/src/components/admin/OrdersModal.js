@@ -11,66 +11,36 @@ export default function OrdersModal({setModal, order}) {
     return (
         <div className={classes.container}>
             <div>
+                    <span className={classes.close_btn}>
+                        <i className="fas fa-close" onClick={closeModal}></i>
+                    </span>
+            </div>
+            <div className={classes.box}>
                 <div>
-                        <span className={classes.close_btn}>
-                            <i className="fas fa-close" onClick={closeModal}></i>
-                        </span>
+                    <h3 style={{marginLeft: '50px', fontStyle: 'oblique'}}>CUSTOMER</h3>
+                    <div className={classes.details}>
+                        <p><strong>Name:</strong> {order.first_name} {order.last_name}</p>
+                        <p><strong>Email:</strong> {order.email}</p>
+                        <p><strong>Phone number:</strong> {order.phone_number}</p>
+                    </div>
                 </div>
-                <div className={classes.box}>
-                    <table>
-                        <h3 style={{marginLeft: '50px', fontStyle: 'oblique'}}>CUSTOMER</h3>
-
-                            <tr>
-                                <th>Name:</th>
-                                <td>{order.first_name} {order.last_name}</td>
-                            </tr>
-                            <tr>
-                                <th>Email:</th>
-                                <td>{order.email}</td>
-                            </tr>
-                            <tr>
-                                <th>Phone number:</th>
-                                <td>{order.phone_number}</td>
-                            </tr>
-
-                        <h3 style={{marginTop: '30px', marginLeft: '50px', fontStyle: 'oblique'}}>DELIVERY</h3>
-
-                            <tr>
-                                <th>Country:</th>
-                                <td>{order.country}</td>
-                            </tr>
-                            <tr>
-                                <th>City:</th>
-                                <td>{order.city}</td>
-                            </tr>
-                            <tr>
-                                <th>Address:</th>
-                                <td>{order.address}</td>
-                            </tr>
-                            <tr>
-                                <th>Postal Code:</th>
-                                <td>{order.postal_code}</td>
-                            </tr>
-                            <tr>
-                                <th>Notes:</th>
-                                <td>{order.notes}</td>
-                            </tr>
-
-                        <h3 style={{marginTop: '30px', marginLeft: '60px', fontStyle: 'oblique'}}>ORDER</h3>
-
-                            <tr>
-                                <th>Order Date:</th>
-                                <td>{moment(order.orderDate).format('DD-MM-YYYY')}</td>
-                            </tr>
-                            <tr>
-                                <th>Total Amount:</th>
-                                <td>{order.totalPrice}</td>
-                            </tr>
-                            <tr>
-                                <th>Tracking ID:</th>
-                                <td>{order.trackingId}</td>
-                            </tr>
-                    </table>
+                <div>
+                    <h3 style={{marginLeft: '50px', fontStyle: 'oblique'}}>DELIVERY</h3>
+                    <div className={classes.details}>
+                        <p><strong>Country:</strong> {order.country}</p>
+                        <p><strong>City:</strong> {order.city}</p>
+                        <p><strong>Address:</strong> {order.address}</p>
+                        <p><strong>Postal Code:</strong> {order.postal_code}</p>
+                        <p><strong>Notes:</strong> {order.notes}</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style={{marginLeft: '50px', fontStyle: 'oblique'}}>ORDER</h3>
+                    <div className={classes.details}>
+                        <p><strong>Order Date:</strong> {moment(order.orderDate).format('DD-MM-YYYY')}</p>
+                        <p><strong>Total Amount:</strong> {order.totalPrice}</p>
+                        <p><strong>Tracking ID:</strong> {order.trackingId}</p>
+                    </div>
                 </div>
             </div>
         </div>

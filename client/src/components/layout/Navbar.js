@@ -18,9 +18,9 @@ export default function Navbar() {
     function logout() {
         localStorage.clear();
         if (location.pathname === "/") {
-            window.location.reload()
+            window.location.reload();
         } else {
-            redirect("/")
+            redirect("/");
         }
     }
 

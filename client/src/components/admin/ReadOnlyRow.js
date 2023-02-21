@@ -37,8 +37,10 @@ export default function ReadOnlyRow({product, index, handleEditClick}) {
 
         fetch(`${baseURL}/admin/edit-product/${product.id}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json',
-            'Authorization': "Bearer " + localStorage.getItem("token")},
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem("token")
+            },
             body: JSON.stringify({...product})
         })
             .then(response => response.json());

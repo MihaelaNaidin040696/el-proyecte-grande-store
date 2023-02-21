@@ -1,5 +1,4 @@
-
-export default [
+export const images = [
     {
         title: "First Slider Image",
         description: " first image of carousel",
@@ -13,11 +12,11 @@ export default [
     {
         title: "Third Slider Image",
         descriptions: " Third image of carousel",
-        urls:"https://sneakernews.com/wp-content/uploads/2017/03/jordan-4-kaws-detailed-photos.jpg?w=780&h=550&crop=1",
+        urls: "https://sneakernews.com/wp-content/uploads/2017/03/jordan-4-kaws-detailed-photos.jpg?w=780&h=550&crop=1",
     },
     {
         title: "Fourth Slider Image",
         description: " Fourth image of carousel",
-        urls:"https://wallpapercave.com/wp/wp1870228.jpg",
+        urls: "https://wallpapercave.com/wp/wp1870228.jpg",
     },
 ];
